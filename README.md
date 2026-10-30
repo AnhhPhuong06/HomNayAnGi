@@ -1,5 +1,8 @@
 # Hôm Nay Ăn Gì?
 
+Build IPA không ký trên **GitHub Actions**: [chạy workflow](https://github.com/AnhhPhuong06/HomNayAnGi/actions/workflows/ios-unsigned.yml)
+hoặc xem [hướng dẫn](docs/github-actions.md).
+
 Build IPA không ký trên Codemagic: xem [docs/codemagic.md](docs/codemagic.md).
 Workflow: **iOS Release - Unsigned IPA** (`ios-unsigned`), branch `main`.
 

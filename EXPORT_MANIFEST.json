@@ -11,7 +11,7 @@
     ".gitattributes": "cb8677c93268ac1623379a85489bfcf58e55efa243fd79f85c329ee882eae8dd",
     ".gitignore": "b7ec9f6068ea139130e772ea8fbc06ce7fc16d9cfcf6bf13b9d2eccffb216143",
     ".metadata": "64c4178f959da808d5ac4efcaa0f031185dec23deb03f920ef701d13659a3d5e",
-    "README.md": "42202d51aba016702b4a5cb4c8de6065210ac950e2355a8493e627e9c5845662",
+    "README.md": "81a9da441d15a61d2be3dd4b4e41c770459da07cedbbdbd3d88c4901beaced3f",
     "analysis_options.yaml": "5fd0920df5d79908fb6ba36a07342c4c590bff3fb9b516051540e16bb24304ce",
     "assets/data/DATA_LICENSE.md": "736634e6ca02da6497ebc4d9d8c539be9da4436c4f95d7edde1de17ff482d9d8",
     "assets/data/catalog_manifest.json": "04d6b06a1c05b942d45e282ef7feab66e65a8fc0bb62a29b30790aae45071220",
@@ -120,9 +120,11 @@
     "tool/data/import_osm.py": "d75830118c5e9370ef5a96ae411e64338ab870142bb42a1f1c49cbaf0e4faad6",
     "tool/data/requirements.txt": "7900a42321bca69c05b21570ae96f6286907def64b74c9c69147329b3c6cc669",
     "tool/data/test_import_osm.py": "212b75f6785d89cf58a48524b6f302fe55c0ae4de8d3d062c31a02e2203e71c3",
-    "tool/export_xcode.py": "b864ccb67853ad2f49a3fe6ff7e37b7c0e7cdc3705b07ea864410981e64c770a",
+    "tool/export_xcode.py": "41461817c9c5fb3d930a9822f1e76cd5d77fcf85a65aa498fd1a7bc81dce9214",
     "tool/generate_demo.py": "2ed483dca1a01d435b7a64288a616223b55601bcfe87b23bde2ac6205803b331",
-    "tool/generate_icons.dart": "bc55ddd49c2f8fcb5731630abc500bbabad11f35ccfe094fbfdda2af167d2aed"
+    "tool/generate_icons.dart": "bc55ddd49c2f8fcb5731630abc500bbabad11f35ccfe094fbfdda2af167d2aed",
+    ".github/workflows/ios-unsigned.yml": "c551d2a60d58b33b6ce9f23227cf86835faf68557ee6f70ecc3d4ab7f2a77a37",
+    "docs/github-actions.md": "629e11f3d5fcec222b9c317bed9970fdd2fd4439eb9078feb06d52122d3d7dc1"
   },
-  "sourceUpdatedAt": "2026-10-30T15:26:19.664069+00:00"
+  "sourceUpdatedAt": "2026-10-30T15:32:41.044332+00:00"
 }

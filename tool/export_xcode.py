@@ -11,7 +11,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "artifacts" / "hom_nay_an_gi-xcode.zip"
 PREFIX = "hom_nay_an_gi_xcode/"
-SOURCE_DIRS = ("lib", "assets", "ios", "test", "integration_test", "docs", "tool")
+SOURCE_DIRS = ("lib", "assets", "ios", "test", "integration_test", "docs", "tool", ".github")
 ROOT_FILES = (
     "pubspec.yaml", "pubspec.lock", "analysis_options.yaml", "README.md",
     ".metadata", ".gitignore", ".gitattributes", ".env.example", "codemagic.yaml",
