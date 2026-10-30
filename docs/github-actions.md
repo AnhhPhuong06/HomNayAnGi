@@ -6,7 +6,7 @@
    **hom_nay_an_gi-unsigned** ở cuối trang và giải nén để lấy
    **hom_nay_an_gi-unsigned.ipa**.
 
-Workflow chạy trên macOS, dùng Flutter **3.47.9** và Xcode của runner.
+Workflow chạy trên macOS 15 Intel, dùng Flutter **3.47.9** và Xcode của runner.
 Dependency được khóa bằng `pubspec.lock`. Analyze và unit/widget tests phải đạt
 trước khi build Release với `--no-codesign` và đóng gói `Payload/Runner.app`.
 Không cần Apple certificate, provisioning profile hoặc repository secret.
