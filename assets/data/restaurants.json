@@ -1,0 +1,881 @@
+[
+  {
+    "id": "demo-01",
+    "name": "Phở bò · Bếp Demo 01",
+    "dishName": "Phở bò",
+    "description": "Không gian minh họa cho món phở bò. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/noodles.jpg",
+    "country": "VN",
+    "latitude": 21.177,
+    "longitude": 106.068,
+    "address": "Địa chỉ minh họa số 1 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "noodles"
+    ],
+    "tags": [
+      "Phở bò",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 35000,
+    "priceMax": 55000,
+    "rating": 3.9,
+    "reviewCount": 29,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "breakfast",
+      "lunch"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-02",
+    "name": "Cơm tấm · Bếp Demo 02",
+    "dishName": "Cơm tấm",
+    "description": "Không gian minh họa cho món cơm tấm. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/rice.jpg",
+    "country": "VN",
+    "latitude": 21.181,
+    "longitude": 106.068,
+    "address": "Địa chỉ minh họa số 2 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "rice"
+    ],
+    "tags": [
+      "Cơm tấm",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 30000,
+    "priceMax": 50000,
+    "rating": 4.1,
+    "reviewCount": 38,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "alone",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-03",
+    "name": "Bún bò Huế · Bếp Demo 03",
+    "dishName": "Bún bò Huế",
+    "description": "Không gian minh họa cho món bún bò huế. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/noodles.jpg",
+    "country": "VN",
+    "latitude": 21.185,
+    "longitude": 106.068,
+    "address": "Địa chỉ minh họa số 3 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "noodles"
+    ],
+    "tags": [
+      "Bún bò Huế",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 40000,
+    "priceMax": 60000,
+    "rating": 4.2,
+    "reviewCount": 47,
+    "openingHours": "07:00–21:00 (giả lập)",
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-04",
+    "name": "Lẩu nấm · Bếp Demo 04",
+    "dishName": "Lẩu nấm",
+    "description": "Không gian minh họa cho món lẩu nấm. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/hotpot.jpg",
+    "country": "VN",
+    "latitude": 21.189,
+    "longitude": 106.068,
+    "address": "Địa chỉ minh họa số 4 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "hotpot"
+    ],
+    "tags": [
+      "Lẩu nấm",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 120000,
+    "priceMax": 190000,
+    "rating": 4.4,
+    "reviewCount": 56,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-05",
+    "name": "Thịt nướng · Bếp Demo 05",
+    "dishName": "Thịt nướng",
+    "description": "Không gian minh họa cho món thịt nướng. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/grill.jpg",
+    "country": "VN",
+    "latitude": 21.177,
+    "longitude": 106.072,
+    "address": "Địa chỉ minh họa số 5 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "grill"
+    ],
+    "tags": [
+      "Thịt nướng",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 150000,
+    "priceMax": 250000,
+    "rating": null,
+    "reviewCount": null,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-06",
+    "name": "Bánh mì trứng · Bếp Demo 06",
+    "dishName": "Bánh mì trứng",
+    "description": "Không gian minh họa cho món bánh mì trứng. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/bread.jpg",
+    "country": "VN",
+    "latitude": 21.181,
+    "longitude": 106.072,
+    "address": "Địa chỉ minh họa số 6 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "bread"
+    ],
+    "tags": [
+      "Bánh mì trứng",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 20000,
+    "priceMax": 28000,
+    "rating": 4.7,
+    "reviewCount": 74,
+    "openingHours": "07:00–21:00 (giả lập)",
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "breakfast",
+      "lunch"
+    ],
+    "companions": [
+      "alone",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-07",
+    "name": "Salad rau củ · Bếp Demo 07",
+    "dishName": "Salad rau củ",
+    "description": "Không gian minh họa cho món salad rau củ. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/salad.jpg",
+    "country": "VN",
+    "latitude": 21.185,
+    "longitude": 106.072,
+    "address": "Địa chỉ minh họa số 7 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "healthy"
+    ],
+    "tags": [
+      "Salad rau củ",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 45000,
+    "priceMax": 75000,
+    "rating": 3.8,
+    "reviewCount": 83,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-08",
+    "name": "Gà giòn · Bếp Demo 08",
+    "dishName": "Gà giòn",
+    "description": "Không gian minh họa cho món gà giòn. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/grill.jpg",
+    "country": "VN",
+    "latitude": 21.189,
+    "longitude": 106.072,
+    "address": "Địa chỉ minh họa số 8 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "snacks"
+    ],
+    "tags": [
+      "Gà giòn",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": null,
+    "priceMax": null,
+    "rating": 3.9,
+    "reviewCount": 92,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-09",
+    "name": "Cà phê sữa · Bếp Demo 09",
+    "dishName": "Cà phê sữa",
+    "description": "Không gian minh họa cho món cà phê sữa. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/cafe.jpg",
+    "country": "VN",
+    "latitude": 21.177,
+    "longitude": 106.076,
+    "address": "Địa chỉ minh họa số 9 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "cafe"
+    ],
+    "tags": [
+      "Cà phê sữa",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 25000,
+    "priceMax": 45000,
+    "rating": 4.1,
+    "reviewCount": 101,
+    "openingHours": "07:00–21:00 (giả lập)",
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "alone",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-10",
+    "name": "Chè đậu · Bếp Demo 10",
+    "dishName": "Chè đậu",
+    "description": "Không gian minh họa cho món chè đậu. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/dessert.jpg",
+    "country": "VN",
+    "latitude": 21.181,
+    "longitude": 106.076,
+    "address": "Địa chỉ minh họa số 10 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "dessert"
+    ],
+    "tags": [
+      "Chè đậu",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 15000,
+    "priceMax": 25000,
+    "rating": 4.2,
+    "reviewCount": 110,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-11",
+    "name": "Cháo sườn · Bếp Demo 11",
+    "dishName": "Cháo sườn",
+    "description": "Không gian minh họa cho món cháo sườn. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/rice.jpg",
+    "country": "VN",
+    "latitude": 21.185,
+    "longitude": 106.076,
+    "address": "Địa chỉ minh họa số 11 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "late"
+    ],
+    "tags": [
+      "Cháo sườn",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 25000,
+    "priceMax": 40000,
+    "rating": 4.4,
+    "reviewCount": 119,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "breakfast",
+      "late"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-12",
+    "name": "Cơm chay · Bếp Demo 12",
+    "dishName": "Cơm chay",
+    "description": "Không gian minh họa cho món cơm chay. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/salad.jpg",
+    "country": "VN",
+    "latitude": 21.189,
+    "longitude": 106.076,
+    "address": "Địa chỉ minh họa số 12 · Không phải quán thật",
+    "province": "Bắc Ninh",
+    "area": "Khu vực Bắc Ninh (demo)",
+    "categories": [
+      "healthy"
+    ],
+    "tags": [
+      "Cơm chay",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 30000,
+    "priceMax": 50000,
+    "rating": 4.5,
+    "reviewCount": 128,
+    "openingHours": "07:00–21:00 (giả lập)",
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-13",
+    "name": "Cơm tấm · Bếp Demo 13",
+    "dishName": "Cơm tấm",
+    "description": "Không gian minh họa cho món cơm tấm. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/rice.jpg",
+    "country": "VN",
+    "latitude": 21.0225,
+    "longitude": 105.85,
+    "address": "Địa chỉ minh họa số 13 · Không phải quán thật",
+    "province": "Hà Nội",
+    "area": "Khu vực Hoàn Kiếm (demo)",
+    "categories": [
+      "rice"
+    ],
+    "tags": [
+      "Cơm tấm",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 30000,
+    "priceMax": 50000,
+    "rating": 4.7,
+    "reviewCount": 137,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "alone",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-14",
+    "name": "Bún bò Huế · Bếp Demo 14",
+    "dishName": "Bún bò Huế",
+    "description": "Không gian minh họa cho món bún bò huế. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/noodles.jpg",
+    "country": "VN",
+    "latitude": 21.0265,
+    "longitude": 105.85,
+    "address": "Địa chỉ minh họa số 14 · Không phải quán thật",
+    "province": "Hà Nội",
+    "area": "Khu vực Hoàn Kiếm (demo)",
+    "categories": [
+      "noodles"
+    ],
+    "tags": [
+      "Bún bò Huế",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 40000,
+    "priceMax": 60000,
+    "rating": 3.8,
+    "reviewCount": 146,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-15",
+    "name": "Lẩu nấm · Bếp Demo 15",
+    "dishName": "Lẩu nấm",
+    "description": "Không gian minh họa cho món lẩu nấm. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/hotpot.jpg",
+    "country": "VN",
+    "latitude": 21.0305,
+    "longitude": 105.85,
+    "address": "Địa chỉ minh họa số 15 · Không phải quán thật",
+    "province": "Hà Nội",
+    "area": "Khu vực Hoàn Kiếm (demo)",
+    "categories": [
+      "hotpot"
+    ],
+    "tags": [
+      "Lẩu nấm",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 120000,
+    "priceMax": 190000,
+    "rating": 3.9,
+    "reviewCount": 155,
+    "openingHours": "07:00–21:00 (giả lập)",
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-16",
+    "name": "Thịt nướng · Bếp Demo 16",
+    "dishName": "Thịt nướng",
+    "description": "Không gian minh họa cho món thịt nướng. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/grill.jpg",
+    "country": "VN",
+    "latitude": 21.0345,
+    "longitude": 105.85,
+    "address": "Địa chỉ minh họa số 16 · Không phải quán thật",
+    "province": "Hà Nội",
+    "area": "Khu vực Hoàn Kiếm (demo)",
+    "categories": [
+      "grill"
+    ],
+    "tags": [
+      "Thịt nướng",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 150000,
+    "priceMax": 250000,
+    "rating": 4.1,
+    "reviewCount": 164,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-17",
+    "name": "Cơm tấm · Bếp Demo 17",
+    "dishName": "Cơm tấm",
+    "description": "Không gian minh họa cho món cơm tấm. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/rice.jpg",
+    "country": "VN",
+    "latitude": 16.054,
+    "longitude": 108.216,
+    "address": "Địa chỉ minh họa số 17 · Không phải quán thật",
+    "province": "Đà Nẵng",
+    "area": "Khu vực Hải Châu (demo)",
+    "categories": [
+      "rice"
+    ],
+    "tags": [
+      "Cơm tấm",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 30000,
+    "priceMax": 50000,
+    "rating": 4.2,
+    "reviewCount": 173,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "alone",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-18",
+    "name": "Bún bò Huế · Bếp Demo 18",
+    "dishName": "Bún bò Huế",
+    "description": "Không gian minh họa cho món bún bò huế. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/noodles.jpg",
+    "country": "VN",
+    "latitude": 16.058,
+    "longitude": 108.216,
+    "address": "Địa chỉ minh họa số 18 · Không phải quán thật",
+    "province": "Đà Nẵng",
+    "area": "Khu vực Hải Châu (demo)",
+    "categories": [
+      "noodles"
+    ],
+    "tags": [
+      "Bún bò Huế",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 40000,
+    "priceMax": 60000,
+    "rating": 4.4,
+    "reviewCount": 182,
+    "openingHours": "07:00–21:00 (giả lập)",
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-19",
+    "name": "Lẩu nấm · Bếp Demo 19",
+    "dishName": "Lẩu nấm",
+    "description": "Không gian minh họa cho món lẩu nấm. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/hotpot.jpg",
+    "country": "VN",
+    "latitude": 16.062,
+    "longitude": 108.216,
+    "address": "Địa chỉ minh họa số 19 · Không phải quán thật",
+    "province": "Đà Nẵng",
+    "area": "Khu vực Hải Châu (demo)",
+    "categories": [
+      "hotpot"
+    ],
+    "tags": [
+      "Lẩu nấm",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 120000,
+    "priceMax": 190000,
+    "rating": 4.5,
+    "reviewCount": 191,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-20",
+    "name": "Thịt nướng · Bếp Demo 20",
+    "dishName": "Thịt nướng",
+    "description": "Không gian minh họa cho món thịt nướng. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/grill.jpg",
+    "country": "VN",
+    "latitude": 16.066,
+    "longitude": 108.216,
+    "address": "Địa chỉ minh họa số 20 · Không phải quán thật",
+    "province": "Đà Nẵng",
+    "area": "Khu vực Hải Châu (demo)",
+    "categories": [
+      "grill"
+    ],
+    "tags": [
+      "Thịt nướng",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 150000,
+    "priceMax": 250000,
+    "rating": 4.7,
+    "reviewCount": 200,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-21",
+    "name": "Cơm tấm · Bếp Demo 21",
+    "dishName": "Cơm tấm",
+    "description": "Không gian minh họa cho món cơm tấm. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/rice.jpg",
+    "country": "VN",
+    "latitude": 10.77,
+    "longitude": 106.696,
+    "address": "Địa chỉ minh họa số 21 · Không phải quán thật",
+    "province": "TP. Hồ Chí Minh",
+    "area": "Khu vực trung tâm (demo)",
+    "categories": [
+      "rice"
+    ],
+    "tags": [
+      "Cơm tấm",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 30000,
+    "priceMax": 50000,
+    "rating": 3.8,
+    "reviewCount": 209,
+    "openingHours": "07:00–21:00 (giả lập)",
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "alone",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-22",
+    "name": "Bún bò Huế · Bếp Demo 22",
+    "dishName": "Bún bò Huế",
+    "description": "Không gian minh họa cho món bún bò huế. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/noodles.jpg",
+    "country": "VN",
+    "latitude": 10.774,
+    "longitude": 106.696,
+    "address": "Địa chỉ minh họa số 22 · Không phải quán thật",
+    "province": "TP. Hồ Chí Minh",
+    "area": "Khu vực trung tâm (demo)",
+    "categories": [
+      "noodles"
+    ],
+    "tags": [
+      "Bún bò Huế",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 40000,
+    "priceMax": 60000,
+    "rating": 3.9,
+    "reviewCount": 218,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-23",
+    "name": "Lẩu nấm · Bếp Demo 23",
+    "dishName": "Lẩu nấm",
+    "description": "Không gian minh họa cho món lẩu nấm. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/hotpot.jpg",
+    "country": "VN",
+    "latitude": 10.778,
+    "longitude": 106.696,
+    "address": "Địa chỉ minh họa số 23 · Không phải quán thật",
+    "province": "TP. Hồ Chí Minh",
+    "area": "Khu vực trung tâm (demo)",
+    "categories": [
+      "hotpot"
+    ],
+    "tags": [
+      "Lẩu nấm",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 120000,
+    "priceMax": 190000,
+    "rating": 4.1,
+    "reviewCount": 227,
+    "openingHours": null,
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  },
+  {
+    "id": "demo-24",
+    "name": "Thịt nướng · Bếp Demo 24",
+    "dishName": "Thịt nướng",
+    "description": "Không gian minh họa cho món thịt nướng. Tên quán, giá, đánh giá và địa chỉ đều là dữ liệu giả lập để kiểm thử ứng dụng.",
+    "imageUrl": "assets/images/grill.jpg",
+    "country": "VN",
+    "latitude": 10.782,
+    "longitude": 106.696,
+    "address": "Địa chỉ minh họa số 24 · Không phải quán thật",
+    "province": "TP. Hồ Chí Minh",
+    "area": "Khu vực trung tâm (demo)",
+    "categories": [
+      "grill"
+    ],
+    "tags": [
+      "Thịt nướng",
+      "Món Việt",
+      "Minh họa"
+    ],
+    "priceMin": 150000,
+    "priceMax": 250000,
+    "rating": 4.2,
+    "reviewCount": 236,
+    "openingHours": "07:00–21:00 (giả lập)",
+    "phone": null,
+    "mapUrl": null,
+    "mealTimes": [
+      "dinner"
+    ],
+    "companions": [
+      "friends",
+      "family",
+      "partner"
+    ]
+  }
+]

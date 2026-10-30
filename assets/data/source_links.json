@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "description": "Optional reviewed links keyed by stable osm-node/way/relation ID. Empty until a specific venue and public link have been checked; search links are generated separately and are never labelled reviewed videos.",
+  "restaurants": {}
+}
