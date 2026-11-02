@@ -4,6 +4,19 @@
 và giới hạn nguồn thật hiện tại xem [open-data.md](open-data.md); số lượng và
 snapshot hiện tại nằm trong `assets/data/catalog_manifest.json`.
 
+## Chuẩn bị cấu hình tài khoản iOS — 02/11/2026
+
+- Thêm script nhập plist Firebase và tạo cấu hình Dart/native; không in giá trị.
+  Sáu bài kiểm tra đạt, gồm thiếu secret, sai bundle/project, placeholder,
+  từ chối server key và chặn chèn dòng vào xcconfig.
+- Workflow mặc định yêu cầu `FIREBASE_IOS_CONFIG_JSON`, truyền vào Dart khi build.
+  Chỉ `compile-only` cho phép xuất IPA chưa cấu hình tài khoản.
+- Sửa Google Sign-In truyền `null` thay cho OAuth client ID trống.
+  `flutter analyze --no-pub` không có vấn đề; 95 bài kiểm thử ứng dụng đạt.
+- Chưa có Firebase project/provider nên chưa tạo IPA có tài khoản hoạt động,
+  chưa kiểm thử OAuth thật. [Các bước Spark miễn phí](firebase-free-setup.md).
+  Kết quả build bên dưới thuộc commit `833ff41`, trước thay đổi cấu hình này.
+
 ## iOS Release không ký trên GitHub Actions — 02/11/2026
 
 - [Run 41443870844](https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41443870844)

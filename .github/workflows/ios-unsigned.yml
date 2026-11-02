@@ -2,6 +2,14 @@ name: Build unsigned IPA
 
 on:
   workflow_dispatch:
+    inputs:
+      account_configuration:
+        description: 'configured requires Firebase; compile-only keeps login unavailable'
+        type: choice
+        default: configured
+        options:
+          - configured
+          - compile-only
 
 permissions:
   contents: read
@@ -22,6 +30,13 @@ jobs:
           test -d "$DEVELOPER_DIR"
           xcodebuild -version
           xcrun swift --version
+      - name: Test account configuration script
+        run: python3 -m unittest discover -s tool -p 'test_configure_ios_accounts.py'
+      - name: Prepare account configuration
+        if: inputs.account_configuration != 'compile-only'
+        env:
+          FIREBASE_IOS_CONFIG_JSON: ${{ secrets.FIREBASE_IOS_CONFIG_JSON }}
+        run: python3 tool/configure_ios_accounts.py --from-env
       - name: Set up Flutter
         uses: subosito/flutter-action@v2.23.0
         with:
@@ -38,7 +53,15 @@ jobs:
           flutter analyze --no-pub
           flutter test --no-pub --concurrency=1
       - name: Build unsigned iOS Release
-        run: flutter build ios --release --no-codesign --no-pub
+        env:
+          ACCOUNT_CONFIGURATION: ${{ inputs.account_configuration }}
+        run: |
+          if [[ "$ACCOUNT_CONFIGURATION" == "compile-only" ]]; then
+            echo '::warning::Compile-only IPA: account service is unavailable in this artifact.'
+            flutter build ios --release --no-codesign --no-pub
+          else
+            flutter build ios --release --no-codesign --no-pub --dart-define-from-file=config/firebase.ios.json
+          fi
       - name: Package IPA
         run: bash ios/package_unsigned_ipa.sh
       - name: Upload unsigned IPA

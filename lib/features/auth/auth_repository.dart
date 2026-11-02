@@ -14,6 +14,8 @@ class Member {
 
 enum SocialProvider { google, facebook, apple }
 
+String? _optionalClientId(String value) => value.isEmpty ? null : value;
+
 class SignInCancelled implements Exception {
   const SignInCancelled();
 }
@@ -34,9 +36,13 @@ class FirebaseAuthRepository implements AuthRepository {
     if (provider == SocialProvider.google) {
       _googleInitialization ??= GoogleSignIn.instance.initialize(
         clientId: defaultTargetPlatform == TargetPlatform.iOS
-            ? const String.fromEnvironment('GOOGLE_IOS_CLIENT_ID')
+            ? _optionalClientId(
+                const String.fromEnvironment('GOOGLE_IOS_CLIENT_ID'),
+              )
             : null,
-        serverClientId: const String.fromEnvironment('GOOGLE_WEB_CLIENT_ID'),
+        serverClientId: _optionalClientId(
+          const String.fromEnvironment('GOOGLE_WEB_CLIENT_ID'),
+        ),
       );
       await _googleInitialization;
       final account = await GoogleSignIn.instance.authenticate();
@@ -154,6 +160,8 @@ String accountError(Object error) {
       'canceled' => 'Bạn đã hủy đăng nhập.',
       'too-many-requests' => 'Bạn đã thử nhiều lần. Vui lòng đợi rồi thử lại.',
       'network-request-failed' => 'Không kết nối được. Hãy kiểm tra Internet.',
+      'operation-not-allowed' =>
+        'Cách đăng nhập này chưa được bật. Vui lòng chọn cách đăng nhập khác.',
       'requires-recent-login' =>
         'Hãy đăng nhập lại rồi thực hiện thao tác này.',
       _ => 'Chưa đăng nhập được. Vui lòng thử lại.',

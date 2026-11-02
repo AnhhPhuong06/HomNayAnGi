@@ -1,5 +1,8 @@
 # Đăng nhập xã hội và blog ăn ngon
 
+Nếu IPA báo dịch vụ tài khoản chưa sẵn sàng và bạn chưa có project,
+làm theo [tạo Firebase Spark và build iOS có Google đăng nhập](firebase-free-setup.md).
+
 Bản 02/11 thêm bài **Địa điểm mới** có ghim quán và mục Cộng đồng trong Khám phá.
 Cần deploy rules mới. [Cách dùng và quyền riêng tư](adaptive-community.md).
 

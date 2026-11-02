@@ -5,7 +5,7 @@
   "workspace": "ios/Runner.xcworkspace",
   "prepareAndOpen": "bash ios/open_xcode.sh",
   "scope": "Flutter application sources for iOS; SDK and build caches excluded",
-  "iosBuildVerified": true,
+  "iosBuildVerified": false,
   "files": {
     ".env.example": "30403172fe0b504803844510a7a7f9109436e1b65df430e7a4c07fbe7b728b36",
     ".gitattributes": "cb8677c93268ac1623379a85489bfcf58e55efa243fd79f85c329ee882eae8dd",
@@ -69,12 +69,12 @@
     "config/firebase.example.json": "4b1fede6fb3db6995cc4d41dafcfdbb1747c6ba6e6b2dc873bf442b8a9a53556",
     "docs/adaptive-community.md": "d09d263035771b0cd037aafd3e8b0d91c0be1621b31fd9d59bd02a4dab57724c",
     "docs/branding.md": "89d8c49f4962fa06add1f6a23ce5ebfebdf8812ba82f45c558e19b7fbb6ee7e6",
-    "docs/community.md": "bb91c81cddb6afa9031c099d3c79c1403c84ad77004829fec00a819b24861585",
+    "docs/community.md": "7a36eb6fec39a28dc96155a3eb14fe7ff781006f01288f50541d32a6b9081b4b",
     "docs/design.md": "eee4d549ed41766174ab7361548e1c47fedf0032cd1ecb7b203e05af12995230",
     "docs/open-data.md": "6a724bfae6805dd144b8ab0f7d2bdb3545b4a51351cef6f858731c031ce567a6",
     "docs/upgrades.md": "f8a70efbd2f434ea9d950b18c5b41def96c1b54d0522d89219c29ac6e6945c85",
-    "docs/verification.md": "db9690cbaecd65936ed1cc3fadd7839bfb540ab74b2e893b17be660e37f9cba6",
-    "docs/xcode.md": "8108f9acfe69d3cdfddb76003b3516f292278238f1f15144c0fd77dacfa969a3",
+    "docs/verification.md": "2737d656c3e2feca67ba49a05e203a865890849f233d0a13db4590a7961e3e8e",
+    "docs/xcode.md": "1d25a968f30a6b6e2afd040fec6cfc0db537e8ba96182043ca80fcae4df94c00",
     "firebase.json": "db8b0ac1f8f5097dcc435f34068150d3e28f5f4eb415a618c0ecaaeb1c8de5bd",
     "firestore.rules": "18c0bfedbfda29b8c7df703c3ad608b19ff632f6b8023a40a6de462516f24010",
     "integration_test/community_flow_test.dart": "f0e137e26b155cf7329233dee1a39e3ffa89bac20ebd6ac6bd37f6ce5db62aa0",
@@ -147,7 +147,7 @@
     "lib/core/widgets/editorial.dart": "0b216d29424e23fdadf993b39469eab643b0f40e4eb3b90b35a115f6a83405bd",
     "lib/features/auth/account_action_lock.dart": "cd30b46c512e2a3d5a693a577b283051d13a48380e72a6bf49a9752254c20673",
     "lib/features/auth/account_section.dart": "04ab4e0776ddf8b60e39ee0de21d4a86f6aa9f1ab4512ac5cd0633299ec83a48",
-    "lib/features/auth/auth_repository.dart": "fd540e4b9f5859b799577f9f66b1a07c2586c1b1f29a254387a355f391ec7b30",
+    "lib/features/auth/auth_repository.dart": "62203f77a6921bdcc5710fcbf2a056870823619222bfd3c3ac64f8a1267c4541",
     "lib/features/auth/login_screen.dart": "5d7b471621ea6bacec12ed4cee6fc7283dd0f351b48abec5a42410ee11fd5788",
     "lib/features/blog/blog_repository.dart": "e570242ee45c0e07167fae3053790c022ae9409c025d5e0d626fb0da6caf5589",
     "lib/features/blog/blog_screen.dart": "8007b3791b3fc7294bccbd3fd81294af2800ebffc212035821e5c36241b1392c",
@@ -208,9 +208,12 @@
     "tool/firebase-tests/rules.test.mjs": "c9b6ec1188693d4e567fbe442d42fcc7f658d23e245112392c18fdc380a61388",
     "tool/generate_demo.py": "2ed483dca1a01d435b7a64288a616223b55601bcfe87b23bde2ac6205803b331",
     "tool/generate_icons.dart": "100d1156b2a342e63a500099b65b12f63964c751a0cb5f9fd014a8568475581f",
-    ".github/workflows/ios-unsigned.yml": "d0afc17b4f20a63ee631f61e12f250267570a035343c7d6d5028ce8c59c92093",
+    ".github/workflows/ios-unsigned.yml": "cf3d40f3169576995e71aaa0c9162869a863d073dd67d0272fce4cc1bbc281df",
     "codemagic.yaml": "08e0e29c79b5e2a2004f51d66fcf95116cbda579fa77aaa3d16459b049063b1e",
-    "ios/package_unsigned_ipa.sh": "5723fc3453c152dd51663ae68ef2540097adeaa52a8d591952135720b949489e"
+    "ios/package_unsigned_ipa.sh": "5723fc3453c152dd51663ae68ef2540097adeaa52a8d591952135720b949489e",
+    "tool/configure_ios_accounts.py": "a7827100435975ec3cbc967ce8ea8f6013555948195a2d654296b7d1c8796c7a",
+    "tool/test_configure_ios_accounts.py": "9777e773f33cd41432074931126750605f1ffffcea244b7139ef4b13cdfd29a6",
+    "docs/firebase-free-setup.md": "98ce6ea559b27741bc67de215fdbd75ff26908aa39aa4debb58c011c32dba48f"
   },
   "repositoryImport": {
     "sourceDirectory": "hom_nay_an_gi_xcode",
@@ -224,5 +227,6 @@
     "firebaseIOS": "12.19.3",
     "scope": "unsigned Release arm64 compile and IPA contents; iOS runtime/OAuth not verified",
     "ipaSHA256": "6f3b092889265f7d9ef25828271a5ace8965da6edae40437dc3df25d1d728f85"
-  }
+  },
+  "iosBuildVerificationNote": "Account configuration changes have passed local checks; native configured build and real OAuth await Firebase project configuration. iosBuildEvidence records the previous source commit only."
 }

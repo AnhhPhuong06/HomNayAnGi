@@ -18,6 +18,12 @@ Workflow in phiên bản Xcode/Swift trước khi giải dependency để thấy
 Chạy **Actions → Build unsigned IPA → Run workflow → main**. Khi thành công,
 artifact `hom_nay_an_gi-unsigned` chứa IPA chưa ký; cần ký lại trước khi cài.
 
+Để tài khoản hoạt động, trước khi chạy workflow hãy làm theo
+[Firebase Spark / Google và GitHub Secret](firebase-free-setup.md). Chế độ mặc
+định `configured` yêu cầu secret `FIREBASE_IOS_CONFIG_JSON`, tạo cấu hình native
+và truyền JSON vào Dart. `compile-only` dành riêng cho kiểm tra biên dịch, vẫn
+hiển thị dịch vụ tài khoản chưa sẵn sàng.
+
 ## Project nguồn trên Mac
 
 Gói hiện tại có [UX/UI thích ứng, cá nhân hóa và địa điểm cộng đồng](adaptive-community.md).
