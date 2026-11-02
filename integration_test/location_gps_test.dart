@@ -1,14 +1,14 @@
 // Requires a test emulator with foreground location granted and an injected fix.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:hom_nay_an_gi/main.dart' as app;
+import 'test_app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets('native foreground GPS resolves without background permissions', (
     tester,
   ) async {
-    await app.main();
+    await launchCatalogTestApp();
     await tester.pumpAndSettle();
     await tester.tap(find.text('Cài đặt').last);
     await tester.pumpAndSettle();

@@ -31,7 +31,7 @@ class ResultScreen extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            const DataSourceNotice(),
+            const DataSourceNotice(compact: true),
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(24),
@@ -79,7 +79,38 @@ class ResultScreen extends ConsumerWidget {
               ),
             const SizedBox(height: 20),
             RestaurantCard(restaurant: r),
+            OutlinedButton.icon(
+              onPressed: () => context.push(
+                Uri(
+                  path: '/blog/new',
+                  queryParameters: {'kind': 'meal', 'restaurant': r.id},
+                ).toString(),
+              ),
+              icon: const Icon(Icons.edit_note),
+              label: const Text('Chia sẻ hôm nay ăn gì'),
+            ),
+            const SizedBox(height: 12),
             const ChooseButton(label: 'CHỌN GỢI Ý KHÁC'),
+            TextButton.icon(
+              onPressed: state.busy
+                  ? null
+                  : () async {
+                      await ref
+                          .read(settingsProvider.notifier)
+                          .hideRestaurant(r.id, true);
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Đã ẩn quán. Bấm chọn gợi ý khác để tiếp tục.',
+                            ),
+                          ),
+                        );
+                      }
+                    },
+              icon: const Icon(Icons.visibility_off_outlined),
+              label: const Text('Không gợi ý quán này nữa'),
+            ),
             const SizedBox(height: 24),
             const SectionTitle('Các quán cùng kiểu món'),
             const SizedBox(height: 12),

@@ -1,0 +1,4 @@
+// Copy to Social.xcconfig and replace using your provider consoles.
+FACEBOOK_APP_ID = 0
+FACEBOOK_CLIENT_TOKEN = not-configured
+GOOGLE_REVERSED_CLIENT_ID = com.googleusercontent.apps.REPLACE_ME

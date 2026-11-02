@@ -1,6 +1,7 @@
 import 'dart:math';
 import '../../../core/utils/geo.dart';
 import '../../restaurants/models/restaurant.dart';
+import '../../restaurants/models/food_category.dart';
 import '../models/meal_preference.dart';
 
 class RecommendationConfig {
@@ -60,6 +61,35 @@ double mealTimeScore(Restaurant r, MealTime meal) => r.mealTimes.isEmpty
     ? 1
     : 0;
 
+class TasteMatcher {
+  TasteMatcher(this.user)
+    : keywords = user.avoidedKeywords
+          .map(normalizeSearch)
+          .where((word) => word.trim().isNotEmpty)
+          .toList();
+  final UserPreference user;
+  final List<String> keywords;
+  bool allows(Restaurant r) {
+    if (user.hiddenRestaurantIds.contains(r.id) ||
+        r.categories.any(user.dislikedCategories.contains)) {
+      return false;
+    }
+    if (keywords.isEmpty) return true;
+    final text =
+        r.indexedSearchText ??
+        normalizeSearch(
+          [
+            r.name,
+            r.dishName,
+            r.description,
+            ...r.tags,
+            for (final id in r.categories) categoryById(id).name,
+          ].join(' '),
+        );
+    return !keywords.any(text.contains);
+  }
+}
+
 class RecommendationService {
   RecommendationService({
     Random? random,
@@ -103,9 +133,7 @@ class RecommendationService {
     if (candidates.isEmpty) return null;
     final notices = <String>[];
     // Explicit dislikes are never relaxed. An empty result is preferable.
-    candidates = candidates
-        .where((r) => !r.categories.any(user.dislikedCategories.contains))
-        .toList();
+    candidates = candidates.where(TasteMatcher(user).allows).toList();
     if (candidates.isEmpty) return null;
     var selected = preference.selectedCategories;
     final hasBudget =
@@ -160,6 +188,17 @@ class RecommendationService {
         0,
         'Không có quán phù hợp trong ${preference.maxDistance.toStringAsFixed(0)} km; đã mở rộng lên ${radius.toStringAsFixed(0)} km.',
       );
+    }
+    final recent = history.take(user.avoidRecentCount.clamp(0, 10)).toSet();
+    if (recent.isNotEmpty) {
+      final fresh = pool.where((r) => !recent.contains(r.id)).toList();
+      if (fresh.isNotEmpty) {
+        pool = fresh;
+      } else {
+        notices.add(
+          'Các quán phù hợp đều có trong lịch sử gần đây. Đang chọn lại trong nhóm này.',
+        );
+      }
     }
     double score(Restaurant r) {
       final distance = origin == null

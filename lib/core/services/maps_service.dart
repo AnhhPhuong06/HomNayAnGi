@@ -1,8 +1,17 @@
 import 'package:url_launcher/url_launcher.dart';
 import '../../features/restaurants/models/restaurant.dart';
 import '../../features/restaurants/models/source_link.dart';
+import '../utils/geo.dart';
 
 class MapsService {
+  static Uri sharedPlaceUri(GeoPoint point) =>
+      Uri.https('www.google.com', '/maps/dir/', {
+        'api': '1',
+        'destination': '${point.latitude},${point.longitude}',
+        'travelmode': 'driving',
+      });
+  Future<bool> sharedPlace(GeoPoint point) =>
+      point.isValid ? _external(sharedPlaceUri(point)) : Future.value(false);
   Future<bool> openDataLicense() =>
       _external(Uri.https('www.openstreetmap.org', '/copyright'));
   Future<bool> openSource(SourceLink source) =>

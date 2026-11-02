@@ -4,9 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'core/providers.dart';
 import 'core/services/local_store.dart';
+import 'core/services/firebase_bootstrap.dart';
+import 'features/auth/auth_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final communityReady = await initializeCommunity();
   try {
     final store = LocalStore(await SharedPreferences.getInstance());
     var settings = const LocalSettings();
@@ -19,6 +22,7 @@ Future<void> main() async {
     runApp(
       ProviderScope(
         overrides: [
+          backendReadyProvider.overrideWithValue(communityReady),
           localStoreProvider.overrideWithValue(store),
           initialSettingsProvider.overrideWithValue(settings),
           startupNoticeProvider.overrideWithValue(notice),

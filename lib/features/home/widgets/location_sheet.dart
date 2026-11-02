@@ -10,6 +10,7 @@ Future<void> showLocationPicker(BuildContext context) =>
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
+      useRootNavigator: true,
       useSafeArea: true,
       builder: (_) => const LocationSheet(),
     );

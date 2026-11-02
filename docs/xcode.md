@@ -1,8 +1,19 @@
 # Mở Hôm Nay Ăn Gì trong Xcode
 
+Gói hiện tại có [UX/UI thích ứng, cá nhân hóa và địa điểm cộng đồng](adaptive-community.md).
+
 Gói `hom_nay_an_gi-xcode.zip` chứa workspace iOS, mã Dart, assets và catalog
 18.668 địa điểm OSM đang dùng trong app. Giữ nguyên cả thư mục sau giải nén;
 workspace cần mã Flutter và assets nằm ngoài `ios/`.
+
+Bản 02/11/2026 gồm hồ sơ khẩu vị, ẩn quán, giảm lặp gợi ý, bản đồ OSM và
+sao lưu/khôi phục thủ công theo tài khoản. [Cách dùng và giới hạn](upgrades.md).
+
+Bản cập nhật có đăng nhập Google/Facebook/Apple bắt buộc và blog dùng Firebase.
+Trước khi chạy tài khoản thật, làm theo [community.md](community.md), tạo
+`config/firebase.ios.json` và `ios/Flutter/Social.xcconfig`. Script mở Xcode nhận
+`--dart-define-from-file=config/firebase.ios.json`. Nếu không cấu hình, app hiển thị
+màn hình đăng nhập với thông báo dịch vụ chưa sẵn sàng.
 
 ## Mở trên Mac
 

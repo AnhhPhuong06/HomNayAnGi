@@ -9,13 +9,17 @@ List<Restaurant> queryRestaurants(
   String query = '',
   MealPreference preference = const MealPreference(),
   GeoPoint? origin,
+  UserPreference user = const UserPreference(),
 }) {
   final terms = normalizeSearch(
     query,
   ).split(RegExp(r'\s+')).where((t) => t.isNotEmpty).toList();
   final distances = <String, double>{};
+  final taste = TasteMatcher(user);
   final result = restaurants.where((r) {
-    if (!r.isUsable || !matchesBudget(r, preference)) return false;
+    if (!r.isUsable || !taste.allows(r) || !matchesBudget(r, preference)) {
+      return false;
+    }
     if (preference.selectedCategories.isNotEmpty &&
         !r.categories.any(preference.selectedCategories.contains)) {
       return false;

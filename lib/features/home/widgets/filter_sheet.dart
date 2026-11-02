@@ -7,6 +7,7 @@ import '../../restaurants/models/food_category.dart';
 Future<void> showFilters(BuildContext context) => showModalBottomSheet<void>(
   context: context,
   isScrollControlled: true,
+  useRootNavigator: true,
   useSafeArea: true,
   builder: (_) => const FilterSheet(),
 );

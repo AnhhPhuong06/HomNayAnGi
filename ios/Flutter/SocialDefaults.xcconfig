@@ -1,0 +1,4 @@
+// Safe unconfigured defaults. Social.xcconfig overrides these on your Mac.
+FACEBOOK_APP_ID = 0
+FACEBOOK_CLIENT_TOKEN = not-configured
+GOOGLE_REVERSED_CLIENT_ID = com.googleusercontent.apps.not-configured

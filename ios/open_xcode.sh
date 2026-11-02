@@ -11,7 +11,7 @@ export BYPASS_PERMISSION_LOCATION_ALWAYS=1
 
 # Regenerate SDK paths, registrants and Swift packages on this Mac.
 flutter pub get
-flutter build ios --debug --config-only --no-codesign
+flutter build ios --debug --config-only --no-codesign "$@"
 
 # Launch the selected Xcode directly so package resolution inherits the flag.
 # Quit an existing Xcode session before running this script.

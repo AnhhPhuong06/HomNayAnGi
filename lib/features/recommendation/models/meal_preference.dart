@@ -106,8 +106,14 @@ class UserPreference {
     this.favoriteCategories = const {},
     this.dislikedCategories = const {},
     this.favoriteRestaurantIds = const {},
+    this.hiddenRestaurantIds = const {},
+    this.avoidedKeywords = const [],
+    this.avoidRecentCount = 5,
   });
   final Set<String> favoriteCategories;
   final Set<String> dislikedCategories;
   final Set<String> favoriteRestaurantIds;
+  final Set<String> hiddenRestaurantIds;
+  final List<String> avoidedKeywords;
+  final int avoidRecentCount;
 }

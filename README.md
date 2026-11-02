@@ -1,14 +1,23 @@
 # Hôm Nay Ăn Gì?
 
-Build IPA không ký trên **GitHub Actions**: [chạy workflow](https://github.com/AnhhPhuong06/HomNayAnGi/actions/workflows/ios-unsigned.yml)
-hoặc xem [hướng dẫn](docs/github-actions.md).
+**UX/UI thích ứng:** thanh bên trên cửa sổ rộng, thẻ nhiều cột, màu/cỡ chữ/thẻ gọn
+và giảm chuyển động theo cá nhân. Có thêm địa điểm kèm ghim để thành viên khác
+biết trong Blog và Khám phá → Cộng đồng. [Cách dùng và giới hạn](docs/adaptive-community.md).
 
-Build IPA không ký trên Codemagic: xem [docs/codemagic.md](docs/codemagic.md).
-Workflow: **iOS Release - Unsigned IPA** (`ios-unsigned`), branch `main`.
+**Bản nâng cấp 02/11:** hồ sơ khẩu vị, ẩn quán, giảm lặp gợi ý, bản đồ OSM trong
+Khám phá và sao lưu/khôi phục thủ công theo tài khoản. [Cách dùng và giới hạn](docs/upgrades.md).
 
 Ứng dụng Flutter giúp chọn món và tìm quán trong vài thao tác: **mở app → chọn giúp tôi → xem quán → chỉ đường**.
 
-MVP mặc định dùng **danh mục quán thật từ OpenStreetMap Việt Nam**, trích từ snapshot Geofabrik và đóng gói để chạy ngoại tuyến. Không cần API key, tài khoản hay backend. Số lượng, thời điểm nguồn và phạm vi thực tế nằm trong `assets/data/catalog_manifest.json`.
+App dùng **danh mục quán thật từ OpenStreetMap Việt Nam**, trích từ snapshot Geofabrik và đóng gói để chạy ngoại tuyến. Danh mục không cần Places API key. Số lượng, thời điểm nguồn và phạm vi thực tế nằm trong `assets/data/catalog_manifest.json`.
+
+**Bản mới yêu cầu đăng nhập Google/Facebook/Apple**, có ảnh món ăn minh họa offline và tab Blog để chia sẻ bữa ăn/quán ngon. Cần cấu hình Firebase Auth, Firestore và provider trước khi đăng nhập thật. Khi chưa cấu hình, app giữ người dùng ở màn hình đăng nhập. Hướng dẫn đầy đủ: [docs/community.md](docs/community.md).
+
+**Giao diện mới:** xanh rừng/kem, font tiếng Việt offline, thẻ ảnh, danh mục món
+cuộn ngang và thanh điều hướng nổi. [Xem giao diện và kiểm tra](docs/design.md).
+
+**Logo hiện tại:** logo đỏ/cam từ trang Facebook do người dùng chọn, đồng bộ trong
+app, Android/iOS và màn khởi động. [Nguồn ảnh và bộ PNG](docs/branding.md).
 
 Dữ liệu cộng đồng có thể thiếu hoặc đã thay đổi, không phải danh sách mọi quán đang hoạt động tại Việt Nam. Không tự điền giá, sao đánh giá, review count hoặc ảnh khi nguồn không cung cấp. Google Maps được mở bằng tọa độ để chỉ đường; nút **Tìm video trên TikTok** là tìm kiếm theo tên quán và khu vực, không phải review đã xác minh. Không sao chép hàng loạt nội dung Google Maps/TikTok.
 
@@ -16,20 +25,20 @@ Bộ **24 quán demo** giữ riêng cho test, bật bằng `--dart-define=RESTAU
 
 ## Chức năng
 
-- Bốn tab: Trang chủ, Khám phá, Yêu thích, Cài đặt.
+- Năm tab: Trang chủ, Khám phá, Yêu thích, Blog, Cài đặt.
 - Chọn khu vực từ nguồn dữ liệu; GPS chỉ được xin khi người dùng bấm nút. Có thể nhập tên và tọa độ tâm khu vực khác tại Việt Nam.
 - Kiểu món theo dữ liệu; lọc ngân sách, khoảng cách, bữa ăn và người đi cùng. Bộ lọc chỉ lưu khi bấm Áp dụng.
 - Recommendation chấm điểm khoảng cách, ngân sách, bữa ăn, đánh giá, sở thích và độ mới; lấy nhóm đầu rồi chọn ngẫu nhiên có trọng số.
 - Nới khoảng cách tối đa 10 km, rồi ngân sách và kiểu món nếu cần; thông báo thay đổi. Không tự gợi ý quán cách hàng trăm km.
 - Tránh lặp ngay quán/món vừa chọn khi có lựa chọn phù hợp khác. Lịch sử giữ tối đa 20 mục, mới nhất trước.
-- Hiệu ứng chọn món 1,1 giây chạy đồng thời với tính toán; bỏ hiệu ứng khi hệ thống giảm chuyển động.
+- Hiệu ứng chọn món 600 ms chạy đồng thời với tính toán; có tùy chọn giảm chuyển động và tôn trọng trợ năng hệ thống.
 - Chi tiết quán, hình ảnh, giá, địa chỉ và dữ liệu tùy chọn; không suy diễn trạng thái “đang mở”. Mở chỉ đường bằng URL HTTPS Google Maps qua app hoặc trình duyệt.
 - Tìm tên, món, danh mục, tag và từ khóa, hỗ trợ tìm không dấu. Dataset nhỏ được tìm local tức thời.
-- Yêu thích, lịch sử, theme và bộ lọc lưu local. Theme sáng/tối/theo hệ thống. GPS chính xác chỉ giữ trong phiên.
-- Catalog quán, yêu thích và cài đặt hoạt động không cần Internet. Ảnh thiếu được ghi rõ là chưa khả dụng. Chỉ đường và tìm kiếm TikTok cần dịch vụ ngoài trên thiết bị.
+- Yêu thích, lịch sử, khẩu vị, theme và bộ lọc lưu local theo tài khoản khi bật backend. Có sao lưu/khôi phục thủ công dữ liệu cá nhân; GPS/khu vực/theme không lên bản sao lưu. Theme sáng/tối/theo hệ thống. GPS chính xác chỉ giữ trong phiên.
+- Sau khi có phiên đăng nhập, catalog quán, yêu thích, ảnh món minh họa và cài đặt dùng được offline. Ảnh minh họa được ghi nhãn rõ. Đăng nhập lần đầu, blog chung, chỉ đường và tìm kiếm TikTok cần kết nối/dịch vụ ngoài.
 - Loading, empty, error, retry; chống bấm lặp action async; thông báo nếu lưu local thất bại.
 
-Không có delivery, thanh toán, chat, tài khoản, quảng cáo, analytics hay Phase 2 realtime.
+Không có delivery, thanh toán hoặc chat. Bản mới dùng Firebase Auth/Firestore cho tài khoản và blog; không bật Firebase Analytics.
 
 ## Stack và SDK
 
@@ -79,9 +88,18 @@ flutter build apk --debug
 
 APK cài thử: `build/app/outputs/flutter-apk/app-debug.apk`.
 
+Bản nâng cấp mới nhất: [APK adaptive](artifacts/hom_nay_an_gi-adaptive-debug.apk)
+và [project Xcode](artifacts/hom_nay_an_gi-xcode.zip). Cấu hình đăng nhập theo
+[docs/community.md](docs/community.md).
+
 Bản đã kiểm tra với 18.668 địa điểm OSM ngày 30/10/2026:
 [APK dữ liệu thật](artifacts/hom_nay_an_gi-open-data-debug.apk).
 Phạm vi, checksum và kết quả kiểm thử: [docs/open-data.md](docs/open-data.md).
+
+Bản cập nhật tài khoản/blog: [APK community](artifacts/hom_nay_an_gi-community-debug.apk),
+[project Xcode](artifacts/hom_nay_an_gi-xcode.zip). APK này yêu cầu đăng nhập;
+chưa cấu hình Firebase/provider sẽ hiển thị thông báo dịch vụ chưa sẵn sàng.
+Thiết lập dịch vụ theo [docs/community.md](docs/community.md).
 
 Unit tests kiểm tra Haversine, ngân sách, bữa ăn, weighted random, nới lọc, thiếu dữ liệu, tọa độ sai, trùng ID, lịch sử, serialize/deserialize và hàng đợi ghi. Widget tests kiểm tra Home, staged filters, kết quả/chi tiết, favorites, tìm kiếm, empty/error, từ chối GPS, theme, cỡ chữ lớn và fixture offline. Integration test dùng plugin lưu trữ thật, khởi tạo lại app để kiểm tra restore.
 

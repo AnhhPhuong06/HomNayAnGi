@@ -1,14 +1,14 @@
 // Prepare the emulator permission state as documented in README before running.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:hom_nay_an_gi/main.dart' as app;
+import 'test_app.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets('native GPS denied forever retains manual selection', (
     tester,
   ) async {
-    await app.main();
+    await launchCatalogTestApp();
     await tester.pumpAndSettle();
     await tester.tap(find.text('Cài đặt').last);
     await tester.pumpAndSettle();

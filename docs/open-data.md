@@ -2,7 +2,9 @@
 
 Nguồn mặc định là OpenStreetMap Việt Nam, trích từ Geofabrik. Google Maps được
 dùng để mở chỉ đường bằng tọa độ; TikTok được mở để tìm video theo quán/khu vực.
-Không có Google Places API key, billing, backend hoặc request Places trong bản này.
+Phần danh mục không dùng Google Places API key, billing, backend hoặc request
+Places. Tài khoản và blog của bản cập nhật dùng Firebase riêng; xem
+[community.md](community.md).
 
 ## Phạm vi
 

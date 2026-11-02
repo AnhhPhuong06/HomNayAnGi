@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../features/recommendation/models/meal_preference.dart';
+import '../features/recommendation/models/taste_preference.dart';
+import '../features/auth/auth_repository.dart';
 import '../features/recommendation/services/recommendation_service.dart';
 import '../features/restaurants/models/restaurant.dart';
 import '../features/restaurants/repositories/restaurant_repository.dart';
 import '../features/restaurants/repositories/open_data_restaurant_repository.dart';
 import 'services/local_store.dart';
 import 'services/location_service.dart';
+import 'theme/appearance.dart';
 
 final localStoreProvider = Provider<LocalStore>(
   (ref) => throw StateError('Initialize storage at startup'),
@@ -47,15 +50,40 @@ class StorageError extends Notifier<String?> {
 }
 
 class SettingsController extends Notifier<LocalSettings> {
+  String? _accountId;
   @override
-  LocalSettings build() => ref.watch(initialSettingsProvider);
+  LocalSettings build() {
+    final initial = ref.watch(initialSettingsProvider);
+    final scoped =
+        ref.watch(backendReadyProvider) &&
+        ref.watch(authenticationRequiredProvider);
+    _accountId = scoped
+        ? ref.watch(memberProvider.select((s) => s.asData?.value?.id))
+        : null;
+    if (!scoped) return initial;
+    if (_accountId == null) return LocalSettings(theme: initial.theme);
+    try {
+      return ref
+          .read(localStoreProvider)
+          .readAccount(_accountId!, theme: initial.theme);
+    } on StorageFailure catch (e) {
+      Future.microtask(() {
+        if (ref.mounted) ref.read(storageErrorProvider.notifier).set(e.message);
+      });
+      return LocalSettings(theme: initial.theme);
+    }
+  }
+
   Future<void> _save(LocalSettings next) async {
+    final account = _accountId;
     state = next;
     try {
-      await ref.read(localStoreProvider).write(next);
-      if (ref.mounted) ref.read(storageErrorProvider.notifier).set(null);
+      await ref.read(localStoreProvider).write(next, accountId: account);
+      if (ref.mounted && account == _accountId) {
+        ref.read(storageErrorProvider.notifier).set(null);
+      }
     } catch (_) {
-      if (ref.mounted) {
+      if (ref.mounted && account == _accountId) {
         ref
             .read(storageErrorProvider.notifier)
             .set(
@@ -72,8 +100,31 @@ class SettingsController extends Notifier<LocalSettings> {
   }
 
   Future<void> setTheme(ThemeMode mode) => _save(state.copyWith(theme: mode));
+  Future<void> setAppearance(Appearance value) =>
+      _save(state.copyWith(appearance: value));
   Future<void> setPreference(MealPreference value) =>
       _save(state.copyWith(preference: value));
+  Future<void> setTaste(TastePreference value) =>
+      _save(state.copyWith(taste: value));
+  Future<void> hideRestaurant(String id, bool hidden) {
+    final ids = {...state.taste.hiddenRestaurantIds};
+    hidden ? ids.add(id) : ids.remove(id);
+    return setTaste(state.taste.copyWith(hiddenRestaurantIds: ids));
+  }
+
+  Future<void> restorePersonalData({
+    required Set<String> favorites,
+    required List<String> history,
+    required MealPreference preference,
+    required TastePreference taste,
+  }) => _save(
+    state.copyWith(
+      favorites: favorites,
+      history: history,
+      preference: preference,
+      taste: taste,
+    ),
+  );
   Future<void> setLocation(SavedLocation value) =>
       _save(state.copyWith(location: value));
   Future<void> clearLocation() => _save(state.copyWith(clearLocation: true));
@@ -96,14 +147,22 @@ final recommendationProvider =
 
 class RecommendationController extends Notifier<RecommendationState> {
   @override
-  RecommendationState build() => const RecommendationState();
+  RecommendationState build() {
+    if (ref.watch(backendReadyProvider)) {
+      ref.watch(memberProvider.select((s) => s.asData?.value?.id));
+    }
+    return const RecommendationState();
+  }
+
   Future<bool> choose() async {
     if (state.busy) return false;
     final previous = state.result;
+    final account = ref.read(memberProvider).asData?.value?.id;
     state = RecommendationState(busy: true, result: previous);
     try {
       final restaurants = await ref.read(restaurantsProvider.future);
       if (!ref.mounted) return false;
+      if (account != ref.read(memberProvider).asData?.value?.id) return false;
       final settings = ref.read(settingsProvider);
       if (!ref.read(repositoryProvider).isDemo && settings.location == null) {
         state = RecommendationState(
@@ -127,6 +186,10 @@ class RecommendationController extends Notifier<RecommendationState> {
             user: UserPreference(
               favoriteRestaurantIds: settings.favorites,
               favoriteCategories: favoriteCategories,
+              dislikedCategories: settings.taste.dislikedCategories,
+              hiddenRestaurantIds: settings.taste.hiddenRestaurantIds,
+              avoidedKeywords: settings.taste.avoidedKeywords,
+              avoidRecentCount: settings.taste.avoidRecentCount,
             ),
           );
       if (result == null) {
@@ -141,10 +204,12 @@ class RecommendationController extends Notifier<RecommendationState> {
           .read(settingsProvider.notifier)
           .remember(result.selected.restaurant.id);
       if (!ref.mounted) return false;
+      if (account != ref.read(memberProvider).asData?.value?.id) return false;
       state = RecommendationState(result: result);
       return true;
     } catch (_) {
-      if (ref.mounted) {
+      if (ref.mounted &&
+          account == ref.read(memberProvider).asData?.value?.id) {
         state = RecommendationState(
           result: previous,
           message: 'Không thể tải gợi ý. Vui lòng thử lại.',

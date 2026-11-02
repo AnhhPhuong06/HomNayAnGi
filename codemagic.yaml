@@ -11,13 +11,14 @@ workflows:
     scripts:
       - name: Resolve Flutter dependencies
         script: |
+          set -euo pipefail
           flutter config --enable-swift-package-manager
           flutter pub get --enforce-lockfile
       - name: Analyze and test
         script: |
           set -euo pipefail
           flutter analyze --no-pub
-          flutter test --no-pub
+          flutter test --no-pub --concurrency=1
       - name: Build unsigned iOS Release
         script: flutter build ios --release --no-codesign --no-pub
       - name: Package unsigned IPA

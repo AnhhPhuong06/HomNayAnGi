@@ -1,1 +1,3 @@
 #include "Generated.xcconfig"
+#include "SocialDefaults.xcconfig"
+#include? "Social.xcconfig"

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/providers.dart';
 import '../../../core/widgets/common.dart';
+import '../../../core/widgets/adaptive_cards.dart';
+import '../../../core/widgets/editorial.dart';
 import '../../restaurants/widgets/restaurant_card.dart';
 
 class FavoritesScreen extends ConsumerWidget {
@@ -14,6 +16,7 @@ class FavoritesScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Yêu thích')),
       body: ContentWidth(
+        maxWidth: 1120,
         child: data.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, stack) => EmptyMessage(
@@ -36,15 +39,39 @@ class FavoritesScreen extends ConsumerWidget {
                 onAction: () => context.go('/discover'),
               );
             }
-            return ListView.builder(
-              padding: const EdgeInsets.all(20),
-              itemCount: favorites.length + 1,
-              itemBuilder: (_, i) => i == 0
-                  ? const Padding(
-                      padding: EdgeInsets.only(bottom: 16),
-                      child: DataSourceNotice(),
-                    )
-                  : RestaurantCard(restaurant: favorites[i - 1]),
+            return CustomScrollView(
+              slivers: [
+                SliverPadding(
+                  padding: const EdgeInsets.all(20),
+                  sliver: SliverMainAxisGroup(
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              PageIntro(
+                                eyebrow: 'ĐỂ DÀNH CHO BỮA TỚI',
+                                title: 'Những quán\nbạn muốn quay lại.',
+                                description:
+                                    '${favorites.length} địa điểm đã lưu cho những lúc cần một lựa chọn quen.',
+                              ),
+                              const SizedBox(height: 18),
+                              const DataSourceNotice(compact: true),
+                            ],
+                          ),
+                        ),
+                      ),
+                      AdaptiveCards(
+                        itemCount: favorites.length,
+                        itemBuilder: (_, i) =>
+                            RestaurantCard(restaurant: favorites[i]),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             );
           },
         ),

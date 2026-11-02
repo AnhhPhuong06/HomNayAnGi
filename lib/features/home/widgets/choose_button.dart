@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/providers.dart';
+import '../../../core/theme/appearance.dart';
 import 'location_sheet.dart';
 
 class ChooseButton extends ConsumerStatefulWidget {
@@ -15,7 +16,7 @@ class _ChooseButtonState extends ConsumerState<ChooseButton>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animation = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 1100),
+    duration: const Duration(milliseconds: 600),
   );
   bool _busy = false;
   @override
@@ -36,7 +37,7 @@ class _ChooseButtonState extends ConsumerState<ChooseButton>
         return;
       }
     }
-    final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    final reduceMotion = reducedMotion(context);
     final operation = ref.read(recommendationProvider.notifier).choose();
     if (!reduceMotion) {
       try {

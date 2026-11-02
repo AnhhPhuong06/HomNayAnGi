@@ -5,6 +5,8 @@ analyzer:
     - android/**
     - ios/**
     - web/**
+    - artifacts/**
+    - tool/firebase-tests/node_modules/**
   language:
     strict-casts: true
     strict-inference: true

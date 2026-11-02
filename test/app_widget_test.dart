@@ -9,6 +9,7 @@ import 'package:hom_nay_an_gi/core/services/location_service.dart';
 import 'package:hom_nay_an_gi/core/utils/geo.dart';
 import 'package:hom_nay_an_gi/features/restaurants/repositories/restaurant_repository.dart';
 import 'fixtures.dart';
+import 'package:hom_nay_an_gi/features/auth/auth_repository.dart';
 
 class DeniedLocation extends LocationService {
   int calls = 0;
@@ -30,6 +31,7 @@ Future<ProviderContainer> pumpApp(
   final store = LocalStore(await SharedPreferences.getInstance());
   final container = ProviderContainer(
     overrides: [
+      authenticationRequiredProvider.overrideWithValue(false),
       localStoreProvider.overrideWithValue(store),
       initialSettingsProvider.overrideWithValue(settings),
       repositoryProvider.overrideWithValue(
@@ -141,7 +143,11 @@ void main() {
     await tester.tap(find.text('Dùng vị trí của tôi'));
     await tester.pumpAndSettle();
     expect(find.textContaining('Bạn chưa cấp quyền vị trí'), findsOneWidget);
+    await tester.ensureVisible(find.text('Tỉnh demo'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Tỉnh demo'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Khu demo'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Khu demo'));
     await tester.pumpAndSettle();
@@ -194,6 +200,8 @@ void main() {
     await tester.tap(find.text('Khám phá').last);
     await tester.pumpAndSettle();
     expect(find.text('© OpenStreetMap contributors · ODbL'), findsOneWidget);
+    await tester.ensureVisible(find.text('Phở Demo a'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Phở Demo a'));
     await tester.pumpAndSettle();
     await tester.scrollUntilVisible(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/providers.dart';
 import '../../../core/services/maps_service.dart';
 import '../../../core/utils/geo.dart';
@@ -88,7 +89,7 @@ class _RestaurantDetailScreenState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const DataSourceNotice(),
+                      const DataSourceNotice(compact: true),
                       const SizedBox(height: 20),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,6 +196,35 @@ class _RestaurantDetailScreenState
                       ),
                       const SizedBox(height: 12),
                       const ChooseButton(label: 'CHỌN QUÁN KHÁC'),
+                      SwitchListTile.adaptive(
+                        contentPadding: EdgeInsets.zero,
+                        title: const Text('Ẩn khỏi gợi ý & Khám phá'),
+                        subtitle: const Text(
+                          'Quản lý lại trong Cài đặt → Khẩu vị của bạn.',
+                        ),
+                        value: ref
+                            .watch(settingsProvider)
+                            .taste
+                            .hiddenRestaurantIds
+                            .contains(r.id),
+                        onChanged: (value) => ref
+                            .read(settingsProvider.notifier)
+                            .hideRestaurant(r.id, value),
+                      ),
+                      const SizedBox(height: 12),
+                      OutlinedButton.icon(
+                        onPressed: () => context.push(
+                          Uri(
+                            path: '/blog/new',
+                            queryParameters: {
+                              'kind': 'restaurant',
+                              'restaurant': r.id,
+                            },
+                          ).toString(),
+                        ),
+                        icon: const Icon(Icons.rate_review_outlined),
+                        label: const Text('Chia sẻ quán ăn ngon'),
+                      ),
                     ],
                   ),
                 ),

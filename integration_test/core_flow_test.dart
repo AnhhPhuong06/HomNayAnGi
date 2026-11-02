@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hom_nay_an_gi/main.dart' as app;
+import 'test_app.dart';
 import 'package:hom_nay_an_gi/core/services/local_store.dart';
 
 void main() {
@@ -12,7 +12,7 @@ void main() {
   ) async {
     final preferences = await SharedPreferences.getInstance();
     await preferences.remove(LocalStore.key);
-    await app.main();
+    await launchCatalogTestApp();
     await tester.pumpAndSettle();
     expect(find.text('CHỌN GIÚP TÔI'), findsOneWidget);
     await tester.tap(find.text('Chọn khu vực của bạn'));
@@ -59,7 +59,7 @@ void main() {
     // Tear down the widget tree and bootstrap a fresh app using actual platform storage.
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();
-    await app.main();
+    await launchCatalogTestApp();
     await tester.pumpAndSettle();
     expect(find.text('Khu vực Bắc Ninh (demo), Bắc Ninh'), findsOneWidget);
     expect(LocalStore(preferences).read().history, contains(id));

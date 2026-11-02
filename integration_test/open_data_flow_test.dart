@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hom_nay_an_gi/main.dart' as app;
+import 'test_app.dart';
 import 'package:hom_nay_an_gi/core/services/local_store.dart';
 import 'package:hom_nay_an_gi/features/restaurants/repositories/open_data_restaurant_repository.dart';
 
@@ -27,7 +27,7 @@ void main() {
           ),
         ),
       );
-      await app.main();
+      await launchCatalogTestApp();
       await tester.pumpAndSettle();
       await tester.tap(find.text('CHỌN GIÚP TÔI'));
       await tester.pumpAndSettle();
@@ -71,7 +71,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.pumpWidget(const SizedBox.shrink());
       await tester.pumpAndSettle();
-      await app.main();
+      await launchCatalogTestApp();
       await tester.pumpAndSettle();
       await tester.tap(find.text('Yêu thích').last);
       await tester.pumpAndSettle();

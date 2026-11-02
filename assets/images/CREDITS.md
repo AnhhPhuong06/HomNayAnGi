@@ -1,5 +1,6 @@
-Food photographs from Unsplash, bundled locally for offline demo use.
-They illustrate food and do not depict or endorse the fictional demo venues.
+Food photographs from Unsplash, bundled locally for offline illustration.
+They illustrate food categories and do not depict or endorse any venue.
+The application labels these as “Ảnh món ăn minh họa” when a venue has no photo.
 
 - noodles: https://images.unsplash.com/photo-1569718212165-3a8278d5f624
 - rice: https://images.unsplash.com/photo-1512058564366-18510be2db19

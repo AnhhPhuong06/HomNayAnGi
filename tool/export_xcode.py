@@ -3,6 +3,7 @@
 from datetime import datetime, timezone
 import hashlib
 import json
+import os
 from pathlib import Path
 import stat
 import zipfile
@@ -11,21 +12,41 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "artifacts" / "hom_nay_an_gi-xcode.zip"
 PREFIX = "hom_nay_an_gi_xcode/"
-SOURCE_DIRS = ("lib", "assets", "ios", "test", "integration_test", "docs", "tool", ".github")
+SOURCE_DIRS = ("lib", "assets", "ios", "test", "integration_test", "test_driver", "docs", "tool", "config")
 ROOT_FILES = (
     "pubspec.yaml", "pubspec.lock", "analysis_options.yaml", "README.md",
-    ".metadata", ".gitignore", ".gitattributes", ".env.example", "codemagic.yaml",
+    ".metadata", ".gitignore", ".gitattributes", ".env.example", "firebase.json", "firestore.rules",
 )
 SKIP_DIRS = {
     "__pycache__", ".git", ".dart_tool", "build", "Pods", ".symlinks",
-    "ephemeral", "DerivedData", "xcuserdata", ".generated",
+    "ephemeral", "DerivedData", "xcuserdata", ".generated", "node_modules",
 }
 SKIP_FILES = {
     "Generated.xcconfig", "flutter_export_environment.sh",
     "GeneratedPluginRegistrant.h", "GeneratedPluginRegistrant.m",
-    ".DS_Store", "local.properties",
+    ".DS_Store", "local.properties", "Social.xcconfig",
 }
 PRIVATE_SUFFIXES = {".p12", ".p8", ".pem", ".key", ".mobileprovision", ".jks", ".keystore"}
+PREVIEW_FILES = (
+    "artifacts/modern_login_light.png", "artifacts/modern_login_dark.png",
+    "artifacts/modern_home_fixture.png", "artifacts/modern_blog_empty_fixture.png",
+    "artifacts/modern_discover_fixture.png", "artifacts/facebook_logo_login_native.png",
+    "artifacts/facebook_logo_launcher_native.png",
+    "artifacts/facebook_logo_splash_native.png",
+    "artifacts/upgrade_settings_fixture.png", "artifacts/upgrade_taste_fixture.png",
+    "artifacts/upgrade_map_offline_fixture.png", "artifacts/upgrade_map_native_fixture.png",
+    "artifacts/upgrade_taste_native_fixture.png", "artifacts/upgrade_settings_native_fixture.png",
+    "artifacts/upgrade_login_native.png",
+    "artifacts/adaptive_tablet_discover_fixture.png",
+    "artifacts/adaptive_desktop_home_fixture.png",
+    "artifacts/adaptive_personalization_fixture.png",
+    "artifacts/adaptive_community_places_fixture.png",
+    "artifacts/adaptive_place_form_fixture.png",
+    "artifacts/adaptive_personalization_native_fixture.png",
+    "artifacts/adaptive_place_form_native_fixture.png",
+    "artifacts/adaptive_places_native_fixture.png",
+    "artifacts/adaptive_login_native.png",
+)
 
 
 def portable_bytes(path: Path) -> bytes:
@@ -33,7 +54,7 @@ def portable_bytes(path: Path) -> bytes:
     if path.suffix in {
         ".dart", ".yaml", ".lock", ".md", ".sh", ".py", ".txt", ".json",
         ".plist", ".pbxproj", ".xcconfig", ".xcscheme", ".xcsettings",
-        ".xcworkspacedata", ".storyboard", ".swift", ".h", ".m",
+        ".xcworkspacedata", ".storyboard", ".swift", ".h", ".m", ".entitlements", ".rules", ".mjs",
     } or path.name.startswith("."):
         data = data.replace(b"\r\n", b"\n")
     return data
@@ -41,8 +62,11 @@ def portable_bytes(path: Path) -> bytes:
 
 def main() -> None:
     paths = [ROOT / name for name in ROOT_FILES]
+    paths.extend(ROOT / name for name in PREVIEW_FILES if (ROOT / name).is_file())
     for name in SOURCE_DIRS:
-        paths.extend(path for path in (ROOT / name).rglob("*") if path.is_file())
+        for directory, dirs, files in os.walk(ROOT / name):
+            dirs[:] = sorted(d for d in dirs if d not in SKIP_DIRS)
+            paths.extend(Path(directory) / f for f in files)
     selected = []
     for path in sorted(set(paths)):
         relative = path.relative_to(ROOT)
@@ -52,6 +76,8 @@ def main() -> None:
                 or path.suffix.lower() in PRIVATE_SUFFIXES):
             continue
         if path.name.startswith(".env") and path.name != ".env.example":
+            continue
+        if (relative.parts[0] == "config" and path.name != "firebase.example.json") or path.name.endswith("-debug.log"):
             continue
         selected.append((relative.as_posix(), portable_bytes(path)))
 

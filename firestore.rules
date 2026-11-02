@@ -1,0 +1,90 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function member() { return request.auth != null; }
+    function owner(uid) { return member() && request.auth.uid == uid; }
+    function text(value, min, max) { return value is string && value.size() >= min && value.size() <= max; }
+    function categories(value) {
+      return value is list && value.size() <= 11
+        && value.hasOnly(['noodles', 'rice', 'hotpot', 'grill', 'snacks', 'bread', 'healthy', 'cafe', 'dessert', 'late', 'other']);
+    }
+    function validPreference(p) {
+      return p is map && p.keys().hasOnly(['budgetMin', 'budgetMax', 'maxDistance', 'mealTime', 'companion', 'selectedCategories'])
+        && (p.budgetMin == null || (p.budgetMin is int && p.budgetMin >= 0 && p.budgetMin <= 1000000000))
+        && (p.budgetMax == null || (p.budgetMax is int && p.budgetMax >= 0 && p.budgetMax <= 1000000000))
+        && (p.budgetMin == null || p.budgetMax == null || p.budgetMin <= p.budgetMax)
+        && p.maxDistance in [1, 3, 5, 10]
+        && p.mealTime in [null, 'breakfast', 'lunch', 'dinner', 'late']
+        && p.companion in [null, 'alone', 'partner', 'friends', 'family']
+        && categories(p.selectedCategories);
+    }
+    function validTaste(t) {
+      return t is map && t.keys().hasOnly(['dislikedCategories', 'hiddenRestaurantIds', 'avoidedKeywords', 'avoidRecentCount'])
+        && categories(t.dislikedCategories)
+        && t.hiddenRestaurantIds is list && t.hiddenRestaurantIds.size() <= 1000
+        && t.avoidedKeywords is list && t.avoidedKeywords.size() <= 20
+        && t.avoidRecentCount in [0, 3, 5, 10];
+    }
+    function validBackup() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['version', 'revision', 'updatedAt', 'data'])
+        && d.version == 1 && d.revision is int && d.revision > 0 && d.revision <= 1000000000
+        && d.updatedAt == request.time
+        && d.data is map && d.data.keys().hasOnly(['favorites', 'history', 'preference', 'taste'])
+        && d.data.favorites is list && d.data.favorites.size() <= 1000
+        && d.data.history is list && d.data.history.size() <= 20
+        && validPreference(d.data.preference) && validTaste(d.data.taste);
+    }
+    function validPlace(d) {
+      return d.kind == 'place'
+        ? d.keys().hasAll(['latitude', 'longitude'])
+          && d.latitude is number && d.latitude >= -90 && d.latitude <= 90
+          && d.longitude is number && d.longitude >= -180 && d.longitude <= 180
+          && d.restaurantId == ''
+        : !d.keys().hasAny(['latitude', 'longitude']);
+    }
+    match /profiles/{uid} {
+      allow read, delete: if owner(uid);
+      allow create: if owner(uid) && validBackup() && request.resource.data.revision == 1;
+      allow update: if owner(uid) && validBackup() && request.resource.data.revision == resource.data.revision + 1;
+    }
+    match /posts/{id} {
+      allow read: if member();
+      allow create: if member()
+        && request.resource.data.keys().hasOnly(['authorId', 'authorName', 'kind', 'title', 'body', 'category', 'restaurantId', 'restaurantName', 'area', 'createdAt', 'termsVersion', 'latitude', 'longitude'])
+        && request.resource.data.authorId == request.auth.uid
+        && text(request.resource.data.authorName, 1, 50)
+        && request.resource.data.kind in ['meal', 'restaurant', 'place']
+        && validPlace(request.resource.data)
+        && text(request.resource.data.title, 5, 100)
+        && text(request.resource.data.body, 20, 3000)
+        && request.resource.data.category in ['noodles', 'rice', 'hotpot', 'grill', 'snacks', 'bread', 'healthy', 'cafe', 'dessert', 'late', 'other']
+        && text(request.resource.data.restaurantId, 0, 100)
+        && text(request.resource.data.restaurantName, 0, 200)
+        && text(request.resource.data.area, 0, 300)
+        && (request.resource.data.kind == 'meal' || (request.resource.data.restaurantName.size() > 0 && request.resource.data.area.size() > 0))
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.termsVersion == 1;
+      allow delete: if owner(resource.data.authorId);
+      allow update: if false;
+    }
+    match /reports/{id} {
+      allow read, delete: if owner(resource.data.reporterId);
+      allow create: if member()
+        && request.resource.data.keys().hasOnly(['postId', 'reporterId', 'reason', 'createdAt'])
+        && request.resource.data.reporterId == request.auth.uid
+        && text(request.resource.data.postId, 1, 100)
+        && id == request.auth.uid + '_' + request.resource.data.postId
+        && text(request.resource.data.reason, 5, 500)
+        && exists(/databases/$(database)/documents/posts/$(request.resource.data.postId))
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+    }
+    match /members/{uid}/blocked/{authorId} {
+      allow read, delete: if owner(uid);
+      allow create, update: if owner(uid) && uid != authorId
+        && request.resource.data.keys().hasOnly(['createdAt'])
+        && request.resource.data.createdAt == request.time;
+    }
+  }
+}

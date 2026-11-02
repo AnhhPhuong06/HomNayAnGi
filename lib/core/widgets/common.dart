@@ -4,13 +4,14 @@ import '../providers.dart';
 import '../services/maps_service.dart';
 
 class ContentWidth extends StatelessWidget {
-  const ContentWidth({super.key, required this.child});
+  const ContentWidth({super.key, required this.child, this.maxWidth = 720});
   final Widget child;
+  final double maxWidth;
   @override
   Widget build(BuildContext context) => Align(
     alignment: Alignment.topCenter,
     child: ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 720),
+      constraints: BoxConstraints(maxWidth: maxWidth),
       child: child,
     ),
   );
@@ -31,7 +32,7 @@ class EmptyMessage extends StatelessWidget {
   final VoidCallback? onAction;
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
+    child: SingleChildScrollView(
       padding: const EdgeInsets.all(28),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -56,10 +57,45 @@ class EmptyMessage extends StatelessWidget {
 }
 
 class DataSourceNotice extends ConsumerWidget {
-  const DataSourceNotice({super.key});
+  const DataSourceNotice({super.key, this.compact = false});
+  final bool compact;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final demo = ref.watch(repositoryProvider).isDemo;
+    if (compact && !demo) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Thông tin cộng đồng có thể thay đổi; hãy kiểm tra trước khi đến.',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
+          TextButton.icon(
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              alignment: Alignment.centerLeft,
+            ),
+            onPressed: () async {
+              final opened = await MapsService().openDataLicense();
+              if (!opened && context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Không mở được trang nguồn dữ liệu.'),
+                  ),
+                );
+              }
+            },
+            icon: const Icon(Icons.public, size: 15),
+            label: const Text(
+              '© OpenStreetMap contributors · ODbL',
+              style: TextStyle(fontSize: 11),
+            ),
+          ),
+        ],
+      );
+    }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(

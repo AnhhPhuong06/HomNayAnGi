@@ -4,9 +4,14 @@ import 'package:go_router/go_router.dart';
 import '../../../core/providers.dart';
 import '../../../core/utils/geo.dart';
 import '../../../core/widgets/common.dart';
-import '../../restaurants/models/food_category.dart';
+import '../../../core/widgets/adaptive_cards.dart';
+import '../../../core/widgets/editorial.dart';
+import '../../auth/auth_repository.dart';
+import '../../recommendation/models/meal_preference.dart';
+import '../../settings/screens/taste_sheet.dart';
 import '../../restaurants/widgets/restaurant_card.dart';
 import '../../restaurants/services/restaurant_queries.dart';
+import '../widgets/category_strip.dart';
 import '../widgets/choose_button.dart';
 import '../widgets/filter_sheet.dart';
 import '../widgets/location_sheet.dart';
@@ -17,116 +22,109 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final location = ref.watch(settingsProvider.select((s) => s.location));
     final preference = ref.watch(settingsProvider.select((s) => s.preference));
+    final taste = ref.watch(settingsProvider.select((s) => s.taste));
     final data = ref.watch(restaurantsProvider);
-    final scheme = Theme.of(context).colorScheme;
+    final member = ref.watch(memberProvider).asData?.value;
+    final s = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hôm Nay Ăn Gì?'),
+        title: const Text(
+          'Hôm Nay Ăn Gì?',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         actions: [
           IconButton(
             tooltip: 'Bộ lọc',
             onPressed: () => showFilters(context),
-            icon: const Icon(Icons.tune),
+            icon: const Icon(Icons.tune_rounded),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: IconButton.filledTonal(
+              tooltip: 'Tài khoản',
+              onPressed: () => context.go('/settings'),
+              icon: member == null
+                  ? const Icon(Icons.person_outline_rounded)
+                  : Text(
+                      member.name.trim().isEmpty
+                          ? 'B'
+                          : member.name.trim().characters.first.toUpperCase(),
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
+            ),
           ),
         ],
       ),
       body: ContentWidth(
+        maxWidth: 1120,
         child: CustomScrollView(
           slivers: [
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               sliver: SliverList.list(
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton.icon(
-                      onPressed: () => showLocationPicker(context),
-                      icon: const Icon(Icons.location_on_outlined, size: 18),
-                      label: Text(
-                        location?.label ?? 'Chọn khu vực của bạn',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Container(
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          scheme.primaryContainer,
-                          scheme.tertiaryContainer,
-                        ],
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 18),
+                    child: Row(
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.auto_awesome,
-                              color: scheme.onPrimaryContainer,
-                              size: 18,
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              'BỮA NGON, BỚT ĐẮN ĐO',
-                              style: TextStyle(
-                                color: scheme.onPrimaryContainer,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 11,
-                                letterSpacing: 1.3,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          'Bạn đang không\nbiết ăn gì?',
-                          style: Theme.of(context).textTheme.headlineLarge
-                              ?.copyWith(
-                                fontWeight: FontWeight.w900,
-                                height: 1.2,
-                                color: scheme.onPrimaryContainer,
-                              ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          'Để chúng tôi chọn giúp bạn.',
-                          style: TextStyle(
-                            color: scheme.onPrimaryContainer,
-                            fontSize: 16,
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: s.primaryContainer,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: Icon(
+                            Icons.location_on_outlined,
+                            color: s.primary,
+                            size: 20,
                           ),
                         ),
-                        const SizedBox(height: 24),
-                        const ChooseButton(),
-                        const SizedBox(height: 12),
-                        Text(
-                          'Một chút bất ngờ. Một bữa thật ngon.',
-                          style: TextStyle(
-                            color: scheme.onPrimaryContainer,
-                            fontSize: 12,
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () => showLocationPicker(context),
+                            style: TextButton.styleFrom(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 10,
+                              ),
+                            ),
+                            child: Text(
+                              location?.label ?? 'Chọn khu vực của bạn',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: s.onSurfaceVariant,
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  MealPhotoHero(
+                    eyebrow: 'BỮA NGON, BỚT ĐẮN ĐO',
+                    title: 'Hôm nay,\năn thật ngon.',
+                    image: 'assets/images/salad.jpg',
+                    description:
+                        'Một chút bất ngờ cho chiếc bụng đói.\nĐể chúng tôi chọn giúp bạn.',
+                    action: const ChooseButton(),
+                  ),
+                  const SizedBox(height: 18),
                   Wrap(
                     spacing: 8,
-                    runSpacing: 6,
+                    runSpacing: 8,
                     children: [
                       ActionChip(
-                        avatar: const Icon(Icons.tune, size: 17),
+                        avatar: const Icon(Icons.tune_rounded, size: 16),
                         label: const Text('Bộ lọc'),
                         onPressed: () => showFilters(context),
                       ),
                       ActionChip(
+                        avatar: const Icon(Icons.payments_outlined, size: 16),
                         label: Text(
                           formatPrice(
                                     preference.budgetMin,
@@ -142,37 +140,34 @@ class HomeScreen extends ConsumerWidget {
                         onPressed: () => showFilters(context),
                       ),
                       ActionChip(
+                        avatar: const Icon(Icons.near_me_outlined, size: 16),
                         label: Text('< ${preference.maxDistance.toInt()} km'),
                         onPressed: () => showFilters(context),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  const SectionTitle('Hôm nay bạn thích…'),
-                  const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      for (final c in foodCategories)
-                        FilterChip(
-                          label: Text('${c.icon}  ${c.name}'),
-                          selected: preference.selectedCategories.contains(
-                            c.id,
-                          ),
-                          onSelected: (selected) {
-                            final next = {...preference.selectedCategories};
-                            selected ? next.add(c.id) : next.remove(c.id);
-                            ref
-                                .read(settingsProvider.notifier)
-                                .setPreference(preference.withCategories(next));
-                          },
+                      ActionChip(
+                        avatar: const Icon(
+                          Icons.restaurant_menu_rounded,
+                          size: 16,
                         ),
+                        label: const Text('Khẩu vị'),
+                        onPressed: () => showTastePreferences(context),
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                  const DataSourceNotice(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 28),
+                  const SectionTitle('Hôm nay bạn thích…'),
+                  const SizedBox(height: 14),
+                  CategoryStrip(
+                    selected: preference.selectedCategories,
+                    onToggle: (id) {
+                      final next = {...preference.selectedCategories};
+                      next.contains(id) ? next.remove(id) : next.add(id);
+                      ref
+                          .read(settingsProvider.notifier)
+                          .setPreference(preference.withCategories(next));
+                    },
+                  ),
+                  const SizedBox(height: 26),
                   SectionTitle(
                     location == null
                         ? 'Một vài gợi ý cho bạn'
@@ -181,6 +176,8 @@ class HomeScreen extends ConsumerWidget {
                     onAction: () => context.go('/discover'),
                   ),
                   const SizedBox(height: 12),
+                  const DataSourceNotice(compact: true),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
@@ -193,7 +190,7 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
               ],
-              error: (_, stack) => [
+              error: (_, _) => [
                 SliverToBoxAdapter(
                   child: EmptyMessage(
                     title: 'Không thể tải danh sách quán.',
@@ -209,6 +206,11 @@ class HomeScreen extends ConsumerWidget {
                   restaurants,
                   preference: preference,
                   origin: location?.point,
+                  user: UserPreference(
+                    dislikedCategories: taste.dislikedCategories,
+                    hiddenRestaurantIds: taste.hiddenRestaurantIds,
+                    avoidedKeywords: taste.avoidedKeywords,
+                  ),
                 ).take(6).toList();
                 if (visible.isEmpty) {
                   return [
@@ -225,7 +227,7 @@ class HomeScreen extends ConsumerWidget {
                 return [
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    sliver: SliverList.builder(
+                    sliver: AdaptiveCards(
                       itemCount: visible.length,
                       itemBuilder: (_, i) =>
                           RestaurantCard(restaurant: visible[i]),
@@ -234,7 +236,7 @@ class HomeScreen extends ConsumerWidget {
                 ];
               },
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 20)),
+            const SliverToBoxAdapter(child: SizedBox(height: 24)),
           ],
         ),
       ),

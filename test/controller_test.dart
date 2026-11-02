@@ -26,9 +26,9 @@ class UnwritableStore extends LocalStore {
   UnwritableStore(super.preferences);
   bool fail = true;
   @override
-  Future<void> write(LocalSettings settings) => fail
+  Future<void> write(LocalSettings settings, {String? accountId}) => fail
       ? Future.error(const StorageFailure('disk full'))
-      : super.write(settings);
+      : super.write(settings, accountId: accountId);
 }
 
 void main() {
