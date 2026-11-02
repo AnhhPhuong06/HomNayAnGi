@@ -1,5 +1,16 @@
 # Mở Hôm Nay Ăn Gì trong Xcode
 
+## GitHub Actions: IPA chưa ký
+
+Workflow `.github/workflows/ios-unsigned.yml` chạy trên `macos-15-intel` và
+chọn Xcode 26.3 bằng `DEVELOPER_DIR`. Không dùng Xcode 16.4 mặc định của image:
+Firebase iOS SDK 13.1.1 trong lockfile plugin cần Swift tools 6.2.
+Workflow in phiên bản Xcode/Swift trước khi giải dependency để thấy rõ toolchain.
+Chạy **Actions → Build unsigned IPA → Run workflow → main**. Khi thành công,
+artifact `hom_nay_an_gi-unsigned` chứa IPA chưa ký; cần ký lại trước khi cài.
+
+## Project nguồn trên Mac
+
 Gói hiện tại có [UX/UI thích ứng, cá nhân hóa và địa điểm cộng đồng](adaptive-community.md).
 
 Gói `hom_nay_an_gi-xcode.zip` chứa workspace iOS, mã Dart, assets và catalog
