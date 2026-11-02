@@ -4,6 +4,22 @@
 và giới hạn nguồn thật hiện tại xem [open-data.md](open-data.md); số lượng và
 snapshot hiện tại nằm trong `assets/data/catalog_manifest.json`.
 
+## iOS Release không ký trên GitHub Actions — 02/11/2026
+
+- [Run 41443870844](https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41443870844)
+  build thành công mã ứng dụng tại commit `833ff41`, bằng Flutter 3.47.9/Xcode 26.3.
+  Analyze và 95 bài kiểm thử đều đạt; 13 lượt xuất ảnh tùy chọn được bỏ qua trong CI.
+- Đồng bộ FlutterFire về `firebase_core 4.15.2`, `firebase_auth 6.7.1`,
+  `cloud_firestore 6.10.2`: Firebase iOS 12.19.3 đã vá bảo mật tương thích với
+  GTMSessionFetcher 3.x của Google Sign-In 9.x. Firebase 13 hiện chưa tương thích.
+- IPA 22.162.041 bytes, arm64, bundle `vn.homnayangi.homNayAnGi`, bản `1.0.0+1`,
+  iOS 15.0+. Kiểm tra ZIP CRC, binary Mach-O, catalog/logo khớp mã nguồn và
+  không có chữ ký ứng dụng/provisioning profile.
+  SHA-256: `6f3b092889265f7d9ef25828271a5ace8965da6edae40437dc3df25d1d728f85`.
+- Chưa chạy Simulator/iPhone thật, chưa xác minh OAuth iOS. IPA cần ký lại trước
+  khi cài; Firebase và tài khoản Google/Facebook/Apple vẫn cần cấu hình riêng.
+  Kết quả này thay thế giới hạn "chưa build native iOS" trong baseline bên dưới.
+
 ## UX/UI thích ứng, cá nhân hóa và địa điểm cộng đồng — 02/11/2026
 
 - `flutter analyze --no-pub`: không có vấn đề; 95 unit/widget tests đạt.

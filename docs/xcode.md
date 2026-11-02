@@ -82,5 +82,11 @@ Gói không chứa cache Windows, `Generated.xcconfig`, Swift package sinh tự 
 Pods, build output hoặc SDK máy phát triển. Các file phụ thuộc máy được tạo lại
 qua script trên Mac. Xem `EXPORT_MANIFEST.json` trong ZIP để đối chiếu checksum.
 
-Đã kiểm tra cấu trúc ZIP, XML/plist, script Bash và catalog đóng gói trên Windows.
-**Chưa biên dịch, chạy simulator hoặc ký iOS** vì máy xuất không có macOS/Xcode.
+Đã build iOS Release không ký bằng Xcode 26.3 trên GitHub Actions ngày 02/11/2026:
+[run 41443870844](https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41443870844),
+commit mã ứng dụng `833ff41`. Analyze và 95 bài kiểm thử đạt.
+IPA arm64 `1.0.0+1` (iOS 15.0+) đã kiểm tra ZIP CRC, bundle identifier,
+catalog/logo khớp nguồn và không có chữ ký ứng dụng/provisioning profile.
+SHA-256: `6f3b092889265f7d9ef25828271a5ace8965da6edae40437dc3df25d1d728f85`.
+**Chưa chạy iOS Simulator/thiết bị thật hoặc kiểm thử OAuth iOS.**
+IPA chưa ký cần được ký lại trước khi cài; vẫn cần cấu hình Firebase/các nhà cung cấp.

@@ -5,7 +5,7 @@
   "workspace": "ios/Runner.xcworkspace",
   "prepareAndOpen": "bash ios/open_xcode.sh",
   "scope": "Flutter application sources for iOS; SDK and build caches excluded",
-  "iosBuildVerified": false,
+  "iosBuildVerified": true,
   "files": {
     ".env.example": "30403172fe0b504803844510a7a7f9109436e1b65df430e7a4c07fbe7b728b36",
     ".gitattributes": "cb8677c93268ac1623379a85489bfcf58e55efa243fd79f85c329ee882eae8dd",
@@ -73,8 +73,8 @@
     "docs/design.md": "eee4d549ed41766174ab7361548e1c47fedf0032cd1ecb7b203e05af12995230",
     "docs/open-data.md": "6a724bfae6805dd144b8ab0f7d2bdb3545b4a51351cef6f858731c031ce567a6",
     "docs/upgrades.md": "f8a70efbd2f434ea9d950b18c5b41def96c1b54d0522d89219c29ac6e6945c85",
-    "docs/verification.md": "bcafcbce1128315403748602ec9b3cbc4be5ac5dfff96907a0c61fa8a62a4e86",
-    "docs/xcode.md": "09e304fd0e916d98feea3e8cf53578070a0d3167f90b83e505d1eea5844bcb8b",
+    "docs/verification.md": "db9690cbaecd65936ed1cc3fadd7839bfb540ab74b2e893b17be660e37f9cba6",
+    "docs/xcode.md": "8108f9acfe69d3cdfddb76003b3516f292278238f1f15144c0fd77dacfa969a3",
     "firebase.json": "db8b0ac1f8f5097dcc435f34068150d3e28f5f4eb415a618c0ecaaeb1c8de5bd",
     "firestore.rules": "18c0bfedbfda29b8c7df703c3ad608b19ff632f6b8023a40a6de462516f24010",
     "integration_test/community_flow_test.dart": "f0e137e26b155cf7329233dee1a39e3ffa89bac20ebd6ac6bd37f6ce5db62aa0",
@@ -207,11 +207,22 @@
     "tool/firebase-tests/package.json": "6c4106a24621064fff02b2a33efcc0d8c7407df868f7a587be8f6e0437fe0f85",
     "tool/firebase-tests/rules.test.mjs": "c9b6ec1188693d4e567fbe442d42fcc7f658d23e245112392c18fdc380a61388",
     "tool/generate_demo.py": "2ed483dca1a01d435b7a64288a616223b55601bcfe87b23bde2ac6205803b331",
-    "tool/generate_icons.dart": "100d1156b2a342e63a500099b65b12f63964c751a0cb5f9fd014a8568475581f"
+    "tool/generate_icons.dart": "100d1156b2a342e63a500099b65b12f63964c751a0cb5f9fd014a8568475581f",
+    ".github/workflows/ios-unsigned.yml": "d0afc17b4f20a63ee631f61e12f250267570a035343c7d6d5028ce8c59c92093",
+    "codemagic.yaml": "08e0e29c79b5e2a2004f51d66fcf95116cbda579fa77aaa3d16459b049063b1e",
+    "ios/package_unsigned_ipa.sh": "5723fc3453c152dd51663ae68ef2540097adeaa52a8d591952135720b949489e"
   },
   "repositoryImport": {
     "sourceDirectory": "hom_nay_an_gi_xcode",
     "excludedNonRuntimeArchive": "assets/images/ui-ux-pro-max-skill-2.15.0.tar.gz",
     "ciWorkflow": "ios-unsigned"
+  },
+  "iosBuildEvidence": {
+    "sourceCommit": "833ff41651348ab0cd1635a7dc378049e11cd890",
+    "runUrl": "https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41443870844",
+    "xcode": "26.3",
+    "firebaseIOS": "12.19.3",
+    "scope": "unsigned Release arm64 compile and IPA contents; iOS runtime/OAuth not verified",
+    "ipaSHA256": "6f3b092889265f7d9ef25828271a5ace8965da6edae40437dc3df25d1d728f85"
   }
 }
