@@ -4,7 +4,16 @@
 
 Workflow `.github/workflows/ios-unsigned.yml` chạy trên `macos-15-intel` và
 chọn Xcode 26.3 bằng `DEVELOPER_DIR`. Không dùng Xcode 16.4 mặc định của image:
-Firebase iOS SDK 13.1.1 trong lockfile plugin cần Swift tools 6.2.
+Xcode 26.3 đáp ứng toolchain được Firebase hỗ trợ.
+
+Các gói được khóa ở `firebase_core 4.15.2`, `firebase_auth 6.7.1` và
+`cloud_firestore 6.10.2`, dùng Firebase iOS SDK **12.19.3** đã vá bảo mật.
+Google Sign-In iOS 9.x yêu cầu GTMSessionFetcher 3.x; Firebase 12.19.3 chấp nhận
+`3.4.1..<6.0.0`, nên hai SDK có thể dùng chung bản 3.x.
+Firebase 13 yêu cầu từ 4.x và [chưa có Google Sign-In tương thích qua SPM](https://github.com/firebase/firebase-ios-sdk/blob/main/FirebaseCore/CHANGELOG.md).
+Không nâng riêng từng gói FlutterFire lên nhánh Firebase 13 cho tới khi có SDK
+Google Sign-In tương thích. Bản vá 12.19.3 được ghi trong
+[changelog FlutterFire](https://pub.dev/packages/firebase_core/versions/4.15.2/changelog).
 Workflow in phiên bản Xcode/Swift trước khi giải dependency để thấy rõ toolchain.
 Chạy **Actions → Build unsigned IPA → Run workflow → main**. Khi thành công,
 artifact `hom_nay_an_gi-unsigned` chứa IPA chưa ký; cần ký lại trước khi cài.
