@@ -1,0 +1,76 @@
+name: Publish manual iOS update
+on:
+  workflow_dispatch:
+    inputs:
+      build_run_id:
+        description: Successful configured Build unsigned IPA run on the current main commit
+        required: true
+        type: string
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: publish-ios-update
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: main
+      - name: Verify build provenance and download artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.build_run_id }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re, subprocess
+          run_id = os.environ['RUN_ID']
+          if not re.fullmatch(r'[0-9]{1,20}', run_id):
+              raise SystemExit('Invalid build run ID')
+          def gh(*args):
+              return subprocess.check_output(['gh', *args], text=True)
+          run = json.loads(gh('api', f'repos/{os.environ["GH_REPO"]}/actions/runs/{run_id}'))
+          head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          if (run['conclusion'] != 'success' or run['head_branch'] != 'main'
+                  or run['head_sha'] != head or run['path'] != '.github/workflows/ios-unsigned.yml'):
+              raise SystemExit('Use a successful iOS workflow from the current main commit')
+          logs = gh('run', 'view', run_id, '--log')
+          if 'Compile-only IPA: account service is unavailable' in logs:
+              raise SystemExit('Compile-only artifacts cannot be published')
+          subprocess.run(['gh', 'run', 'download', run_id, '-n', 'hom_nay_an_gi-unsigned', '-D', '/tmp/meal-ipa'], check=True)
+          PY
+      - name: Validate IPA and prepare update metadata
+        run: python3 tool/prepare_app_release.py --ipa /tmp/meal-ipa/hom_nay_an_gi-unsigned.ipa --output /tmp/meal-release
+      - name: Publish release before advertising it
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          TAG="$(cat /tmp/meal-release/release-tag.txt)"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo 'Release already exists. Inspect it before publishing metadata manually.' >&2
+            exit 1
+          fi
+          gh release create "$TAG" --draft --target "$(git rev-parse HEAD)" --title "Hôm Nay Ăn Gì? $TAG — IPA unsigned" --notes-file /tmp/meal-release/release-notes.md
+          gh release upload "$TAG" /tmp/meal-ipa/hom_nay_an_gi-unsigned.ipa /tmp/meal-release/SHA256SUMS.txt
+          gh release edit "$TAG" --draft=false
+          gh release view "$TAG" --json isDraft,assets --jq 'if .isDraft or (.assets | length) < 2 then error("Release is not ready") else "Release ready" end'
+          cp /tmp/meal-release/app_updates.json config/app_updates.json
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          path = Path('EXPORT_MANIFEST.json')
+          if path.exists():
+              manifest = json.loads(path.read_text(encoding='utf-8'))
+              manifest['files']['config/app_updates.json'] = hashlib.sha256(Path('config/app_updates.json').read_bytes()).hexdigest()
+              path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add config/app_updates.json EXPORT_MANIFEST.json
+          git commit -m 'Publish metadata for manual iOS update'
+          git push origin HEAD:main

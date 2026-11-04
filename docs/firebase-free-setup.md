@@ -71,3 +71,7 @@ trong GitHub Secret; script chỉ đưa chúng vào cấu hình native. **Không
 App Secret, Apple `.p8`, mật khẩu hoặc service-account key vào JSON này.
 Apple cần entitlement/signing và cấu hình Apple Developer phù hợp; tài khoản
 Firebase miễn phí không thay thế các yêu cầu của Apple.
+
+Từ bản 1.1.0, script tự bật `FACEBOOK_LOGIN_ENABLED` chỉ khi cả App ID và client token đã hợp lệ. Apple mặc định tắt; chỉ thêm `"APPLE_LOGIN_ENABLED": true` vào cấu hình build sau khi đã hoàn tất provider, entitlement và signing. Không bật cờ chỉ để làm nút hết báo chưa cấu hình. Google vẫn dùng cấu hình hiện có.
+
+Triển khai Firestore và cấp quyền xử lý báo cáo xem [moderation.md](moderation.md). Nhắc cập nhật không cần Firebase/push; xem [app-updates.md](app-updates.md).

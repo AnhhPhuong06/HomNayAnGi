@@ -20,6 +20,11 @@ class SignInCancelled implements Exception {
   const SignInCancelled();
 }
 
+class SignInProviderUnavailable implements Exception {
+  const SignInProviderUnavailable(this.provider);
+  final SocialProvider provider;
+}
+
 abstract class AuthRepository {
   Stream<Member?> session();
   Future<void> signIn(SocialProvider provider);
@@ -34,6 +39,11 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<void>? _googleInitialization;
   Future<AuthCredential> _credential(SocialProvider provider) async {
     if (provider == SocialProvider.google) {
+      if (!kIsWeb &&
+          defaultTargetPlatform == TargetPlatform.iOS &&
+          const String.fromEnvironment('GOOGLE_IOS_CLIENT_ID').isEmpty) {
+        throw const SignInProviderUnavailable(SocialProvider.google);
+      }
       _googleInitialization ??= GoogleSignIn.instance.initialize(
         clientId: defaultTargetPlatform == TargetPlatform.iOS
             ? _optionalClientId(
@@ -49,6 +59,9 @@ class FirebaseAuthRepository implements AuthRepository {
       return GoogleAuthProvider.credential(
         idToken: account.authentication.idToken,
       );
+    }
+    if (!const bool.fromEnvironment('FACEBOOK_LOGIN_ENABLED')) {
+      throw const SignInProviderUnavailable(SocialProvider.facebook);
     }
     final random = Random.secure();
     final nonce = base64Url.encode(
@@ -89,6 +102,14 @@ class FirebaseAuthRepository implements AuthRepository {
   );
   @override
   Future<void> signIn(SocialProvider provider) async {
+    if (provider == SocialProvider.apple &&
+        !const bool.fromEnvironment('APPLE_LOGIN_ENABLED')) {
+      throw const SignInProviderUnavailable(SocialProvider.apple);
+    }
+    if (provider == SocialProvider.facebook &&
+        !const bool.fromEnvironment('FACEBOOK_LOGIN_ENABLED')) {
+      throw const SignInProviderUnavailable(SocialProvider.facebook);
+    }
     if (kIsWeb) {
       await auth.signInWithPopup(_provider(provider));
     } else if (provider == SocialProvider.apple) {
@@ -146,6 +167,14 @@ final memberProvider = StreamProvider<Member?>((ref) {
 });
 
 String accountError(Object error) {
+  if (error is SignInProviderUnavailable) {
+    final name = switch (error.provider) {
+      SocialProvider.google => 'Google',
+      SocialProvider.facebook => 'Facebook',
+      SocialProvider.apple => 'Apple',
+    };
+    return '$name chưa được cấu hình đầy đủ cho bản này. Vui lòng dùng cách đăng nhập đã sẵn sàng.';
+  }
   if (error is SignInCancelled ||
       error is GoogleSignInException &&
           error.code == GoogleSignInExceptionCode.canceled) {

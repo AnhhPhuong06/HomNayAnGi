@@ -1,5 +1,7 @@
 # Hôm Nay Ăn Gì?
 
+**1.1.0 (build 2):** Nhắc cập nhật khi mở hoặc quay lại app; xem [hướng dẫn](docs/app-updates.md). [Quản trị báo cáo cộng đồng](docs/moderation.md) cần triển khai Firestore và cấp quyền trên máy chủ.
+
 **UX/UI thích ứng:** thanh bên trên cửa sổ rộng, thẻ nhiều cột, màu/cỡ chữ/thẻ gọn
 và giảm chuyển động theo cá nhân. Có thêm địa điểm kèm ghim để thành viên khác
 biết trong Blog và Khám phá → Cộng đồng. [Cách dùng và giới hạn](docs/adaptive-community.md).

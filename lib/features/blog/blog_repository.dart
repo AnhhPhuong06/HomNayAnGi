@@ -180,6 +180,7 @@ class FirestoreBlogRepository implements BlogRepository {
         'postId': postId,
         'reporterId': reporterId,
         'reason': reason,
+        'status': 'open',
         'createdAt': FieldValue.serverTimestamp(),
       });
   CollectionReference<Map<String, dynamic>> _blocks(String uid) =>

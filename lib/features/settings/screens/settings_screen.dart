@@ -9,6 +9,9 @@ import '../../auth/account_section.dart';
 import 'taste_sheet.dart';
 import '../cloud_backup_section.dart';
 import '../../auth/auth_repository.dart';
+import '../../updates/update_widgets.dart';
+import '../../moderation/moderation_repository.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -26,6 +29,14 @@ class SettingsScreen extends ConsumerWidget {
           padding: const EdgeInsets.all(20),
           children: [
             const AccountSection(),
+            if (ref.watch(isAdminProvider).asData?.value == true)
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.admin_panel_settings_outlined),
+                title: const Text('Quản trị cộng đồng'),
+                subtitle: const Text('Xem báo cáo và gỡ nội dung vi phạm'),
+                onTap: () => context.push('/moderation'),
+              ),
             CloudBackupSection(
               key: ValueKey(ref.watch(memberProvider).asData?.value?.id),
             ),
@@ -85,16 +96,11 @@ class SettingsScreen extends ConsumerWidget {
               onTap: () => showFilters(context),
             ),
             const SizedBox(height: 28),
-            const SectionTitle('Về ứng dụng'),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.restaurant_menu),
-              title: const Text('Hôm Nay Ăn Gì?'),
-              subtitle: Text(
-                demo
-                    ? 'Phiên bản 1.0.0 · Dữ liệu demo'
-                    : 'Phiên bản 1.0.0 · ${restaurantCount ?? "…"} quán từ dữ liệu mở Việt Nam',
-              ),
+            const SectionTitle('Giới thiệu & cập nhật'),
+            AppUpdateSection(
+              catalogSummary: demo
+                  ? 'Dữ liệu demo'
+                  : '${restaurantCount ?? "…"} quán từ dữ liệu mở Việt Nam',
             ),
             ListTile(
               contentPadding: EdgeInsets.zero,
@@ -108,13 +114,14 @@ class SettingsScreen extends ConsumerWidget {
                   scrollable: true,
                   content: const Text(
                     'Ứng dụng dùng Firebase Authentication để đăng nhập bằng Google, Facebook hoặc Apple. Ứng dụng không nhận mật khẩu nhà cung cấp. Phiên đăng nhập được SDK lưu trên thiết bị.\n\n'
-                    'Tên hiển thị, nội dung và quán/khu vực bạn đính kèm bài blog được lưu trên Cloud Firestore và hiển thị cho thành viên khác. Khi chia sẻ địa điểm mới, tọa độ quán bạn chủ động chọn hoặc nhập cũng được công khai trong bài viết và mục Cộng đồng. Email không được ghi vào bài blog. Bạn có thể xóa bài và tài khoản trong ứng dụng. Báo cáo và danh sách chặn chỉ được bạn và người quản trị truy cập.\n\n'
+                      'Tên hiển thị, nội dung và quán/khu vực bạn đính kèm bài blog được lưu trên Cloud Firestore và hiển thị cho thành viên khác. Khi chia sẻ địa điểm mới, tọa độ quán bạn chủ động chọn hoặc nhập cũng được công khai trong bài viết và mục Cộng đồng. Email không được ghi vào bài blog. Bạn có thể xóa bài và tài khoản trong ứng dụng. Báo cáo được bạn và người quản trị truy cập; danh sách chặn chỉ tài khoản của bạn truy cập được.\n\n'
                     'Vị trí chỉ được xin khi bạn chọn dùng GPS. Tọa độ GPS chỉ giữ trong phiên; ứng dụng không tự điền hay tự đăng GPS khi chia sẻ địa điểm. '
                     'Khu vực chọn thủ công, yêu thích, khẩu vị, cài đặt và tối đa 20 gợi ý được lưu trên thiết bị. Dữ liệu cá nhân được tách theo tài khoản. Khi bạn bấm Lưu lên tài khoản, yêu thích, lịch sử, bộ lọc và khẩu vị được gửi tới Cloud Firestore, chỉ tài khoản đó được truy cập. GPS, khu vực và giao diện không nằm trong bản sao lưu.\n\n'
                     'Khi mở chế độ Bản đồ trong Khám phá hoặc chọn ghim quán, ứng dụng tải nền từ máy chủ OpenStreetMap. Máy chủ bản đồ nhận địa chỉ IP và các ô bản đồ của vùng đang xem. Danh sách quán vẫn hoạt động ngoại tuyến.\n\n'
                     'Khi mở chỉ đường, tọa độ đích được chuyển cho Google Maps hoặc trình duyệt; dịch vụ đó áp dụng chính sách riêng. '
                     'Danh mục quán đi kèm app hoạt động ngoại tuyến. Dữ liệu thật có nguồn từ OpenStreetMap; chế độ demo được đánh dấu riêng. '
                     'Khi bạn bấm liên kết TikTok hoặc nguồn dữ liệu, ứng dụng mở dịch vụ ngoài với tên quán hoặc đường dẫn tương ứng; chính sách của dịch vụ đó được áp dụng.\n\n'
+                    'Khi bật nhắc phiên bản mới, ứng dụng đọc thông tin phát hành công khai từ GitHub khi mở hoặc quay lại app. Máy chủ nhận địa chỉ IP của kết nối; app không gửi email, UID hoặc vị trí để kiểm tra cập nhật. Có thể tắt kiểm tra tự động trong Cài đặt.\n\n'
                     'Bạn có thể xóa vị trí trong Cài đặt hoặc xóa dữ liệu ứng dụng từ cài đặt thiết bị.',
                   ),
                   actions: [

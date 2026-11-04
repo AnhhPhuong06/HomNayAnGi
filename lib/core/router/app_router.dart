@@ -10,16 +10,19 @@ import '../../features/settings/screens/settings_screen.dart';
 import '../providers.dart';
 import '../widgets/common.dart';
 import '../branding/brand_mark.dart';
+import '../services/app_navigation.dart';
 import '../../features/auth/auth_repository.dart';
 import '../../features/auth/login_screen.dart';
 import '../../features/blog/blog_screen.dart';
 import '../../features/blog/blog_repository.dart';
 import '../../features/blog/compose_screen.dart';
+import '../../features/moderation/moderation_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final refresh = ValueNotifier<int>(0);
   ref.listen(memberProvider, (_, _) => refresh.value++);
   final router = GoRouter(
+    navigatorKey: ref.watch(appNavigatorKeyProvider),
     refreshListenable: refresh,
     redirect: (_, state) {
       if (!ref.read(authenticationRequiredProvider)) return null;
@@ -70,6 +73,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(path: '/result', builder: (_, state) => const ResultScreen()),
+      GoRoute(
+        path: '/moderation',
+        builder: (_, state) => const ModerationScreen(),
+      ),
       GoRoute(
         path: '/blog/new',
         builder: (_, state) => ComposeScreen(

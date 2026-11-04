@@ -1,7 +1,7 @@
 import { before, after, beforeEach, test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { initializeTestEnvironment, assertSucceeds, assertFails } from '@firebase/rules-unit-testing';
-import { doc, collection, query, orderBy, limit, getDocs, getDoc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, collection, query, orderBy, limit, getDocs, getDoc, setDoc, updateDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 
 let env;
 before(async () => {
@@ -99,4 +99,52 @@ test('backup revisions advance exactly once and server owns the timestamp', asyn
   await assertFails(setDoc(target, backup()));
   await assertSucceeds(setDoc(target, backup({revision: 2})));
   await assertFails(setDoc(target, backup({revision: 2})));
+});
+
+
+async function grantModerator(uid) {
+  await env.withSecurityRulesDisabled(async context => {
+    await setDoc(doc(context.firestore(), 'roles/' + uid), {admin: true});
+  });
+}
+
+test('clients cannot grant roles or enumerate other members roles', async () => {
+  await assertFails(setDoc(doc(db('alice'), 'roles/alice'), {admin: true}));
+  await grantModerator('mod');
+  await assertSucceeds(getDoc(doc(db('mod'), 'roles/mod')));
+  await assertFails(getDoc(doc(db('alice'), 'roles/mod')));
+  await assertFails(getDocs(collection(db('mod'), 'roles')));
+  await assertFails(deleteDoc(doc(db('mod'), 'roles/mod')));
+});
+
+test('moderator reads reports and removes violating posts without accessing private backups', async () => {
+  await grantModerator('mod');
+  await setDoc(doc(db('alice'), 'posts/p'), post('alice'));
+  await setDoc(doc(db('bob'), 'reports/bob_p'), {postId: 'p', reporterId: 'bob', reason: 'Content requires moderation', status: 'open', createdAt: serverTimestamp()});
+  await assertSucceeds(getDocs(collection(db('mod'), 'reports')));
+  await assertFails(getDocs(collection(db('charlie'), 'reports')));
+  await setDoc(doc(db('alice'), 'profiles/alice'), backup());
+  await assertFails(getDoc(doc(db('mod'), 'profiles/alice')));
+  await assertSucceeds(deleteDoc(doc(db('mod'), 'posts/p')));
+});
+
+test('only moderator resolves reports and cannot rewrite their original contents', async () => {
+  await grantModerator('mod');
+  await setDoc(doc(db('alice'), 'posts/p'), post('alice'));
+  const report = {postId: 'p', reporterId: 'bob', reason: 'Content requires moderation', createdAt: serverTimestamp()};
+  await setDoc(doc(db('bob'), 'reports/bob_p'), report);
+  const resolution = {status: 'resolved', moderatorId: 'mod', resolvedAt: serverTimestamp()};
+  await assertFails(updateDoc(doc(db('bob'), 'reports/bob_p'), resolution));
+  await assertFails(updateDoc(doc(db('mod'), 'reports/bob_p'), {...resolution, moderatorId: 'someone-else'}));
+  await assertFails(updateDoc(doc(db('mod'), 'reports/bob_p'), {...resolution, reason: 'Changed accusation'}));
+  await assertSucceeds(updateDoc(doc(db('mod'), 'reports/bob_p'), resolution));
+  await assertFails(updateDoc(doc(db('mod'), 'reports/bob_p'), {status: 'open'}));
+});
+
+test('role revocation immediately prevents moderation writes and reporters cannot pre-resolve a report', async () => {
+  await grantModerator('mod');
+  await setDoc(doc(db('alice'), 'posts/p'), post('alice'));
+  await assertFails(setDoc(doc(db('bob'), 'reports/bob_p'), {postId: 'p', reporterId: 'bob', reason: 'Content requires moderation', status: 'resolved', createdAt: serverTimestamp()}));
+  await env.withSecurityRulesDisabled(async context => { await deleteDoc(doc(context.firestore(), 'roles/mod')); });
+  await assertFails(deleteDoc(doc(db('mod'), 'posts/p')));
 });

@@ -40,6 +40,11 @@ def validate(data):
     facebook_token = value('FACEBOOK_CLIENT_TOKEN', r'[A-Za-z0-9_-]+', True)
     if bool(facebook_id) != bool(facebook_token):
         raise ValueError('Provide both FACEBOOK_APP_ID and FACEBOOK_CLIENT_TOKEN, or neither.')
+    apple = data.get('APPLE_LOGIN_ENABLED', False)
+    if not isinstance(apple, bool):
+        raise ValueError('APPLE_LOGIN_ENABLED must be true or false.')
+    config['FACEBOOK_LOGIN_ENABLED'] = bool(facebook_id)
+    config['APPLE_LOGIN_ENABLED'] = apple
     # Derive the callback from the same ID passed to GoogleSignIn.initialize.
     reverse_id = '.'.join(reversed(config['GOOGLE_IOS_CLIENT_ID'].split('.')))
     social = f'GOOGLE_REVERSED_CLIENT_ID = {reverse_id}\n'

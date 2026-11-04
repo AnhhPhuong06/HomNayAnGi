@@ -1,3 +1,4 @@
+import 'package:hom_nay_an_gi/features/moderation/moderation_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,6 +49,7 @@ void main() {
       overrides: [
         localStoreProvider.overrideWithValue(store),
         backendReadyProvider.overrideWithValue(true),
+        isAdminProvider.overrideWith((ref) => Stream.value(false)),
         authRepositoryProvider.overrideWithValue(auth),
         blogRepositoryProvider.overrideWithValue(blog),
         repositoryProvider.overrideWithValue(

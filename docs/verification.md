@@ -259,3 +259,12 @@ snapshot hiện tại nằm trong `assets/data/catalog_manifest.json`.
 - `artifacts/favorites_after_restart.png`: quán yêu thích vẫn còn sau cold restart, ảnh demo hiển thị khi offline.
 
 Artifact nằm local, không được commit Git; tạo lại APK bằng lệnh trong README. APK debug không dùng để đánh giá kích thước/performance release.
+
+## Nâng cấp 1.1.0+2 — 05/11/2026
+
+- Nhắc cập nhật khi mở/quay lại app; phiên bản thật từ gói cài, kiểm tra thủ công, cache 6 giờ, hoãn cùng bản 24 giờ, tắt nhắc theo thiết bị. Tách kênh IPA manual khỏi App Store/TestFlight; không tự cài mã, không dùng push.
+- Thêm màn hình quản trị 100 báo cáo gần nhất, phân quyền server, xử lý giữ/gỡ bài; gỡ bài cần xác nhận thứ hai. Client không tự cấp quyền và admin không đọc được backup riêng của thành viên.
+- Provider chưa cấu hình có thông báo rõ; Facebook/Apple mặc định chưa bật. Giữ Google client configuration trong secret hiện có.
+- Kiểm tra cục bộ: `flutter analyze` không có lỗi; 118 Flutter tests đạt, các ca preview mặc định bỏ qua. 7 account configuration tests, 4 release preparation tests và 15 Firestore Emulator rules tests đạt. Preview hộp thoại tại `artifacts/update_dialog_fixture.png` dùng phiên bản giả lập 1.2.0 để minh họa, không phải release đã công bố.
+- Chưa xác minh đăng nhập trên iPhone thật. Chưa triển khai Firestore production trong phiên này vì Firebase CLI đang chờ chủ project hoàn tất đăng nhập Google. Chưa cấp admin cho UID nào.
+- Bản native 1.1.0+2 và public update feed được xác minh riêng sau khi GitHub build hoàn tất; kết quả build 1.0.0 ở các phần trước không phải bằng chứng cho 1.1.0.

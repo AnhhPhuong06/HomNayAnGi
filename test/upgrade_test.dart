@@ -1,3 +1,4 @@
+import 'package:hom_nay_an_gi/features/moderation/moderation_repository.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -74,6 +75,7 @@ void main() {
         overrides: [
           localStoreProvider.overrideWithValue(store),
           backendReadyProvider.overrideWithValue(true),
+          isAdminProvider.overrideWith((ref) => Stream.value(false)),
           authRepositoryProvider.overrideWithValue(auth),
           repositoryProvider.overrideWithValue(TestRepository([venue()])),
         ],
@@ -110,6 +112,7 @@ void main() {
           LocalStore(await SharedPreferences.getInstance()),
         ),
         backendReadyProvider.overrideWithValue(true),
+        isAdminProvider.overrideWith((ref) => Stream.value(false)),
         authRepositoryProvider.overrideWithValue(auth),
       ],
     );
@@ -160,6 +163,7 @@ void main() {
           LocalStore(await SharedPreferences.getInstance()),
         ),
         backendReadyProvider.overrideWithValue(true),
+        isAdminProvider.overrideWith((ref) => Stream.value(false)),
         authRepositoryProvider.overrideWithValue(auth),
         blogRepositoryProvider.overrideWithValue(blog),
         repositoryProvider.overrideWithValue(TestRepository([venue()])),
@@ -372,6 +376,7 @@ void main() {
         overrides: [
           localStoreProvider.overrideWithValue(store),
           backendReadyProvider.overrideWithValue(true),
+          isAdminProvider.overrideWith((ref) => Stream.value(false)),
           authRepositoryProvider.overrideWithValue(auth),
         ],
       );
@@ -493,6 +498,7 @@ void main() {
             LocalStore(await SharedPreferences.getInstance()),
           ),
           backendReadyProvider.overrideWithValue(true),
+          isAdminProvider.overrideWith((ref) => Stream.value(false)),
           authRepositoryProvider.overrideWithValue(auth),
           blogRepositoryProvider.overrideWithValue(blog),
           personalBackupRepositoryProvider.overrideWithValue(backup),

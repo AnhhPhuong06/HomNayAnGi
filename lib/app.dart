@@ -5,6 +5,7 @@ import 'core/providers.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/appearance.dart';
+import 'features/updates/update_widgets.dart';
 
 class MealApp extends ConsumerWidget {
   const MealApp({super.key});
@@ -37,7 +38,7 @@ class MealApp extends ConsumerWidget {
                   context,
                 ).platformDispatcher.accessibilityFeatures.reduceMotion,
           ),
-          child: child!,
+          child: UpdatePromptHost(child: child!),
         );
       },
       themeMode: ref.watch(settingsProvider.select((s) => s.theme)),

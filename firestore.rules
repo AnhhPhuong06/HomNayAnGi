@@ -3,6 +3,10 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function member() { return request.auth != null; }
     function owner(uid) { return member() && request.auth.uid == uid; }
+    function admin() {
+      return member() && exists(/databases/$(database)/documents/roles/$(request.auth.uid))
+        && get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.get('admin', false) == true;
+    }
     function text(value, min, max) { return value is string && value.size() >= min && value.size() <= max; }
     function categories(value) {
       return value is list && value.size() <= 11
@@ -65,20 +69,29 @@ service cloud.firestore {
         && (request.resource.data.kind == 'meal' || (request.resource.data.restaurantName.size() > 0 && request.resource.data.area.size() > 0))
         && request.resource.data.createdAt == request.time
         && request.resource.data.termsVersion == 1;
-      allow delete: if owner(resource.data.authorId);
+      allow delete: if admin() || owner(resource.data.authorId);
       allow update: if false;
     }
     match /reports/{id} {
-      allow read, delete: if owner(resource.data.reporterId);
+      allow read, delete: if admin() || owner(resource.data.reporterId);
       allow create: if member()
-        && request.resource.data.keys().hasOnly(['postId', 'reporterId', 'reason', 'createdAt'])
+        && request.resource.data.keys().hasOnly(['postId', 'reporterId', 'reason', 'createdAt', 'status'])
+        && request.resource.data.get('status', 'open') == 'open'
         && request.resource.data.reporterId == request.auth.uid
         && text(request.resource.data.postId, 1, 100)
         && id == request.auth.uid + '_' + request.resource.data.postId
         && text(request.resource.data.reason, 5, 500)
         && exists(/databases/$(database)/documents/posts/$(request.resource.data.postId))
         && request.resource.data.createdAt == request.time;
-      allow update: if false;
+      allow update: if admin() && resource.data.get('status', 'open') != 'resolved'
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'moderatorId', 'resolvedAt'])
+        && request.resource.data.status == 'resolved'
+        && request.resource.data.moderatorId == request.auth.uid
+        && request.resource.data.resolvedAt == request.time;
+    }
+    match /roles/{uid} {
+      allow get: if owner(uid);
+      allow list, create, update, delete: if false;
     }
     match /members/{uid}/blocked/{authorId} {
       allow read, delete: if owner(uid);

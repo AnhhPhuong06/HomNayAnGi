@@ -26,6 +26,15 @@ class AccountConfigurationTest(unittest.TestCase):
         self.assertEqual(config['GOOGLE_WEB_CLIENT_ID'], '')
         self.assertIn('com.googleusercontent.apps.123456789-ios', native)
         self.assertNotIn('FACEBOOK_', native)
+        self.assertFalse(config['FACEBOOK_LOGIN_ENABLED'])
+        self.assertFalse(config['APPLE_LOGIN_ENABLED'])
+
+    def test_provider_flags_need_explicit_configuration(self):
+        config, _ = setup.validate(self.data | {'FACEBOOK_APP_ID': '1234', 'FACEBOOK_CLIENT_TOKEN': 'test-client-token', 'APPLE_LOGIN_ENABLED': True})
+        self.assertTrue(config['FACEBOOK_LOGIN_ENABLED'])
+        self.assertTrue(config['APPLE_LOGIN_ENABLED'])
+        with self.assertRaises(ValueError):
+            setup.validate(self.data | {'APPLE_LOGIN_ENABLED': 'true'})
 
     def test_rejects_missing_placeholder_and_cross_project_values(self):
         for change in [

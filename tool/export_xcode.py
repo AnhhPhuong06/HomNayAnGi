@@ -12,7 +12,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "artifacts" / "hom_nay_an_gi-xcode.zip"
 PREFIX = "hom_nay_an_gi_xcode/"
-SOURCE_DIRS = ("lib", "assets", "ios", "test", "integration_test", "test_driver", "docs", "tool", "config")
+SOURCE_DIRS = ("lib", "assets", "ios", "test", "integration_test", "test_driver", "docs", "tool", "config", ".github")
 ROOT_FILES = (
     "pubspec.yaml", "pubspec.lock", "analysis_options.yaml", "README.md",
     ".metadata", ".gitignore", ".gitattributes", ".env.example", "firebase.json", "firestore.rules",
@@ -77,7 +77,9 @@ def main() -> None:
             continue
         if path.name.startswith(".env") and path.name != ".env.example":
             continue
-        if (relative.parts[0] == "config" and path.name != "firebase.example.json") or path.name.endswith("-debug.log"):
+        if (relative.parts[0] == "config" and path.name not in {"firebase.example.json", "app_updates.json"}) or path.name.endswith("-debug.log"):
+            continue
+        if path.name.startswith("GoogleService-Info") or path.name == "google-services.json" or path.suffix == ".gz":
             continue
         selected.append((relative.as_posix(), portable_bytes(path)))
 
