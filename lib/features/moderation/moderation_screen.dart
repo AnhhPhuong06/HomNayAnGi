@@ -47,23 +47,29 @@ class _ModerationScreenState extends ConsumerState<ModerationScreen> {
                 if (post.restaurantName.isNotEmpty)
                   Text('${post.restaurantName} · ${post.area}'),
               ],
+              const SizedBox(height: 20),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                alignment: WrapAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Đóng'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: const Text('Giữ bài, hoàn tất báo cáo'),
+                  ),
+                  if (post != null)
+                    FilledButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: const Text('Gỡ bài vi phạm'),
+                    ),
+                ],
+              ),
             ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Đóng'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text('Giữ bài, hoàn tất báo cáo'),
-            ),
-            if (post != null)
-              FilledButton(
-                onPressed: () => Navigator.pop(context, true),
-                child: const Text('Gỡ bài vi phạm'),
-              ),
-          ],
         ),
       );
       if (remove == null || !mounted) return;
@@ -72,6 +78,7 @@ class _ModerationScreenState extends ConsumerState<ModerationScreen> {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Gỡ bài viết này?'),
+            scrollable: true,
             content: const Text(
               'Bài viết sẽ bị xóa khỏi cộng đồng. Thao tác không thể hoàn tác.',
             ),

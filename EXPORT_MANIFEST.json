@@ -73,7 +73,7 @@
     "docs/design.md": "eee4d549ed41766174ab7361548e1c47fedf0032cd1ecb7b203e05af12995230",
     "docs/open-data.md": "ae293cdfe2ee64f0217fd2bc5959b404110f73cc6fab59153c98d374af40bed2",
     "docs/upgrades.md": "f8a70efbd2f434ea9d950b18c5b41def96c1b54d0522d89219c29ac6e6945c85",
-    "docs/verification.md": "2a8f07da7650d6639efe2a85ac012162a279be3a793a1f8dba10e3947107c5a1",
+    "docs/verification.md": "b25fa711457f1a411c5c6fcdb97349291c8c19435b407acbbd39845c5ca25c75",
     "docs/xcode.md": "6b41aaae0d4a25baa2169a90031af5d31d367cf79492e0040c5a6b910046ee06",
     "firebase.json": "db8b0ac1f8f5097dcc435f34068150d3e28f5f4eb415a618c0ecaaeb1c8de5bd",
     "firestore.rules": "f7239c5ebae9f59477cf687b41f33076331f15d9cf43a6dfade71aa286b1d2f5",
@@ -243,7 +243,7 @@
     "docs/releases/1.1.0.md": "951aefbbcb9462a9d72d098d3f5690204fc13258c96e991bfd5bb2bd92c5222e",
     "lib/core/services/app_navigation.dart": "af3dc4a5490ac0218075521de89f67a3200f003a5a744476d4614d1432085769",
     "lib/features/moderation/moderation_repository.dart": "3ae17d27e19bbe25369a23cfb0ded4ff455be5d21f1be1bb9d52dfe586bb0652",
-    "lib/features/moderation/moderation_screen.dart": "d776af0635b7cd6394c0ce12b8177d962a1adc51af358e5ff76c409899fb8326",
+    "lib/features/moderation/moderation_screen.dart": "957b226f4b01016a84343f4efaed43536b56571b7e90e4188b1a34b1ddf3ccec",
     "lib/features/updates/update_controller.dart": "e5b4d9bac4477c3589ec5b170664215654a18d6bec0f130b5118c3237da04dc4",
     "lib/features/updates/update_models.dart": "65dc27a012a35807d00d1dcb5f7e5a03514c50cec70024a948547cbc97b5c3ef",
     "lib/features/updates/update_repository.dart": "e22271f3a87fdf0223fb66e0768c2a7a554e1e11e591353d6951917323341b79",
@@ -253,7 +253,8 @@
     "test/update_test.dart": "d690e7b51372fe1097887b01e5a3ef50807e88a78912fe8ea390120f8249aaca",
     "test/visual/update_preview_test.dart": "7e48b0e3bebbd06d31121f4b185df245ae3c7a8409581f3428ac6f142efd94ed",
     "tool/prepare_app_release.py": "1ae87d2a1b4f49c6b5dc807b39bf9fe12f6b52168f0323cf46b9041120a6b876",
-    "tool/test_prepare_app_release.py": "21bc0af1d41d9668f6d6609a87ed3f40b1e03346b47963bff83ae0eb0e1e2406"
+    "tool/test_prepare_app_release.py": "21bc0af1d41d9668f6d6609a87ed3f40b1e03346b47963bff83ae0eb0e1e2406",
+    "test/moderation_accessibility_test.dart": "9a5ab19b04486f0b939895a273fb8de1130e56fd5508ee6ca833af08fd67583e"
   },
   "repositoryImport": {
     "sourceDirectory": "hom_nay_an_gi_xcode",
