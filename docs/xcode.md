@@ -26,6 +26,13 @@ hiển thị dịch vụ tài khoản chưa sẵn sàng.
 
 ## Project nguồn trên Mac
 
+Bản build có cấu hình Google đã thành công ngày 04/11/2026 tại
+[run 41783504670](https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41783504670)
+(commit `1fb4165`). Đã kiểm tra callback và cấu hình được nhúng trong IPA;
+chưa thử OAuth trên iPhone. [Bằng chứng và giới hạn](verification.md).
+Gói ZIP mã nguồn không chứa cấu hình tài khoản riêng. Khi build từ ZIP ở máy
+khác, cần thiết lập lại theo [hướng dẫn Firebase](firebase-free-setup.md).
+
 Gói hiện tại có [UX/UI thích ứng, cá nhân hóa và địa điểm cộng đồng](adaptive-community.md).
 
 Gói `hom_nay_an_gi-xcode.zip` chứa workspace iOS, mã Dart, assets và catalog

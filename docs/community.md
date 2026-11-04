@@ -123,8 +123,8 @@ Danh sách chặn nằm dưới `members/{uid}/blocked`, chỉ UID đó truy c�
 Trước khi mở cộng đồng công khai, đặt đầu mối hỗ trợ/privacy/data-deletion thực
 tế trong các console và phân công người xem báo cáo; app không có hệ thống tự
 kiểm duyệt hay giới hạn tần suất toàn server. App Check có thể bổ sung khi bật
-production, không thay thế Firestore rules. Chưa triển khai backend nào trong
-phiên làm việc này vì chưa có tài khoản dịch vụ.
+production, không thay thế Firestore rules. Quy trình build không tự tạo Firestore
+hay deploy rules. Cần thiết lập riêng trước khi dùng blog/sao lưu giữa các máy.
 
 Xóa tài khoản yêu cầu xác thực lại provider; bài, báo cáo và blocks của UID được
 xóa trước khi xóa Firebase user. Apple iOS thu hồi authorization code qua Firebase.
@@ -155,8 +155,9 @@ ba nút OAuth, hủy đăng nhập, viết/xóa/báo cáo/chặn bài. Rules tes
 Emulator, không chạm project thật. Bài integration catalog cũ override đăng nhập
 ở test harness; chúng không phải bằng chứng OAuth thật đã pass.
 
-Chưa kiểm tra Google/Facebook/Apple end-to-end với tài khoản thật vì chưa được
-cấu hình provider. Windows không biên dịch/chạy native iOS; cần xác minh trên Mac.
+Ngày 04/11/2026 đã bật Google trên Firebase và build IPA có cấu hình tài khoản
+qua GitHub Actions. Chưa kiểm tra OAuth end-to-end trên iPhone/Simulator;
+Facebook/Apple còn cần thiết lập provider. Xem [verification.md](verification.md).
 
 ## Tài liệu chính thức
 

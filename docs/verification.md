@@ -4,6 +4,23 @@
 và giới hạn nguồn thật hiện tại xem [open-data.md](open-data.md); số lượng và
 snapshot hiện tại nằm trong `assets/data/catalog_manifest.json`.
 
+## iOS có cấu hình Google/Firebase — 04/11/2026
+
+- Đã đăng ký app iOS đúng bundle ID, xác nhận Google provider Enabled trên
+  Firebase và project vẫn dùng Spark. Cấu hình riêng được lưu vào GitHub Secret;
+  không đưa plist/JSON thật vào source hoặc gói ZIP mã nguồn.
+- [Run 41783504670](https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41783504670)
+  build thành công commit `1fb4165` ở chế độ `configured`, dùng Xcode 26.3.
+  Sáu bài kiểm tra script, analyze và 95 bài kiểm thử ứng dụng đạt.
+- IPA 22.162.379 bytes, arm64, iOS 15.0+, bản `1.0.0+1`. Đã kiểm tra cấu hình
+  Firebase/app ID/API key/Google client ID hiện diện trong binary AOT và URL
+  callback Google khớp cấu hình; logo/catalog khớp nguồn và ZIP CRC đạt.
+  Không có chữ ký ứng dụng hoặc provisioning profile.
+  SHA-256: `1db010b0005412e73978027702499eb76cd0e73167c9ad1d41f6705106b0060a`.
+- Chưa xác minh OAuth trên iPhone/Simulator. Cần ký và cài IPA mới để thử Google;
+  IPA cũ chưa có cấu hình không tự cập nhật. Facebook/Apple và Firestore/rules
+  chưa được cấu hình/triển khai trong lượt thiết lập Google này.
+
 ## Chuẩn bị cấu hình tài khoản iOS — 02/11/2026
 
 - Thêm script nhập plist Firebase và tạo cấu hình Dart/native; không in giá trị.
