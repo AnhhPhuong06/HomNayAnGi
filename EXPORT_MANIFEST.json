@@ -5,7 +5,7 @@
   "workspace": "ios/Runner.xcworkspace",
   "prepareAndOpen": "bash ios/open_xcode.sh",
   "scope": "Flutter application sources for iOS; SDK and build caches excluded",
-  "iosBuildVerified": false,
+  "iosBuildVerified": true,
   "files": {
     ".env.example": "30403172fe0b504803844510a7a7f9109436e1b65df430e7a4c07fbe7b728b36",
     ".gitattributes": "cb8677c93268ac1623379a85489bfcf58e55efa243fd79f85c329ee882eae8dd",
@@ -73,8 +73,8 @@
     "docs/design.md": "eee4d549ed41766174ab7361548e1c47fedf0032cd1ecb7b203e05af12995230",
     "docs/open-data.md": "ae293cdfe2ee64f0217fd2bc5959b404110f73cc6fab59153c98d374af40bed2",
     "docs/upgrades.md": "f8a70efbd2f434ea9d950b18c5b41def96c1b54d0522d89219c29ac6e6945c85",
-    "docs/verification.md": "8393ab7d398db640ca7956ddae432ba7115fe7ed09aa08f28cd967cd649741b7",
-    "docs/xcode.md": "5e6aea1be8512ecbba5ff75161ba88dd4c2a65c02a220e8623727f978e2c8f2b",
+    "docs/verification.md": "20d7e9f9bbcb59861f55f20d8f633564bb7da795fa15eef3c696f121ad236311",
+    "docs/xcode.md": "6b41aaae0d4a25baa2169a90031af5d31d367cf79492e0040c5a6b910046ee06",
     "firebase.json": "db8b0ac1f8f5097dcc435f34068150d3e28f5f4eb415a618c0ecaaeb1c8de5bd",
     "firestore.rules": "18c0bfedbfda29b8c7df703c3ad608b19ff632f6b8023a40a6de462516f24010",
     "integration_test/community_flow_test.dart": "f0e137e26b155cf7329233dee1a39e3ffa89bac20ebd6ac6bd37f6ce5db62aa0",
@@ -242,13 +242,14 @@
     "ciWorkflow": "ios-unsigned"
   },
   "iosBuildEvidence": {
-    "sourceCommit": "1fb4165ddfc38492efa433c79d227e4fd0846d6d",
-    "runUrl": "https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41783504670",
+    "sourceCommit": "df9099c2292bfb0ca1187c8eff9fd952ec7e486a",
+    "runUrl": "https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41824359107",
     "xcode": "26.3",
     "firebaseIOS": "12.19.3",
     "accountConfiguration": "configured",
-    "scope": "Release compile, IPA contents, Google callback and compiled client configuration; real iOS OAuth not verified",
-    "ipaSHA256": "1db010b0005412e73978027702499eb76cd0e73167c9ad1d41f6705106b0060a"
+    "scope": "Release compile, IPA contents, all nine venue photos/credits, Google callback and compiled client configuration; iOS runtime/OAuth not verified",
+    "ipaSHA256": "47045bd754c48475a267ce75302c51947ed278cf69b97c06a82dc315546cb203",
+    "reviewedVenuePhotoCount": 9
   },
-  "iosBuildVerificationNote": "Real venue photo update passed local checks; configured iOS Release rebuild pending. Previous evidence applies to 1fb4165 only."
+  "iosBuildVerificationNote": "Configured Release build and all nine real venue photos/credits verified in IPA; iOS runtime/OAuth not verified."
 }

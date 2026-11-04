@@ -21,8 +21,13 @@ snapshot hiện tại nằm trong `assets/data/catalog_manifest.json`.
   [chi tiết](../artifacts/real_photo_detail_fixture.png),
   [danh sách](../artifacts/real_photo_discover_fixture.png),
   [nguồn ảnh](../artifacts/real_photo_credit_fixture.png).
-- Thay đổi ảnh đang chờ build iOS mới; kết quả Google/Firebase bên dưới thuộc
-  commit cũ `1fb4165`.
+- [Run 41824359107](https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41824359107)
+  build iOS Release không ký thành công commit `df9099c`, giữ cấu hình Google.
+  IPA 24.083.934 bytes, arm64, iOS 15.0+, bản `1.0.0+1`. Đã đối chiếu đủ 9 ảnh,
+  CREDITS/manifest ảnh và catalog/logo trong IPA với nguồn; kiểm tra ZIP CRC,
+  callback Google và cấu hình Firebase/Google trong binary đều đạt.
+  SHA-256: `47045bd754c48475a267ce75302c51947ed278cf69b97c06a82dc315546cb203`.
+  Chưa chạy bản ảnh mới trên iPhone/Simulator và chưa xác minh OAuth iOS thực tế.
 
 ## iOS có cấu hình Google/Firebase — 04/11/2026
 

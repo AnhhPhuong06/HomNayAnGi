@@ -26,6 +26,11 @@ hiển thị dịch vụ tài khoản chưa sẵn sàng.
 
 ## Project nguồn trên Mac
 
+Bản mới có 9 ảnh thật đã đối chiếu với quán, bộ lọc ảnh và attribution:
+[build 41824359107](https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41824359107)
+ngày 04/11/2026, commit `df9099c`. IPA đã kiểm tra đủ ảnh/credits cùng cấu hình
+Google; [phạm vi ảnh](open-data.md) và [xác minh](verification.md).
+
 Bản build có cấu hình Google đã thành công ngày 04/11/2026 tại
 [run 41783504670](https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41783504670)
 (commit `1fb4165`). Đã kiểm tra callback và cấu hình được nhúng trong IPA;
