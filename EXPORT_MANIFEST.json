@@ -9,7 +9,7 @@
   "files": {
     ".env.example": "30403172fe0b504803844510a7a7f9109436e1b65df430e7a4c07fbe7b728b36",
     ".gitattributes": "cb8677c93268ac1623379a85489bfcf58e55efa243fd79f85c329ee882eae8dd",
-    ".gitignore": "6df7ed8232df24be43cf2e3d54f1c6c90e0c02870a4eac23530e1b472453ab70",
+    ".gitignore": "b22c531886da72c4ff13a35284bed10b66ec234dae6aa54db5393b0d8b78704d",
     ".metadata": "64c4178f959da808d5ac4efcaa0f031185dec23deb03f920ef701d13659a3d5e",
     "analysis_options.yaml": "91803794ba42b780c442e82c27a7b8cc8e5feadd5ce6f30b1810c46e4f3f4f75",
     "artifacts/adaptive_community_places_fixture.png": "1d5f0654add14a4e3ab477252f952b96f63f949878eef15ad521e891e8ad2fa4",

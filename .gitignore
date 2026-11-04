@@ -69,3 +69,5 @@ android/social.properties
 ios/Flutter/Social.xcconfig
 **/node_modules/
 *-debug.log
+GoogleService-Info*.plist
+google-services.json
