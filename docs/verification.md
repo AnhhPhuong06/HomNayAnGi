@@ -4,6 +4,26 @@
 và giới hạn nguồn thật hiện tại xem [open-data.md](open-data.md); số lượng và
 snapshot hiện tại nằm trong `assets/data/catalog_manifest.json`.
 
+## Ảnh thật tại quán — 04/11/2026
+
+- Đã đóng gói 9 ảnh Wikimedia Commons cho 9 địa điểm trong catalog 18.668 quán.
+  Đối chiếu tên/địa chỉ/chi nhánh, lưu tác giả, giấy phép, ngày chụp, nguồn và SHA-256.
+  Ảnh không bao phủ toàn bộ catalog; một số ảnh lịch sử khá cũ, không xác nhận
+  diện mạo/tình trạng hoạt động hiện nay. [Phạm vi và cập nhật](open-data.md).
+- Danh sách, kết quả gợi ý và chi tiết ưu tiên ảnh thật. Khám phá có bộ lọc
+  **Có ảnh tại quán**; chạm attribution để xem nguồn, ngày chụp và giấy phép.
+  Quán chưa có ảnh vẫn ghi rõ ảnh món ăn minh họa. OSM ID đổi tên doanh nghiệp
+  không tự kế thừa ảnh cũ.
+- Analyze không có vấn đề, 102 bài kiểm thử ứng dụng và 6 bài kiểm thử dữ liệu đạt.
+  Có kiểm tra nguồn/giấy phép/path không an toàn, checksum assets, đổi tên quán,
+  lọc ảnh và nguồn ảnh trên màn hình 320×568 với chữ phóng 2,6 lần.
+- Ba bản xem trước dùng widget thật và ảnh thật, không phải bằng chứng native/OAuth:
+  [chi tiết](../artifacts/real_photo_detail_fixture.png),
+  [danh sách](../artifacts/real_photo_discover_fixture.png),
+  [nguồn ảnh](../artifacts/real_photo_credit_fixture.png).
+- Thay đổi ảnh đang chờ build iOS mới; kết quả Google/Firebase bên dưới thuộc
+  commit cũ `1fb4165`.
+
 ## iOS có cấu hình Google/Firebase — 04/11/2026
 
 - Đã đăng ký app iOS đúng bundle ID, xác nhận Google provider Enabled trên

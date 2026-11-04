@@ -7,6 +7,7 @@ import '../../../core/utils/geo.dart';
 import '../models/food_category.dart';
 import '../models/restaurant.dart';
 import 'dish_photo.dart';
+import 'venue_photo.dart';
 
 class FoodImage extends StatelessWidget {
   const FoodImage({super.key, required this.restaurant, this.height = 160});
@@ -14,6 +15,14 @@ class FoodImage extends StatelessWidget {
   final double height;
   @override
   Widget build(BuildContext context) {
+    final photo = restaurant.photo;
+    if (photo != null) {
+      return VenuePhoto(
+        photo: photo,
+        categories: restaurant.categories,
+        height: height,
+      );
+    }
     Widget fallback() =>
         DishPhoto(categories: restaurant.categories, height: height);
     final source = restaurant.imageUrl;

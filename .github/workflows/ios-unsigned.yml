@@ -30,8 +30,10 @@ jobs:
           test -d "$DEVELOPER_DIR"
           xcodebuild -version
           xcrun swift --version
-      - name: Test account configuration script
-        run: python3 -m unittest discover -s tool -p 'test_configure_ios_accounts.py'
+      - name: Test account and photo configuration scripts
+        run: |
+          python3 -m unittest discover -s tool -p 'test_configure_ios_accounts.py'
+          python3 -m unittest discover -s tool/data -p 'test_import_venue_photos.py'
       - name: Prepare account configuration
         if: inputs.account_configuration != 'compile-only'
         env:

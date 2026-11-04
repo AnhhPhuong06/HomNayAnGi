@@ -90,6 +90,8 @@ void main() {
     final container = await pumpApp(tester);
     await tester.tap(find.text('Khám phá').last);
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byTooltip('Lưu yêu thích').first);
+    await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Lưu yêu thích').first);
     await tester.pumpAndSettle();
     expect(container.read(localStoreProvider).read().favorites, {'a'});

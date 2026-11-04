@@ -36,6 +36,7 @@ flutter:
   assets:
     - assets/data/
     - assets/images/
+    - assets/venue_photos/
     - assets/branding/
     - assets/fonts/OFL.txt
   fonts:

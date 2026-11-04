@@ -22,6 +22,40 @@ hành chính chính thức; thông tin thiếu được ghi rõ.
 
 ## Cập nhật catalog
 
+### Ảnh thật tại quán — cập nhật 04/11/2026
+
+Đã bổ sung **9 ảnh cho 9 địa điểm** trong tổng số 18.668 bản ghi, tại Hà Nội,
+TP.HCM, Hội An và Đà Nẵng. Ảnh đến từ Wikimedia Commons, đối chiếu tên/quán,
+địa chỉ hoặc tọa độ của đúng chi nhánh; không dùng logo chung để gán cho cả chuỗi.
+Không khẳng định đã có ảnh cho tất cả quán hoặc ảnh phản ánh diện mạo hiện nay.
+Một số ảnh lịch sử khá cũ; ngày chụp theo nguồn được hiển thị trong thông tin ảnh.
+
+Vào **Khám phá → Có ảnh tại quán** để lọc các địa điểm đã có ảnh. Chạm dòng
+ghi tác giả/giấy phép trên ảnh để xem chú thích, ngày chụp, nguồn gốc và giấy phép.
+Quán chưa có ảnh đã đối chiếu vẫn dùng ảnh món ăn có nhãn minh họa, kèm thông báo
+trong chi tiết. Ảnh thật được đóng gói offline, không phụ thuộc URL tạm thời.
+
+- `assets/data/restaurant_photos.json`: ID quán, đường dẫn ảnh, tác giả, giấy phép,
+  URL nguồn, ngày chụp, bằng chứng đối chiếu và SHA-256 của từng ảnh.
+- `assets/venue_photos/CREDITS.md`: attribution riêng cho ảnh, độc lập giấy phép OSM.
+- `tool/data/venue_photo_sources.json`: danh sách đối chiếu trước khi tải.
+  Đổi tên/địa chỉ quán trong lần cập nhật catalog cần xem lại ảnh; app không gán
+  ảnh cũ khi tên doanh nghiệp tại cùng OSM ID đã thay đổi.
+
+Tải lại sau khi duyệt danh sách nguồn:
+
+```powershell
+python tool/data/import_venue_photos.py
+python -m unittest discover -s tool/data -p test_import_venue_photos.py -v
+flutter test test/restaurant_photos_test.dart
+```
+
+Importer chỉ nhận các giấy phép mở đã cho phép trong mã, lưu tác giả và liên kết
+giấy phép theo từng file. Ảnh chỉ được thu nhỏ bởi Commons và cắt theo khung khi
+hiển thị. [Hướng dẫn tái sử dụng của Commons](https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia).
+
+### Dữ liệu quán OSM
+
 ```powershell
 python -m pip install -r tool/data/requirements.txt
 curl.exe -L --fail https://download.geofabrik.de/asia/vietnam-latest.osm.pbf -o D:\devtools\data\vietnam-latest.osm.pbf

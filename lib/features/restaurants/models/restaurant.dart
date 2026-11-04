@@ -2,6 +2,7 @@ import '../../../core/utils/geo.dart';
 import '../../recommendation/models/meal_preference.dart';
 import 'food_category.dart';
 import 'source_link.dart';
+import 'restaurant_photo.dart';
 
 class Restaurant {
   const Restaurant({
@@ -29,6 +30,7 @@ class Restaurant {
     this.sourceUpdatedAt,
     this.sourceSnapshotAt,
     this.sourceLinks = const [],
+    this.photo,
     this.indexedSearchText,
     this.mealTimes = const [],
     this.companions = const [],
@@ -45,6 +47,7 @@ class Restaurant {
   final String? suggestedDish;
   final String? sourceName, sourceUrl, sourceUpdatedAt, sourceSnapshotAt;
   final List<SourceLink> sourceLinks;
+  final RestaurantPhoto? photo;
   final String? indexedSearchText;
   String get dishName => suggestedDish?.trim().isNotEmpty == true
       ? suggestedDish!.trim()
@@ -97,6 +100,7 @@ class Restaurant {
       sourceUrl: json['sourceUrl'] as String?,
       sourceUpdatedAt: json['sourceUpdatedAt'] as String?,
       sourceSnapshotAt: json['sourceSnapshotAt'] as String?,
+      photo: RestaurantPhoto.fromJson(json['photo']),
       sourceLinks: List.unmodifiable(
         (json['sourceLinks'] as List? ?? [])
             .map(SourceLink.fromJson)

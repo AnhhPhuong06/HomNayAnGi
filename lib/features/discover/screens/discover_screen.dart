@@ -22,6 +22,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
   String _query = '';
   bool _map = false;
   bool _community = false;
+  bool _photosOnly = false;
   @override
   Widget build(BuildContext context) {
     final data = ref.watch(restaurantsProvider);
@@ -100,6 +101,21 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                     ),
                   const SizedBox(height: 12),
                   if (!_community) const DataSourceNotice(compact: true),
+                  if (!_community)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: FilterChip(
+                        showCheckmark: false,
+                        avatar: const Icon(
+                          Icons.photo_camera_outlined,
+                          size: 18,
+                        ),
+                        label: const Text('Có ảnh tại quán'),
+                        selected: _photosOnly,
+                        onSelected: (value) =>
+                            setState(() => _photosOnly = value),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -121,7 +137,9 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                 ),
                 data: (restaurants) {
                   final visible = queryRestaurants(
-                    restaurants,
+                    _photosOnly
+                        ? restaurants.where((r) => r.photo != null).toList()
+                        : restaurants,
                     query: _query,
                     preference: p,
                     origin: location?.point,
@@ -148,7 +166,9 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                       hasScrollBody: false,
                       child: EmptyMessage(
                         title: 'Chưa tìm thấy quán phù hợp.',
-                        message: 'Thử từ khóa khác hoặc nới bộ lọc.',
+                        message: _photosOnly
+                            ? 'Chưa có ảnh đã đối chiếu trong kết quả này. Hãy tắt lọc ảnh hoặc đổi khu vực/bộ lọc.'
+                            : 'Thử từ khóa khác hoặc nới bộ lọc.',
                         action: 'Chỉnh bộ lọc',
                         onAction: () => showFilters(context),
                       ),

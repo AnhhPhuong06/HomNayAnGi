@@ -14,3 +14,7 @@ license of the app's independent source code, or cover third-party TikTok videos
 
 `restaurants.json` is the separate synthetic demo fixture and is not mixed into
 the open-data catalog. No Google Maps ratings, photos or reviews are copied into it.
+
+## Photographs
+
+Photographs in `assets/venue_photos/` retain their individual Commons licenses, separately from the ODbL catalog. See `assets/venue_photos/CREDITS.md` and `assets/data/restaurant_photos.json` for author, license, source and capture date.

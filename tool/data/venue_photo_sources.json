@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-04",
+  "restaurants": {
+    "osm-node-4311854914": {
+      "file": "File:Giang Café - Nguyen Huu Huan Street, Hanoi, Vietnam - DSC03671.JPG",
+      "caption": "Mặt tiền Cà Phê Giảng, 39 Nguyễn Hữu Huân, Hà Nội.",
+      "matchEvidence": "Tên và phố trong mô tả tác giả; biển CAFE GIANG và số nhà trong ảnh khớp địa chỉ OSM.",
+      "venueName": "Cà Phê Giảng - Cà Phê Trứng",
+      "address": "39 Phố Nguyễn Hữu Huân"
+    },
+    "osm-node-5116302421": {
+      "file": "File:Phở Gia Truyền.jpg",
+      "caption": "Mặt tiền Phở Gia Truyền, 49 Bát Đàn, Hà Nội.",
+      "matchEvidence": "Biển Phở Gia Truyền và địa chỉ 49 Bát Đàn đọc được trong ảnh, khớp tên/địa chỉ OSM.",
+      "venueName": "Phở Gia Truyền",
+      "address": "49 Bát Đàn"
+    },
+    "osm-node-4272727197": {
+      "file": "File:President Barack Obama with Anthony Bourdain at Bún cha Huong Lien Restaurant in Hanoi, Vietnam.jpg",
+      "caption": "Bên trong Bún Chả Hương Liên, 24 Lê Văn Hưu, Hà Nội; ảnh chuyến thăm của Barack Obama và Anthony Bourdain ngày 23/05/2016.",
+      "matchEvidence": "Mô tả ảnh lịch sử xác định Bún Chả Hương Liên tại Hà Nội; chi nhánh 24 Lê Văn Hưu, không gán cho điểm Hàng Buồm.",
+      "venueName": "Cửa Hàng Bún Chả Hương Liên",
+      "address": "24 Phố Lê Văn Hưu"
+    },
+    "osm-node-11283541744": {
+      "file": "File:Highlands Coffee Pullman, 108 Giảng Võ, Hà Nội 003.JPG",
+      "caption": "Không gian Highlands Coffee tại khu Pullman, góc Giảng Võ/Cát Linh, Hà Nội.",
+      "matchEvidence": "Tên chi nhánh Pullman trong tên ảnh; GPS nguồn cách điểm Highlands OSM ở 40 Cát Linh khoảng 20 m.",
+      "venueName": "Highlands Coffee",
+      "address": "40 Phố Cát Linh"
+    },
+    "osm-way-1302250723": {
+      "file": "File:Highlands Coffee Flag Tower Hanoi.jpg",
+      "caption": "Highlands Coffee tại khu Cột cờ Hà Nội, đường Điện Biên Phủ.",
+      "matchEvidence": "Mô tả tác giả xác định chi nhánh Flag Tower/Điện Biên Phủ; GPS cách polygon OSM khoảng 20 m.",
+      "venueName": "Highlands Coffee",
+      "address": "28 Đường Điện Biên Phủ"
+    },
+    "osm-node-4279536690": {
+      "file": "File:Bánh Mì Phượng (2024) - img 01.jpg",
+      "caption": "Mặt tiền Bánh mì Phượng, 2B Phan Châu Trinh, Hội An.",
+      "matchEvidence": "Biển Bánh mì Phượng trong ảnh, mô tả Hội An và GPS nguồn cách địa điểm OSM khoảng 15 m.",
+      "venueName": "Bánh mì Phượng",
+      "address": "2B Phan Châu Trinh"
+    },
+    "osm-node-2076855947": {
+      "file": "File:Morning Glory Street Food Restaurant and Cooking School, Hoi An Ancient Town, Vietnam (7090600285).jpg",
+      "caption": "Mặt tiền Morning Glory Original, 106 Nguyễn Thái Học, Hội An.",
+      "matchEvidence": "Mặt tiền và tên nhà hàng Morning Glory trong ảnh/mô tả, đối chiếu cơ sở Original 106 Nguyễn Thái Học; không dùng GPS ảnh vốn lệch khỏi khu phố cổ.",
+      "venueName": "Morning Glory",
+      "address": "106 Nguyễn Thái Học"
+    },
+    "osm-node-9587113803": {
+      "file": "File:Dim Tu Tac flagship location, 55 Đông Du Street.jpg",
+      "caption": "Mặt tiền Dim Tu Tac, 55 Đông Du, Thành phố Hồ Chí Minh.",
+      "matchEvidence": "Mô tả tác giả ghi địa chỉ 55 Đông Du và tên Dim Tu Tac; GPS cách điểm OSM cùng tên khoảng 30 m.",
+      "venueName": "Nhà Hàng Dim Tu Tac",
+      "address": "Chưa có địa chỉ trong OpenStreetMap"
+    },
+    "osm-node-729406744": {
+      "file": "File:Highlands Coffee storefront DN.JPG",
+      "caption": "Highlands Coffee tại Indochina Riverside Towers, đường Bạch Đằng, Đà Nẵng.",
+      "matchEvidence": "Mô tả tác giả xác định Indochina Riverside Towers/Bạch Đằng; GPS cách điểm Highlands OSM khoảng 35 m.",
+      "venueName": "Highlands Coffee",
+      "address": "Chưa có địa chỉ trong OpenStreetMap"
+    }
+  }
+}
