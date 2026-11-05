@@ -254,7 +254,9 @@
     "test/visual/update_preview_test.dart": "7e48b0e3bebbd06d31121f4b185df245ae3c7a8409581f3428ac6f142efd94ed",
     "tool/prepare_app_release.py": "5a07b8097164840de1079f075d70bfca8b78610db811abe814a4f8e3853ba5fd",
     "tool/test_prepare_app_release.py": "59e8f2b203c0f5d581e6774405ff955aeb883857b00fda7d90e150463bd2f017",
-    "test/moderation_accessibility_test.dart": "9a5ab19b04486f0b939895a273fb8de1130e56fd5508ee6ca833af08fd67583e"
+    "test/moderation_accessibility_test.dart": "9a5ab19b04486f0b939895a273fb8de1130e56fd5508ee6ca833af08fd67583e",
+    "docs/codemagic.md": "65d1180caa2e74ef5515f484182e91b8bee9f2e290ccd3ee03237e19ddf9f90b",
+    "docs/github-actions.md": "57d3027a58abf703c488c91c16b4551bb6daca9d062fbd2501145d21b88ed7c8"
   },
   "repositoryImport": {
     "sourceDirectory": "hom_nay_an_gi_xcode",
