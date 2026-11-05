@@ -4,7 +4,7 @@ import plistlib
 import tempfile
 import unittest
 import zipfile
-from prepare_app_release import BUNDLE, prepare
+from prepare_app_release import BUNDLE, prepare, release_only_changes
 
 
 class ReleaseTest(unittest.TestCase):
@@ -19,11 +19,13 @@ class ReleaseTest(unittest.TestCase):
 
     def write_ipa(self, changes=None, extra=None):
         info = {'CFBundleIdentifier': BUNDLE, 'CFBundleShortVersionString': '1.1.0',
-                'CFBundleVersion': '2', 'CFBundleSupportedPlatforms': ['iPhoneOS']}
+                'CFBundleVersion': '2', 'CFBundleSupportedPlatforms': ['iPhoneOS'],
+                'CFBundleURLTypes': [{'CFBundleURLSchemes': ['com.googleusercontent.apps.123456789-ios']}]}
         info.update(changes or {})
         with zipfile.ZipFile(self.ipa, 'w') as z:
             z.writestr('Payload/Runner.app/Info.plist', plistlib.dumps(info))
             z.writestr('Payload/Runner.app/Runner', b'fixture-executable')
+            z.writestr('Payload/Runner.app/Frameworks/App.framework/App', b'fixture homnayangi-cba95 123456789-ios.apps.googleusercontent.com')
             if extra:
                 z.writestr(extra, b'fixture')
 
@@ -49,6 +51,14 @@ class ReleaseTest(unittest.TestCase):
                 self.write_ipa(extra=path)
                 with self.assertRaises(ValueError):
                     prepare(self.ipa, 'Notes', self.root)
+
+    def test_rejects_compile_only_and_only_allows_non_runtime_changes(self):
+        self.write_ipa({'CFBundleURLTypes': []})
+        with self.assertRaisesRegex(ValueError, 'Compile-only'):
+            prepare(self.ipa, 'Notes', self.root)
+        self.assertTrue(release_only_changes(['docs/app-updates.md', 'EXPORT_MANIFEST.json', '.github/workflows/publish-ios-update.yml']))
+        for path in ['lib/main.dart', 'assets/data/restaurants.json', 'ios/Runner/Info.plist', 'pubspec.yaml', 'pubspec.lock', '.github/workflows/ios-unsigned.yml', 'firestore.rules', 'config/firebase.example.json']:
+            self.assertFalse(release_only_changes(['README.md', path]), path)
 
     def test_rejects_rollback_and_preserves_other_channels(self):
         self.write_ipa()

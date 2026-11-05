@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       build_run_id:
-        description: Successful configured Build unsigned IPA run on the current main commit
+        description: Successful configured IPA run with unchanged app and native sources
         required: true
         type: string
 permissions:
@@ -27,7 +27,9 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           python3 - <<'PY'
-          import json, os, re, subprocess
+          import json, os, re, subprocess, sys
+          sys.path.insert(0, 'tool')
+          from prepare_app_release import release_only_changes
           run_id = os.environ['RUN_ID']
           if not re.fullmatch(r'[0-9]{1,20}', run_id):
               raise SystemExit('Invalid build run ID')
@@ -36,11 +38,17 @@ jobs:
           run = json.loads(gh('api', f'repos/{os.environ["GH_REPO"]}/actions/runs/{run_id}'))
           head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
           if (run['conclusion'] != 'success' or run['head_branch'] != 'main'
-                  or run['head_sha'] != head or run['path'] != '.github/workflows/ios-unsigned.yml'):
-              raise SystemExit('Use a successful iOS workflow from the current main commit')
-          logs = gh('run', 'view', run_id, '--log')
-          if 'Compile-only IPA: account service is unavailable' in logs:
-              raise SystemExit('Compile-only artifacts cannot be published')
+                  or run['event'] != 'workflow_dispatch' or run['path'] != '.github/workflows/ios-unsigned.yml'):
+              raise SystemExit('Use a successful manual iOS workflow from main')
+          built = run['head_sha']
+          if not re.fullmatch(r'[0-9a-f]{40}', built):
+              raise SystemExit('Invalid source commit')
+          subprocess.run(['git', 'fetch', '--no-tags', '--depth=1', 'origin', built], check=True)
+          changed = subprocess.check_output(['git', 'diff', '--name-only', built, head], text=True).splitlines()
+          if not release_only_changes(changed):
+              raise SystemExit('App, native, backend or build inputs changed. Build a new IPA first.')
+          with open('/tmp/meal-built-commit', 'w') as file:
+              file.write(built)
           subprocess.run(['gh', 'run', 'download', run_id, '-n', 'hom_nay_an_gi-unsigned', '-D', '/tmp/meal-ipa'], check=True)
           PY
       - name: Validate IPA and prepare update metadata
@@ -55,7 +63,7 @@ jobs:
             echo 'Release already exists. Inspect it before publishing metadata manually.' >&2
             exit 1
           fi
-          gh release create "$TAG" --draft --target "$(git rev-parse HEAD)" --title "Hôm Nay Ăn Gì? $TAG — IPA unsigned" --notes-file /tmp/meal-release/release-notes.md
+          gh release create "$TAG" --draft --target "$(cat /tmp/meal-built-commit)" --title "Hôm Nay Ăn Gì? $TAG — IPA unsigned" --notes-file /tmp/meal-release/release-notes.md
           gh release upload "$TAG" /tmp/meal-ipa/hom_nay_an_gi-unsigned.ipa /tmp/meal-release/SHA256SUMS.txt
           gh release edit "$TAG" --draft=false
           gh release view "$TAG" --json isDraft,assets --jq 'if .isDraft or (.assets | length) < 2 then error("Release is not ready") else "Release ready" end'

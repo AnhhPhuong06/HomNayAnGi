@@ -20,7 +20,7 @@ Kiểm tra tự động dùng cache tối đa 6 giờ và giới hạn thử l�
 
 1. Tăng `version` trong pubspec.yaml; viết `docs/releases/<version>.md` (tối đa 2.000 ký tự), commit và push main.
 2. Chạy **Build unsigned IPA**, chọn `configured`, đợi thành công và kiểm tra artifact.
-3. Chạy **Publish manual iOS update**, nhập ID của build vừa thành công. Workflow yêu cầu build đúng workflow/commit main hiện tại và từ chối compile-only. Nó kiểm tra bundle, phiên bản/build, nền tảng thiết bị, CRC, đường dẫn ZIP và tính unsigned.
+3. Chạy **Publish manual iOS update**, nhập ID của build vừa thành công. Workflow yêu cầu build thủ công thành công từ main; từ chối khi app, asset, native, backend hoặc đầu vào build đã thay đổi. Chỉ cho phép các thay đổi tài liệu/test/công cụ phát hành sau build. Nó kiểm tra bundle, phiên bản/build, nền tảng thiết bị, CRC, đường dẫn ZIP, tính unsigned và cấu hình Google/Firebase thực sự có trong IPA để loại compile-only. Không tìm cảnh báo bằng grep toàn bộ log vì GitHub cũng in cả nhánh lệnh chưa chạy.
 4. Workflow tạo draft Release, tải IPA và SHA-256, công bố Release rồi mới commit metadata cập nhật. Không công bố feed trỏ tới bản chưa tải được. Nếu Release đã tồn tại, workflow dừng để người quản lý kiểm tra, tránh ghi đè âm thầm.
 5. Kiểm tra trang Release và JSON công khai. Bản đang cài cùng phiên bản/build không được nhắc. Dùng một bản cũ có bộ kiểm tra để xác minh luồng trên iPhone.
 

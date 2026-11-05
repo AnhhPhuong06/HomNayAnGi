@@ -10,6 +10,14 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 BUNDLE = 'vn.homnayangi.homNayAnGi'
 REPO = 'AnhhPhuong06/HomNayAnGi'
+PROJECT = 'homnayangi-cba95'
+
+
+def release_only_changes(paths: list[str]) -> bool:
+    allowed = {'README.md', 'EXPORT_MANIFEST.json', 'config/app_updates.json',
+               '.github/workflows/publish-ios-update.yml',
+               'tool/prepare_app_release.py', 'tool/test_prepare_app_release.py'}
+    return all(p in allowed or p.startswith(('docs/', 'test/', 'artifacts/')) for p in paths)
 
 
 def prepare(ipa: Path, notes: str, root: Path = ROOT) -> dict:
@@ -33,6 +41,13 @@ def prepare(ipa: Path, notes: str, root: Path = ROOT) -> dict:
             raise ValueError('IPA does not match this source version, bundle or device platform')
         if base + 'Runner' not in names:
             raise ValueError('Missing app executable')
+        callbacks = [s for item in info.get('CFBundleURLTypes', [])
+                     for s in item.get('CFBundleURLSchemes', [])
+                     if re.fullmatch(r'com\.googleusercontent\.apps\.\d+-[A-Za-z0-9_-]+', s)]
+        binary = archive.read(base + 'Frameworks/App.framework/App') if base + 'Frameworks/App.framework/App' in names else b''
+        if (len(callbacks) != 1 or PROJECT.encode() not in binary
+                or '.'.join(reversed(callbacks[0].split('.'))).encode() not in binary):
+            raise ValueError('Compile-only or missing compiled Google/Firebase configuration')
         if any(n.startswith(base + '_CodeSignature/') or n == base + 'embedded.mobileprovision' for n in names):
             raise ValueError('This publisher accepts unsigned manual builds only')
     tag = f'v{version}+{build}'

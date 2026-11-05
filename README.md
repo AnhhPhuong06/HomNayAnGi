@@ -1,6 +1,8 @@
 # Hôm Nay Ăn Gì?
 
-**1.1.0 (build 2):** Nhắc cập nhật khi mở hoặc quay lại app; xem [hướng dẫn](docs/app-updates.md). [Quản trị báo cáo cộng đồng](docs/moderation.md) cần triển khai Firestore và cấp quyền trên máy chủ.
+**1.1.0 (build 2):** Nhắc cập nhật khi mở hoặc quay lại app; xem [hướng dẫn](docs/app-updates.md). [Quản trị báo cáo cộng đồng](docs/moderation.md) dùng phân quyền trên máy chủ.
+
+Firestore của project hiện tại đã được triển khai trên gói miễn phí tại Singapore; tài khoản Google của chủ project có quyền quản trị. Cần kiểm tra đăng nhập/đăng bài trên iPhone thật sau khi cài IPA. Facebook và Apple vẫn cần cấu hình riêng.
 
 **UX/UI thích ứng:** thanh bên trên cửa sổ rộng, thẻ nhiều cột, màu/cỡ chữ/thẻ gọn
 và giảm chuyển động theo cá nhân. Có thêm địa điểm kèm ghim để thành viên khác
