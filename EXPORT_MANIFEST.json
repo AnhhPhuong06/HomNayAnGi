@@ -228,7 +228,7 @@
     "artifacts/real_photo_credit_fixture.png": "43bef2677256c9b473beffb9f089e6d2f2336a046b7815781ce38b469984861d",
     ".github/workflows/publish-ios-update.yml": "85ca935d53296d8f09a0ef3d02a6b681afaa3099bac19901a9b9566a1ea9c8cd",
     "artifacts/update_dialog_fixture.png": "30fb14b96784024e8cddc3015892825fe06e9818428a2c5d2d346bc42d521930",
-    "config/app_updates.json": "c61407aed0d0c325141ebe16c86f6c2a8652501e2862bc46b0af9b9bcb8d1025",
+    "config/app_updates.json": "ade5bbb874334a6bb4330bded69be815a3bcf3d2cb5bcad50cfbe318e9d3d083",
     "docs/app-updates.md": "98273e13f8b2675a24ca28ec838e6279d4b001b420a68878fac9b5fb33ad6a6d",
     "docs/moderation.md": "facfd518b105837053ddbd3d377064bf1f83583898d99b4c432f1e81e2b175fc",
     "docs/releases/1.1.0.md": "e7fc3c6cd9e8026fb174340090cdc3b74765eaaae224d1c7acb7b24e3d934cfe",
