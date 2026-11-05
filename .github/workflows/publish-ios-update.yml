@@ -52,7 +52,14 @@ jobs:
           subprocess.run(['gh', 'run', 'download', run_id, '-n', 'hom_nay_an_gi-unsigned', '-D', '/tmp/meal-ipa'], check=True)
           PY
       - name: Validate IPA and prepare update metadata
-        run: python3 tool/prepare_app_release.py --ipa /tmp/meal-ipa/hom_nay_an_gi-unsigned.ipa --output /tmp/meal-release
+        run: |
+          python3 tool/prepare_app_release.py --ipa /tmp/meal-ipa/hom_nay_an_gi-unsigned.ipa --output /tmp/meal-release
+          python3 - <<'PY'
+          from pathlib import Path
+          built = Path('/tmp/meal-built-commit').read_text()
+          with Path('/tmp/meal-release/release-notes.md').open('a', encoding='utf-8') as notes:
+              notes.write(f'\nBuild source: `{built}`.\n')
+          PY
       - name: Publish release before advertising it
         env:
           GH_TOKEN: ${{ github.token }}
@@ -63,7 +70,9 @@ jobs:
             echo 'Release already exists. Inspect it before publishing metadata manually.' >&2
             exit 1
           fi
-          gh release create "$TAG" --draft --target "$(cat /tmp/meal-built-commit)" --title "Hôm Nay Ăn Gì? $TAG — IPA unsigned" --notes-file /tmp/meal-release/release-notes.md
+          # Native/build inputs were checked against the built commit above.
+          # Tag current main so GITHUB_TOKEN never needs workflow-write access.
+          gh release create "$TAG" --draft --target "$(git rev-parse HEAD)" --title "Hôm Nay Ăn Gì? $TAG — IPA unsigned" --notes-file /tmp/meal-release/release-notes.md
           gh release upload "$TAG" /tmp/meal-ipa/hom_nay_an_gi-unsigned.ipa /tmp/meal-release/SHA256SUMS.txt
           gh release edit "$TAG" --draft=false
           gh release view "$TAG" --json isDraft,assets --jq 'if .isDraft or (.assets | length) < 2 then error("Release is not ready") else "Release ready" end'

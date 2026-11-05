@@ -24,6 +24,8 @@ Kiểm tra tự động dùng cache tối đa 6 giờ và giới hạn thử l�
 4. Workflow tạo draft Release, tải IPA và SHA-256, công bố Release rồi mới commit metadata cập nhật. Không công bố feed trỏ tới bản chưa tải được. Nếu Release đã tồn tại, workflow dừng để người quản lý kiểm tra, tránh ghi đè âm thầm.
 5. Kiểm tra trang Release và JSON công khai. Bản đang cài cùng phiên bản/build không được nhắc. Dùng một bản cũ có bộ kiểm tra để xác minh luồng trên iPhone.
 
+Tag phát hành trỏ tới main lúc công bố; SHA nguồn thực sự được build được ghi riêng trong Release và EXPORT_MANIFEST. Các đầu vào app/native/assets/backend/build phải giữ nguyên giữa hai commit. Cách này cho phép cập nhật tài liệu/công cụ phát hành mà không làm sai nguồn gói cài và tránh yêu cầu quyền sửa workflow khi tạo tag cho một commit cũ ([quy tắc GitHub](https://docs.github.com/en/rest/releases/releases#create-a-release)).
+
 Nếu policy GitHub chặn bot push main, Release vẫn tồn tại nhưng feed chưa đổi; kiểm tra asset trước rồi commit file metadata đã chuẩn bị. Không hạ phiên bản feed hoặc đưa draft/compile-only lên feed. Script `tool/prepare_app_release.py` chỉ chuẩn bị metadata, không tự công bố.
 
 ## Kiểm thử
