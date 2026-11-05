@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/services/maps_service.dart';
-import '../restaurants/widgets/dish_photo.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/providers.dart';
+import '../restaurants/widgets/venue_photo.dart';
 import 'blog_repository.dart';
 
-class BlogStoryCard extends StatelessWidget {
+class BlogStoryCard extends ConsumerWidget {
   const BlogStoryCard({
     super.key,
     required this.post,
@@ -16,9 +18,20 @@ class BlogStoryCard extends StatelessWidget {
   final bool own, busy;
   final ValueChanged<String> onAction;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final s = Theme.of(context).colorScheme;
     final p = post;
+    final photo = p.restaurantId.isEmpty
+        ? null
+        : ref
+              .watch(restaurantsProvider)
+              .asData
+              ?.value
+              .where(
+                (r) => r.id == p.restaurantId && r.name == p.restaurantName,
+              )
+              .firstOrNull
+              ?.photo;
     return Card(
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.only(bottom: 20),
@@ -87,13 +100,14 @@ class BlogStoryCard extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: DishPhoto(categories: [p.category], height: 190),
+          if (photo != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: VenuePhoto(photo: photo, height: 190),
+              ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.all(18),
             child: Column(

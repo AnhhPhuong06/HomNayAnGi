@@ -1,5 +1,7 @@
 # Hôm Nay Ăn Gì?
 
+**1.1.1 (build 3):** Chỉ hiển thị ảnh thực tế đã đối chiếu đúng quán. Đã xóa 8 ảnh món ăn mẫu khỏi source và bỏ thư mục ảnh minh họa khỏi bundle. Hiện có **10 quán có ảnh xác minh**; quán còn lại hiển thị thông tin gọn. Blog chỉ dùng ảnh của quán được đính kèm và khớp tên. [Phạm vi ảnh thật](docs/real-photos-only.md).
+
 **1.1.0 (build 2):** Nhắc cập nhật khi mở hoặc quay lại app; xem [hướng dẫn](docs/app-updates.md). [Quản trị báo cáo cộng đồng](docs/moderation.md) dùng phân quyền trên máy chủ.
 
 Firestore của project hiện tại đã được triển khai trên gói miễn phí tại Singapore; tài khoản Google của chủ project có quyền quản trị. Cần kiểm tra đăng nhập/đăng bài trên iPhone thật sau khi cài IPA. Facebook và Apple vẫn cần cấu hình riêng.
@@ -15,7 +17,7 @@ Khám phá và sao lưu/khôi phục thủ công theo tài khoản. [Cách dùng
 
 App dùng **danh mục quán thật từ OpenStreetMap Việt Nam**, trích từ snapshot Geofabrik và đóng gói để chạy ngoại tuyến. Danh mục không cần Places API key. Số lượng, thời điểm nguồn và phạm vi thực tế nằm trong `assets/data/catalog_manifest.json`.
 
-**Bản mới yêu cầu đăng nhập Google/Facebook/Apple**, có ảnh món ăn minh họa offline và tab Blog để chia sẻ bữa ăn/quán ngon. Cần cấu hình Firebase Auth, Firestore và provider trước khi đăng nhập thật. Khi chưa cấu hình, app giữ người dùng ở màn hình đăng nhập. Hướng dẫn đầy đủ: [docs/community.md](docs/community.md).
+**Bản mới yêu cầu đăng nhập Google/Facebook/Apple**, có ảnh thật tại quán đóng gói offline và tab Blog để chia sẻ bữa ăn/quán ngon. Cần cấu hình Firebase Auth, Firestore và provider trước khi đăng nhập thật. Khi chưa cấu hình, app giữ người dùng ở màn hình đăng nhập. Hướng dẫn đầy đủ: [docs/community.md](docs/community.md).
 
 **Giao diện mới:** xanh rừng/kem, font tiếng Việt offline, thẻ ảnh, danh mục món
 cuộn ngang và thanh điều hướng nổi. [Xem giao diện và kiểm tra](docs/design.md).
@@ -39,7 +41,7 @@ Bộ **24 quán demo** giữ riêng cho test, bật bằng `--dart-define=RESTAU
 - Chi tiết quán, hình ảnh, giá, địa chỉ và dữ liệu tùy chọn; không suy diễn trạng thái “đang mở”. Mở chỉ đường bằng URL HTTPS Google Maps qua app hoặc trình duyệt.
 - Tìm tên, món, danh mục, tag và từ khóa, hỗ trợ tìm không dấu. Dataset nhỏ được tìm local tức thời.
 - Yêu thích, lịch sử, khẩu vị, theme và bộ lọc lưu local theo tài khoản khi bật backend. Có sao lưu/khôi phục thủ công dữ liệu cá nhân; GPS/khu vực/theme không lên bản sao lưu. Theme sáng/tối/theo hệ thống. GPS chính xác chỉ giữ trong phiên.
-- Sau khi có phiên đăng nhập, catalog quán, yêu thích, ảnh món minh họa và cài đặt dùng được offline. Ảnh minh họa được ghi nhãn rõ. Đăng nhập lần đầu, blog chung, chỉ đường và tìm kiếm TikTok cần kết nối/dịch vụ ngoài.
+- Sau khi có phiên đăng nhập, catalog quán, yêu thích, ảnh thật đã đóng gói và cài đặt dùng được offline. Quán chưa có ảnh giữ giao diện thông tin; ảnh lỗi không được thay bằng ảnh món ăn mẫu. Đăng nhập lần đầu, blog chung, chỉ đường và tìm kiếm TikTok cần kết nối/dịch vụ ngoài.
 - Loading, empty, error, retry; chống bấm lặp action async; thông báo nếu lưu local thất bại.
 
 Không có delivery, thanh toán hoặc chat. Bản mới dùng Firebase Auth/Firestore cho tài khoản và blog; không bật Firebase Analytics.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "importedAt": "2026-11-04T11:42:54.101487+00:00",
-  "reviewedPhotoCount": 9,
+  "importedAt": "2026-11-05T06:32:19.281298+00:00",
+  "reviewedPhotoCount": 10,
   "catalogVenueCount": 18668,
   "source": "Wikimedia Commons; branch matches reviewed in tool/data/venue_photo_sources.json",
   "displayChanges": "Thumbnails displayed with cover cropping; originals and licenses linked in app.",
@@ -140,6 +140,21 @@
       "capturedAt": "2010-09-15",
       "sha256": "2d003036e0c384aac5c5d68ca1547d5ebc6025d8362b03e6347cd47c0c51dd00",
       "venueName": "Highlands Coffee"
+    },
+    "osm-node-2494793015": {
+      "asset": "assets/venue_photos/osm-node-2494793015.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lang_ca_phe_Trung_Nguyen.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Lang_ca_phe_Trung_Nguyen.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Lang_ca_phe_Trung_Nguyen.JPG/960px-Lang_ca_phe_Trung_Nguyen.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "vi:User:Pttp1991",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "caption": "Làng cà phê Trung Nguyên, Phường Buôn Ma Thuột, Tỉnh Đắk Lắk.",
+      "matchEvidence": "Commons author names Lang ca phe Trung Nguyen; source GPS is 88 m from this OSM venue node within the cafe grounds. Panorama manually reviewed; captured in 2014.",
+      "checkedAt": "2026-11-05",
+      "capturedAt": "2014-09-25",
+      "sha256": "073a47b3ce3c3e9334de24403e780a2e843837b9f1f6747e883ad09968cb43f6",
+      "venueName": "Làng cà phê Trung Nguyên"
     }
   }
 }

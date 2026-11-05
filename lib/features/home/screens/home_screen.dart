@@ -105,10 +105,9 @@ class HomeScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  MealPhotoHero(
+                  MealIntroHero(
                     eyebrow: 'BỮA NGON, BỚT ĐẮN ĐO',
                     title: 'Hôm nay,\năn thật ngon.',
-                    image: 'assets/images/salad.jpg',
                     description:
                         'Một chút bất ngờ cho chiếc bụng đói.\nĐể chúng tôi chọn giúp bạn.',
                     action: const ChooseButton(),

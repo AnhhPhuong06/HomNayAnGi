@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../restaurants/models/food_category.dart';
-import '../../restaurants/widgets/dish_photo.dart';
 
 class CategoryStrip extends StatelessWidget {
   const CategoryStrip({
@@ -48,15 +47,33 @@ class CategoryStrip extends StatelessWidget {
                                 width: 2,
                               ),
                             ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(18),
-                              child: Image.asset(
-                                dishPhotoAsset([c.id]),
-                                height: 72,
-                                width: 72,
-                                fit: BoxFit.cover,
-                                cacheWidth: 220,
-                                excludeFromSemantics: true,
+                            child: Container(
+                              height: 72,
+                              width: 72,
+                              decoration: BoxDecoration(
+                                color: s.primaryContainer,
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              child: Center(
+                                child: ExcludeSemantics(
+                                  child: Icon(
+                                    switch (c.id) {
+                                      'noodles' => Icons.ramen_dining_outlined,
+                                      'rice' => Icons.rice_bowl_outlined,
+                                      'hotpot' => Icons.soup_kitchen_outlined,
+                                      'grill' => Icons.outdoor_grill_outlined,
+                                      'snacks' => Icons.tapas_outlined,
+                                      'bread' => Icons.bakery_dining_outlined,
+                                      'healthy' => Icons.eco_outlined,
+                                      'cafe' => Icons.local_cafe_outlined,
+                                      'dessert' => Icons.icecream_outlined,
+                                      'late' => Icons.nights_stay_outlined,
+                                      _ => Icons.restaurant_outlined,
+                                    },
+                                    size: 30,
+                                    color: s.primary,
+                                  ),
+                                ),
                               ),
                             ),
                           ),

@@ -16,8 +16,10 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.text('Tiếp tục với $name'), findsOneWidget);
       }
-      expect(find.text('Ảnh món ăn minh họa'), findsOneWidget);
-      expect(find.byType(Image), findsOneWidget);
+      expect(
+        find.byType(Image),
+        findsOneWidget,
+      ); // The selected brand logo only.
       expect(tester.takeException(), isNull);
     },
   );

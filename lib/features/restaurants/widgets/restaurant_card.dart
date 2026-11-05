@@ -6,7 +6,7 @@ import '../../../core/providers.dart';
 import '../../../core/utils/geo.dart';
 import '../models/food_category.dart';
 import '../models/restaurant.dart';
-import 'dish_photo.dart';
+import 'venue_photo_unavailable.dart';
 import 'venue_photo.dart';
 
 class FoodImage extends StatelessWidget {
@@ -17,39 +17,9 @@ class FoodImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final photo = restaurant.photo;
     if (photo != null) {
-      return VenuePhoto(
-        photo: photo,
-        categories: restaurant.categories,
-        height: height,
-      );
+      return VenuePhoto(photo: photo, height: height);
     }
-    Widget fallback() =>
-        DishPhoto(categories: restaurant.categories, height: height);
-    final source = restaurant.imageUrl;
-    if (source.startsWith('assets/images/')) {
-      return Image.asset(
-        source,
-        height: height,
-        width: double.infinity,
-        fit: BoxFit.cover,
-        cacheWidth: 1000,
-        excludeFromSemantics: true,
-        errorBuilder: (_, error, stack) => fallback(),
-      );
-    }
-    final uri = Uri.tryParse(source);
-    if (uri?.scheme != 'https' || uri!.host.isEmpty) return fallback();
-    return Image.network(
-      source,
-      height: height,
-      width: double.infinity,
-      fit: BoxFit.cover,
-      cacheWidth: 1000,
-      excludeFromSemantics: true,
-      errorBuilder: (_, error, stack) => fallback(),
-      loadingBuilder: (_, child, progress) =>
-          progress == null ? child : fallback(),
-    );
+    return const VenuePhotoUnavailable();
   }
 }
 
@@ -103,51 +73,73 @@ class RestaurantCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(21),
-                    child: FoodImage(
-                      restaurant: restaurant,
-                      height: compact ? 112 : 190,
+            if (restaurant.photo != null)
+              Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(21),
+                      child: FoodImage(
+                        restaurant: restaurant,
+                        height: compact ? 112 : 190,
+                      ),
                     ),
                   ),
-                ),
-                if (restaurant.categories.isNotEmpty)
-                  Positioned(
-                    left: 20,
-                    top: 20,
-                    child: Container(
-                      constraints: const BoxConstraints(maxWidth: 180),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainerLow
-                            .withValues(alpha: .96),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        categoryById(restaurant.categories.first).name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
+                  if (restaurant.categories.isNotEmpty)
+                    Positioned(
+                      left: 20,
+                      top: 20,
+                      child: Container(
+                        constraints: const BoxConstraints(maxWidth: 180),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerLow
+                              .withValues(alpha: .96),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          categoryById(restaurant.categories.first).name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
+                  Positioned(
+                    right: 18,
+                    top: 18,
+                    child: FavoriteButton(id: restaurant.id),
                   ),
-                Positioned(
-                  right: 18,
-                  top: 18,
-                  child: FavoriteButton(id: restaurant.id),
+                ],
+              ),
+            if (restaurant.photo == null)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(18, 8, 8, 0),
+                child: Row(
+                  children: [
+                    const Icon(Icons.storefront_outlined, size: 20),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        restaurant.categories.isEmpty
+                            ? 'Quán ăn'
+                            : categoryById(restaurant.categories.first).name,
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+                    ),
+                    FavoriteButton(id: restaurant.id),
+                  ],
                 ),
-              ],
-            ),
+              ),
             Padding(
               padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
               child: Column(
@@ -163,6 +155,13 @@ class RestaurantCard extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
+                  if (restaurant.photo == null) ...[
+                    Text(
+                      'Quán chưa có ảnh thực tế.',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    const SizedBox(height: 6),
+                  ],
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -65,16 +65,15 @@ class PageIntro extends StatelessWidget {
   );
 }
 
-class MealPhotoHero extends StatelessWidget {
-  const MealPhotoHero({
+class MealIntroHero extends StatelessWidget {
+  const MealIntroHero({
     super.key,
     required this.title,
     required this.eyebrow,
-    required this.image,
     this.description,
     this.action,
   });
-  final String title, eyebrow, image;
+  final String title, eyebrow;
   final String? description;
   final Widget? action;
   @override
@@ -83,23 +82,12 @@ class MealPhotoHero extends StatelessWidget {
     child: Stack(
       children: [
         Positioned.fill(
-          child: Image.asset(
-            image,
-            fit: BoxFit.cover,
-            cacheWidth: 1200,
-            excludeFromSemantics: true,
-          ),
-        ),
-        Positioned.fill(
           child: DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  const Color(0xff143a29).withValues(alpha: .72),
-                  const Color(0xff0b241b).withValues(alpha: .92),
-                ],
+                colors: [const Color(0xff143a29), const Color(0xff0b241b)],
               ),
             ),
           ),
@@ -155,10 +143,6 @@ class MealPhotoHero extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
               ],
-              const Text(
-                'Ảnh món ăn minh họa',
-                style: TextStyle(color: Color(0xffd4dfd0), fontSize: 10),
-              ),
             ],
           ),
         ),

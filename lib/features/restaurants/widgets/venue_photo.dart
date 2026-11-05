@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/restaurant_photo.dart';
-import 'dish_photo.dart';
+import 'venue_photo_unavailable.dart';
 
 class VenuePhoto extends StatelessWidget {
-  const VenuePhoto({
-    super.key,
-    required this.photo,
-    required this.categories,
-    required this.height,
-  });
+  const VenuePhoto({super.key, required this.photo, required this.height});
   final RestaurantPhoto photo;
-  final Iterable<String> categories;
   final double height;
 
   Future<void> _open(BuildContext context, String url) async {
@@ -87,7 +81,7 @@ class VenuePhoto extends StatelessWidget {
     cacheWidth: 1000,
     semanticLabel: photo.caption,
     errorBuilder: (_, error, stack) =>
-        DishPhoto(categories: categories, height: height),
+        const VenuePhotoUnavailable(failed: true),
     frameBuilder: (context, child, frame, synchronous) {
       if (frame == null && !synchronous) {
         return SizedBox(

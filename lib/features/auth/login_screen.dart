@@ -40,7 +40,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             children: [
               const AppBrand(),
               const SizedBox(height: 24),
-              const _WelcomePhoto(),
+              const _WelcomePanel(),
               const SizedBox(height: 24),
               Text(
                 'Bữa ngon bắt đầu từ đây',
@@ -174,22 +174,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 }
 
-class _WelcomePhoto extends StatelessWidget {
-  const _WelcomePhoto();
+class _WelcomePanel extends StatelessWidget {
+  const _WelcomePanel();
   @override
   Widget build(BuildContext context) => ClipRRect(
     borderRadius: BorderRadius.circular(30),
     child: Stack(
       children: [
-        Positioned.fill(
-          child: Image.asset(
-            'assets/images/noodles.jpg',
-            fit: BoxFit.cover,
-            alignment: const Alignment(0, -.25),
-            cacheWidth: 1200,
-            excludeFromSemantics: true,
-          ),
-        ),
         Positioned.fill(
           child: DecoratedBox(
             decoration: BoxDecoration(
@@ -197,10 +188,7 @@ class _WelcomePhoto extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: const [.25, 1],
-                colors: [
-                  Colors.transparent,
-                  const Color(0xff102b20).withValues(alpha: .94),
-                ],
+                colors: [const Color(0xff275b42), const Color(0xff102b20)],
               ),
             ),
           ),
@@ -231,11 +219,6 @@ class _WelcomePhoto extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 30,
                 ),
-              ),
-              const SizedBox(height: 12),
-              const Text(
-                'Ảnh món ăn minh họa',
-                style: TextStyle(fontSize: 10, color: Colors.white70),
               ),
             ],
           ),

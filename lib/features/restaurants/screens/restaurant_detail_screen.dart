@@ -124,13 +124,6 @@ class _RestaurantDetailScreenState
                         ],
                       ),
                       const SizedBox(height: 20),
-                      if (r.photo == null && !isDemo)
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 12),
-                          child: Text(
-                            'Quán chưa có ảnh được đối chiếu; ảnh món ăn phía trên chỉ để minh họa.',
-                          ),
-                        ),
                       Text(r.description, style: const TextStyle(height: 1.6)),
                       const SizedBox(height: 16),
                       Wrap(

@@ -8,7 +8,7 @@ import '../auth/auth_repository.dart';
 import '../auth/account_action_lock.dart';
 import '../restaurants/models/food_category.dart';
 import '../restaurants/models/restaurant.dart';
-import '../restaurants/widgets/dish_photo.dart';
+import '../restaurants/widgets/restaurant_card.dart';
 import 'blog_repository.dart';
 import 'place_picker.dart';
 
@@ -167,10 +167,11 @@ class _ComposeScreenState extends ConsumerState<ComposeScreen> {
                   ),
                 ),
               const SizedBox(height: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: DishPhoto(categories: [_category], height: 170),
-              ),
+              if (_kind != PostKind.place && _restaurant?.photo != null)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: FoodImage(restaurant: _restaurant!, height: 170),
+                ),
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
                 isExpanded: true,

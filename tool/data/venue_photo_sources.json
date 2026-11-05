@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-04",
+  "checkedAt": "2026-11-05",
   "restaurants": {
     "osm-node-4311854914": {
       "file": "File:Giang Café - Nguyen Huu Huan Street, Hanoi, Vietnam - DSC03671.JPG",
@@ -63,6 +63,13 @@
       "caption": "Highlands Coffee tại Indochina Riverside Towers, đường Bạch Đằng, Đà Nẵng.",
       "matchEvidence": "Mô tả tác giả xác định Indochina Riverside Towers/Bạch Đằng; GPS cách điểm Highlands OSM khoảng 35 m.",
       "venueName": "Highlands Coffee",
+      "address": "Chưa có địa chỉ trong OpenStreetMap"
+    },
+    "osm-node-2494793015": {
+      "file": "File:Lang ca phe Trung Nguyen.JPG",
+      "caption": "Làng cà phê Trung Nguyên, Phường Buôn Ma Thuột, Tỉnh Đắk Lắk.",
+      "matchEvidence": "Commons author names Lang ca phe Trung Nguyen; source GPS is 88 m from this OSM venue node within the cafe grounds. Panorama manually reviewed; captured in 2014.",
+      "venueName": "Làng cà phê Trung Nguyên",
       "address": "Chưa có địa chỉ trong OpenStreetMap"
     }
   }

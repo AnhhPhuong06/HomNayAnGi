@@ -22,18 +22,20 @@ hành chính chính thức; thông tin thiếu được ghi rõ.
 
 ## Cập nhật catalog
 
-### Ảnh thật tại quán — cập nhật 04/11/2026
+### Ảnh thật tại quán — cập nhật 05/11/2026
 
-Đã bổ sung **9 ảnh cho 9 địa điểm** trong tổng số 18.668 bản ghi, tại Hà Nội,
-TP.HCM, Hội An và Đà Nẵng. Ảnh đến từ Wikimedia Commons, đối chiếu tên/quán,
+Đã bổ sung **10 ảnh cho 10 địa điểm** trong tổng số 18.668 bản ghi, tại Hà Nội,
+TP.HCM, Hội An, Đà Nẵng và Buôn Ma Thuột. Ảnh đến từ Wikimedia Commons, đối chiếu tên/quán,
 địa chỉ hoặc tọa độ của đúng chi nhánh; không dùng logo chung để gán cho cả chuỗi.
 Không khẳng định đã có ảnh cho tất cả quán hoặc ảnh phản ánh diện mạo hiện nay.
 Một số ảnh lịch sử khá cũ; ngày chụp theo nguồn được hiển thị trong thông tin ảnh.
 
 Vào **Khám phá → Có ảnh tại quán** để lọc các địa điểm đã có ảnh. Chạm dòng
 ghi tác giả/giấy phép trên ảnh để xem chú thích, ngày chụp, nguồn gốc và giấy phép.
-Quán chưa có ảnh đã đối chiếu vẫn dùng ảnh món ăn có nhãn minh họa, kèm thông báo
-trong chi tiết. Ảnh thật được đóng gói offline, không phụ thuộc URL tạm thời.
+Từ 1.1.1, quán chưa có ảnh đã đối chiếu hiển thị thẻ thông tin và trạng thái chưa
+có ảnh. Ảnh lỗi cũng không dùng ảnh món ăn mẫu. Blog chỉ hiện ảnh khi bài viết
+gắn với đúng ID và tên quán có ảnh xác minh. Ảnh thật được đóng gói offline,
+không phụ thuộc URL tạm thời. [Thay đổi toàn ứng dụng](real-photos-only.md).
 
 - `assets/data/restaurant_photos.json`: ID quán, đường dẫn ảnh, tác giả, giấy phép,
   URL nguồn, ngày chụp, bằng chứng đối chiếu và SHA-256 của từng ảnh.

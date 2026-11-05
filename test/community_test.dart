@@ -9,7 +9,6 @@ import 'package:hom_nay_an_gi/core/router/app_router.dart';
 import 'package:hom_nay_an_gi/core/services/local_store.dart';
 import 'package:hom_nay_an_gi/features/auth/auth_repository.dart';
 import 'package:hom_nay_an_gi/features/blog/blog_repository.dart';
-import 'package:hom_nay_an_gi/features/restaurants/widgets/dish_photo.dart';
 import 'fixtures.dart';
 import 'support/community_fakes.dart';
 
@@ -105,10 +104,6 @@ void main() {
     );
     expect(draft.validationError, contains('tên quán'));
   });
-  test('illustrative photos match category and use a bundled fallback', () {
-    expect(dishPhotoAsset(['cafe']), 'assets/images/cafe.jpg');
-    expect(dishPhotoAsset(['unknown']), 'assets/images/rice.jpg');
-  });
   testWidgets('login is mandatory on startup and protected deep links', (
     tester,
   ) async {
@@ -182,7 +177,7 @@ void main() {
     );
     container.read(routerProvider).go('/blog/new?kind=restaurant&restaurant=a');
     await tester.pumpAndSettle();
-    expect(find.text('Ảnh món ăn minh họa'), findsOneWidget);
+    expect(find.byType(Image), findsNothing);
     final body = find.widgetWithText(TextField, 'Câu chuyện của bạn');
     await tester.ensureVisible(body);
     await tester.enterText(

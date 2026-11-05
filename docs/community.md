@@ -13,8 +13,9 @@ sàng, các nút chưa hoạt động và không có chế độ tự tạo phi�
 
 ## Những gì đã có trong mã
 
-- Ảnh món ăn đóng gói offline theo kiểu món. Khi không có ảnh đúng quán, ảnh được
-  ghi rõ **Ảnh món ăn minh họa**, không biến ảnh stock thành ảnh quán đã xác minh.
+- Từ 1.1.1 chỉ dùng ảnh thật đã đối chiếu quán và giấy phép, đóng gói offline.
+  Bài có liên kết ID/tên quán phù hợp được hiện ảnh quán kèm nguồn; bài khác giữ
+  nội dung chữ, không tự gán ảnh theo kiểu món. [Phạm vi ảnh](real-photos-only.md).
 - Tab **Blog**: xem 30 bài mới nhất, lọc Hôm nay ăn gì / Quán ăn ngon / Bài của tôi.
 - Viết bài từ blog, kết quả chọn món hoặc trang chi tiết quán; đính kèm tên quán,
   khu vực và ID quán khi xuất phát từ catalog. Tên tác giả lấy từ phiên đăng nhập.
@@ -23,7 +24,7 @@ sàng, các nút chưa hoạt động và không có chế độ tự tạo phi�
   chính thức của địa điểm OSM. Không tự đăng bài khi chỉ bấm nút chọn món.
 
 Blog chung dùng Firebase Auth và Cloud Firestore. Dùng **Spark** để bắt đầu trong
-hạn mức miễn phí, không bật billing/Blaze trong quy trình này. Ảnh minh họa đi kèm
+hạn mức miễn phí, không bật billing/Blaze trong quy trình này. Ảnh quán đã duyệt đi kèm
 app; hiện chưa có tải ảnh cá nhân lên Cloud Storage hay tự đăng lên Facebook.
 Apple Developer/signing có điều kiện tài khoản riêng của Apple; không coi đó là
 một dịch vụ miễn phí do ứng dụng cung cấp.

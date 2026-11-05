@@ -14,6 +14,7 @@ import 'package:hom_nay_an_gi/core/router/app_router.dart';
 import 'package:hom_nay_an_gi/core/services/local_store.dart';
 import 'package:hom_nay_an_gi/core/theme/appearance.dart';
 import 'package:hom_nay_an_gi/features/auth/auth_repository.dart';
+import 'package:hom_nay_an_gi/features/moderation/moderation_repository.dart';
 import 'package:hom_nay_an_gi/features/blog/blog_repository.dart';
 import 'package:hom_nay_an_gi/features/restaurants/models/restaurant.dart';
 import 'package:hom_nay_an_gi/features/restaurants/repositories/open_data_restaurant_repository.dart';
@@ -149,6 +150,7 @@ void main() {
             TestRepository(catalog, demo: false),
           ),
           backendReadyProvider.overrideWithValue(signedIn),
+          isAdminProvider.overrideWith((ref) => Stream.value(false)),
           authRepositoryProvider.overrideWithValue(auth),
           blogRepositoryProvider.overrideWithValue(blog),
         ],
