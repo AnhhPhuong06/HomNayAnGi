@@ -14,7 +14,7 @@ Kiểm tra tự động dùng cache tối đa 6 giờ và giới hạn thử l�
 - Tự chuẩn bị Xcode để cài thủ công: `bash ios/open_xcode.sh --dart-define=APP_UPDATE_CHANNEL=iosManual --dart-define-from-file=config/firebase.ios.json`. Cờ này phải có khi tạo cấu hình build trên Mac; không sửa pubspec để giả phiên bản đang cài.
 - Build iOS mặc định dùng App Store; không được dùng cờ `iosManual` cho bản nộp Store. Receipt TestFlight chọn kênh TestFlight. `package_info_plus` không phân biệt đáng tin cậy IPA chưa có receipt với App Store, nên kênh manual phải được chọn rõ lúc build.
 - Chưa có bản App Store/TestFlight/Google Play được phát hành. Các kênh này chưa có entry; không chuyển người dùng Store sang IPA unsigned.
-- Bản 1.0.0 chưa có bộ kiểm tra này. Cần cài 1.1.0 một lần để nhận nhắc cho những bản tiếp theo.
+- Bản 1.0.0 chưa có bộ kiểm tra này. Cần cài 1.1.0 hoặc bản mới hơn một lần để nhận nhắc cho những bản tiếp theo.
 
 ## Phát hành lần tiếp theo
 
