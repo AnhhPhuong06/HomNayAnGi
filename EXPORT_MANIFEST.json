@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-11-05T01:30:54.122531+00:00",
+  "exportedAt": "2026-11-05T01:34:43.417562+00:00",
   "flutterVersion": "3.47.9",
   "entryPoint": "lib/main.dart",
   "workspace": "ios/Runner.xcworkspace",
@@ -73,7 +73,7 @@
     "docs/design.md": "eee4d549ed41766174ab7361548e1c47fedf0032cd1ecb7b203e05af12995230",
     "docs/open-data.md": "ae293cdfe2ee64f0217fd2bc5959b404110f73cc6fab59153c98d374af40bed2",
     "docs/upgrades.md": "f8a70efbd2f434ea9d950b18c5b41def96c1b54d0522d89219c29ac6e6945c85",
-    "docs/verification.md": "2397baf0c69e84553ea12f2d0b3c412615c1db92c9fd67d88b5591c4003f6c80",
+    "docs/verification.md": "daccba5bc67280931d47ca5416dc76900b4a8868997f046045b9687270631ac0",
     "docs/xcode.md": "6b41aaae0d4a25baa2169a90031af5d31d367cf79492e0040c5a6b910046ee06",
     "firebase.json": "db8b0ac1f8f5097dcc435f34068150d3e28f5f4eb415a618c0ecaaeb1c8de5bd",
     "firestore.rules": "f7239c5ebae9f59477cf687b41f33076331f15d9cf43a6dfade71aa286b1d2f5",
@@ -202,7 +202,7 @@
     "tool/data/import_osm.py": "d75830118c5e9370ef5a96ae411e64338ab870142bb42a1f1c49cbaf0e4faad6",
     "tool/data/requirements.txt": "7900a42321bca69c05b21570ae96f6286907def64b74c9c69147329b3c6cc669",
     "tool/data/test_import_osm.py": "212b75f6785d89cf58a48524b6f302fe55c0ae4de8d3d062c31a02e2203e71c3",
-    "tool/export_xcode.py": "6f425427c7217dc71740f64e509c8635ae0692e21644c43d979f3a983f1fca0e",
+    "tool/export_xcode.py": "d8dc8b1f2ef796c2e04a2a2eeaea5e878092f1e4997359e803ea006f83a391ac",
     "tool/firebase-tests/package-lock.json": "5693d9a0504832568ab97d233bf93870e0f1c127a9ccdbbf277c82855fd9e6c0",
     "tool/firebase-tests/package.json": "6c4106a24621064fff02b2a33efcc0d8c7407df868f7a587be8f6e0437fe0f85",
     "tool/firebase-tests/rules.test.mjs": "3b636cd7b57289dc35e95c9e625ef69eec71049c0fbabd12354ef46b473f7106",
@@ -284,6 +284,13 @@
     "nativePackageInfoBundlePresent": true,
     "ipaSHA256": "c41e89c94e726e9c5e6c604e3f74f30d2d457b6de84facfa2b5e2ce7bc90df9b",
     "ipaSizeBytes": 24213282,
-    "verifiedScope": "Release compile, v1.1.0+2 IPA contents, update metadata URL/package-info resource bundle, nine venue photos/credits, Google callback and compiled client configuration; physical iOS runtime/OAuth not verified"
+    "verifiedScope": "Release compile, v1.1.0+2 IPA contents, update metadata URL/package-info resource bundle, nine venue photos/credits, Google callback and compiled client configuration; physical iOS runtime/OAuth not verified",
+    "publicReleaseUrl": "https://github.com/AnhhPhuong06/HomNayAnGi/releases/tag/v1.1.0+2",
+    "publicIpaUrl": "https://github.com/AnhhPhuong06/HomNayAnGi/releases/download/v1.1.0%2B2/hom_nay_an_gi-unsigned.ipa",
+    "publicIpaDownloadVerified": true,
+    "publicFeedVerified": true,
+    "publishRunId": 41949245002,
+    "publishRunUrl": "https://github.com/AnhhPhuong06/HomNayAnGi/actions/runs/41949245002",
+    "runnerHasNoCodeSignatureCommand": true
   }
 }

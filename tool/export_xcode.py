@@ -46,6 +46,10 @@ PREVIEW_FILES = (
     "artifacts/adaptive_place_form_native_fixture.png",
     "artifacts/adaptive_places_native_fixture.png",
     "artifacts/adaptive_login_native.png",
+    "artifacts/real_photo_detail_fixture.png",
+    "artifacts/real_photo_discover_fixture.png",
+    "artifacts/real_photo_credit_fixture.png",
+    "artifacts/update_dialog_fixture.png",
 )
 
 
